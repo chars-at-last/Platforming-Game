@@ -13,3 +13,14 @@ config_version=5
 config/name="Platforming Game"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=1000
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=480
+window/size/mode=4
+
+[layer_names]
+
+2d_physics/layer_1="Player"
