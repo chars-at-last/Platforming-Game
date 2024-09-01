@@ -37,7 +37,19 @@ func _physics_process(delta: float) -> void:
 	#print(_wall_normal)
 	#print()
 	
-	# Gravity and other stuff
+	physics_gravity(delta)				# Gravity stuff
+	physics_direction(delta)			# Directional stuff
+	physics_jump(delta)					# Jump stuff
+	physics_wall(delta)					# Wall stuff
+	
+	# Velocity
+	velocity = unbridled_velocity		# Velocity
+
+	physics_floor(delta)				# Floor stuff
+	move_and_slide()
+
+# Gravity and other stuff
+func physics_gravity(delta: float) -> void:
 	if not is_on_floor():
 		if not is_on_wall():
 			if _wall_boosted:
@@ -47,10 +59,12 @@ func _physics_process(delta: float) -> void:
 			unbridled_velocity.y = max(0, unbridled_velocity.y)
 		unbridled_velocity += get_gravity() * delta			# Apply gravity here
 	else:
+		unbridled_velocity.y = 0
 		if _switching_dir:
 			_switching_dir = false
 
-	# Get the input direction and handle the acceleration/deceleration.
+# Get the input direction and handle the acceleration/deceleration.
+func physics_direction(_delta: float) -> void:
 	acceleration.x = max(acceleration.x, move_accel)
 	direction = Input.get_axis("move_left", "move_right")
 	if direction:
@@ -72,12 +86,14 @@ func _physics_process(delta: float) -> void:
 	elif _switching_dir:
 		_switching_dir = false
 
-	# Handle jump
+# Handle jump
+func physics_jump(_delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		unbridled_velocity.y = JUMP_VELOCITY
 		unbridled_velocity.x += jump_vel_boost * direction
-	
-	# Walls
+
+# Walls
+func physics_wall(_delta: float) -> void:
 	if is_on_wall():
 		_wall_normal = get_wall_normal()
 		
@@ -91,11 +107,9 @@ func _physics_process(delta: float) -> void:
 				_wall_boosted = true
 				
 	wall_jump()
-	
-	# Velocity
-	velocity = unbridled_velocity
 
-	# Other floor stuff
+# Other floor stuff
+func physics_floor(_delta: float) -> void:
 	if is_on_floor():
 		if not (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")):
 			velocity.x = floor(velocity.x * VELOCITY_GROUND_NERF)				# Nerf x velocity here
@@ -104,9 +118,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = flpcen(velocity.x * VELOCITY_GROUND_MOVEMENT_NERF)
 			#unbridled_velocity.x = floor(unbridled_velocity.x * VELOCITY_GROUND_MOVEMENT_NERF)
 
-	move_and_slide()
-
-# Wall jumpget_wall_normal()
+# Wall jump
 func wall_jump() -> void:
 	if (_can_wall_jump and not is_on_floor()) or is_on_wall_only():
 		if Input.is_action_just_pressed("jump"):
