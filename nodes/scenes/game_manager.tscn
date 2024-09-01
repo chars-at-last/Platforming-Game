@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqfiu2iio1r5q"]
+[gd_scene load_steps=9 format=3 uid="uid://bqfiu2iio1r5q"]
 
 [ext_resource type="PackedScene" uid="uid://crtbnkmpoyka2" path="res://nodes/scenes/player/player.tscn" id="1_1ulvm"]
 [ext_resource type="Script" path="res://nodes/scripts/game_manager.gd" id="1_p8b7o"]
+[ext_resource type="Shader" path="res://nodes/scripts/shaders/16bit_color_converter.gdshader" id="1_sv5m8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oxpyf"]
 size = Vector2(1048, 114)
@@ -14,6 +15,9 @@ size = Vector2(143.5, 308)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ph3ue"]
 size = Vector2(143.5, 152)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lmv1b"]
+shader = ExtResource("1_sv5m8")
 
 [node name="GameManager" type="Node"]
 editor_description = "Main node of the game."
@@ -83,3 +87,10 @@ shape = SubResource("RectangleShape2D_ph3ue")
 
 [node name="Player" parent="." instance=ExtResource("1_1ulvm")]
 position = Vector2(110, 43)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_lmv1b")
+offset_right = 640.0
+offset_bottom = 360.0
