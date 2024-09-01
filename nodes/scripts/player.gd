@@ -13,6 +13,8 @@ const WALL_JUMP_ANGLE_R: float = PI * 7.1 / 4		## Wall jump angle (Rightward nor
 const WALL_JUMP_ANGLE_L: float = PI * 4.9 / 4		## Wall jump angle (Leftward normal)
 
 # Variables
+@onready var sprite: Sprite2D = $Sprite2D
+
 var direction: float								## Direction of movement
 
 var unbridled_velocity: Vector2						## Velocity without restrictions
@@ -36,7 +38,7 @@ func _physics_process(delta: float) -> void:
 	#print(_can_wall_jump)
 	#print(_wall_normal)
 	#print()
-	
+		
 	physics_gravity(delta)				# Gravity stuff
 	physics_direction(delta)			# Directional stuff
 	physics_jump(delta)					# Jump stuff
@@ -44,9 +46,16 @@ func _physics_process(delta: float) -> void:
 	
 	# Velocity
 	velocity = unbridled_velocity		# Velocity
+	
+	face()								# Which way is the character facing
 
 	physics_floor(delta)				# Floor stuff
 	move_and_slide()
+
+# Facing direction
+func face() -> void:
+	if direction:
+		sprite.flip_h = direction < 0
 
 # Gravity and other stuff
 func physics_gravity(delta: float) -> void:
@@ -125,6 +134,8 @@ func wall_jump() -> void:
 			unbridled_velocity.y = min(0, unbridled_velocity.y)
 			unbridled_velocity += Vector2.from_angle(WALL_JUMP_ANGLE_L if _wall_normal.x < 0 else WALL_JUMP_ANGLE_R) * wall_jump_vel_boost
 			_can_wall_jump = false
+			
+			sprite.flip_h = not sprite.flip_h
 
 # Floor if positive + ceil if negative (flpcen)
 func flpcen(value: float) -> float:
