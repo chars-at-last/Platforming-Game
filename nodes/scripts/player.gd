@@ -5,7 +5,7 @@ class_name Player extends CharacterBody2D
 
 # Constants
 const JUMP_VELOCITY: float = -400.0					## Jump velocity
-const VELOCITY_GROUND_NERF: float = .8				## Velocity nerf when on ground
+const VELOCITY_GROUND_NERF: float = .9				## Velocity nerf when on ground
 const VELOCITY_GROUND_MOVEMENT_NERF: float = .9		## Velocity nerf when on ground and moving
 const DIFF_DIRECTION_MULT: float = 4				## Acceleration multiplier when moving opposite to velocity
 const WALL_BOOST_MULT: float = .25					## Velocity multiplier when move-jumping into wall
@@ -50,13 +50,21 @@ func _physics_process(delta: float) -> void:
 		if _switching_dir:
 			_switching_dir = false
 
-	# Get the input direction and handle the movement/deceleration.
+	# Get the input direction and handle the acceleration/deceleration.
 	acceleration.x = max(acceleration.x, move_accel)
 	direction = Input.get_axis("move_left", "move_right")
 	if direction:
 		var addition: float = acceleration.x * direction
-		if not (is_on_floor() or is_equal_approx(signf(direction), signf(unbridled_velocity.x))):
-			_switching_dir = true
+		
+		var same_signs: bool = is_equal_approx(signf(direction), signf(unbridled_velocity.x))
+		if not is_on_floor():
+			if not same_signs:
+				_switching_dir = true
+		else:
+			if not same_signs:
+				_switching_dir = true
+			elif _switching_dir:
+				_switching_dir = false
 			
 		if _switching_dir:
 			addition *= DIFF_DIRECTION_MULT
@@ -91,25 +99,30 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		if not (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")):
 			velocity.x = floor(velocity.x * VELOCITY_GROUND_NERF)				# Nerf x velocity here
-			unbridled_velocity.x = floor(unbridled_velocity.x * VELOCITY_GROUND_NERF)
+			unbridled_velocity.x = flpcen(unbridled_velocity.x * VELOCITY_GROUND_NERF)
 		else:
-			velocity.x = floor(velocity.x * VELOCITY_GROUND_MOVEMENT_NERF)
-			#unbridled_velocity *= VELOCITY_GROUND_MOVEMENT_NERF
+			velocity.x = flpcen(velocity.x * VELOCITY_GROUND_MOVEMENT_NERF)
+			#unbridled_velocity.x = floor(unbridled_velocity.x * VELOCITY_GROUND_MOVEMENT_NERF)
 
 	move_and_slide()
 
 # Wall jumpget_wall_normal()
 func wall_jump() -> void:
-	if _can_wall_jump or is_on_wall_only():
+	if (_can_wall_jump and not is_on_floor()) or is_on_wall_only():
 		if Input.is_action_just_pressed("jump"):
 			unbridled_velocity.y = min(0, unbridled_velocity.y)
 			unbridled_velocity += Vector2.from_angle(WALL_JUMP_ANGLE_L if _wall_normal.x < 0 else WALL_JUMP_ANGLE_R) * wall_jump_vel_boost
+			_can_wall_jump = false
+
+# Floor if positive + ceil if negative (flpcen)
+func flpcen(value: float) -> float:
+	return floor(value) if value > 0 else ceil(value)
 
 # Signal method(s) #
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_area_2d_body_entered(_body: Node2D) -> void:
 	_can_wall_jump = true
 
-func _on_area_2d_body_exited(body: Node2D) -> void:
+func _on_area_2d_body_exited(_body: Node2D) -> void:
 	if $Area2D.get_overlapping_bodies().is_empty():
 		_can_wall_jump = false
