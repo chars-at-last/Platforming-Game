@@ -11,27 +11,33 @@ const DIFF_DIRECTION_MULT: float = 4				## Acceleration multiplier when moving o
 const WALL_BOOST_MULT: float = .25					## Velocity multiplier when move-jumping into wall
 const WALL_JUMP_ANGLE_R: float = PI * 7.1 / 4		## Wall jump angle (Rightward normal)
 const WALL_JUMP_ANGLE_L: float = PI * 4.9 / 4		## Wall jump angle (Leftward normal)
-const SHORT_JUMP_MULT: float = .5					## Short jump multiplier
+const SHORT_JUMP_MULT: float = .25					## Short jump multiplier
+
+enum LOOKING_DIRS {
+	STRAIGHT = 0,
+	DOWN = 1,
+	UP = -1
+}
 
 # Variables
 @onready var sprite: Sprite2D = $Sprite2D
 
-var direction: float								## Direction of movement
+var direction: float													## Direction of movement
 
-var unbridled_velocity: Vector2						## Velocity without restrictions
-var acceleration: Vector2							## Rate of change of the velocity
-@export var move_accel: float = 10					## What the acceleration is set to when moving
+var unbridled_velocity: Vector2											## Velocity without restrictions
+var acceleration: Vector2												## Rate of change of the velocity
+@export var move_accel: float = 10										## What the acceleration is set to when moving
 
-@export var jump_vel_boost: float = 20				## Boost to velocity when jumping off ground
-@export var wall_jump_vel_boost: float = 500		## Boost to velocity when jumping off wall
-var _wall_normal: Vector2							## Wall normal
+@export var jump_vel_boost: float = 20									## Boost to velocity when jumping off ground
+@export var wall_jump_vel_boost: float = 500							## Boost to velocity when jumping off wall
+var _wall_normal: Vector2												## Wall normal
 
-#var _looking_direction: 
+var _looking_direction: LOOKING_DIRS = LOOKING_DIRS.STRAIGHT			## Direction of looking (-1 is up, 1 is down)
 
-var _switching_dir: bool = false					## Flag for switching direction
-var _wall_boosted: bool = false						## Flag if move-jumping into wall
-var _can_wall_jump: bool = false					## Flag if can wall jump
-var _just_jumped: bool = false						## Tracks if character just jumped
+var _switching_dir: bool = false										## Flag for switching direction
+var _wall_boosted: bool = false											## Flag if move-jumping into wall
+var _can_wall_jump: bool = false										## Flag if can wall jump
+var _just_jumped: bool = false											## Tracks if character just jumped
 
 # Process
 func _physics_process(delta: float) -> void:
@@ -42,12 +48,13 @@ func _physics_process(delta: float) -> void:
 	#print(_can_wall_jump)
 	#print(_wall_normal)
 	#print()
-		
+	
+	physics_looking(delta)
 	physics_gravity(delta)				# Gravity stuff
 	physics_direction(delta)			# Directional stuff
 	physics_jump(delta)					# Jump stuff
 	physics_wall(delta)					# Wall stuff
-	
+		
 	# Velocity
 	velocity = unbridled_velocity		# Velocity
 	
@@ -55,6 +62,15 @@ func _physics_process(delta: float) -> void:
 
 	physics_floor(delta)				# Floor stuff
 	move_and_slide()
+
+# Looking direction
+func physics_looking(_delta: float) -> void:
+	if Input.is_action_pressed("look_up"):
+		self._looking_direction = LOOKING_DIRS.UP
+	elif Input.is_action_pressed("look_down"):
+		self._looking_direction = LOOKING_DIRS.DOWN
+	else:
+		self._looking_direction = LOOKING_DIRS.STRAIGHT
 
 # Facing direction
 func face() -> void:
@@ -71,13 +87,16 @@ func physics_gravity(delta: float) -> void:
 		if is_on_ceiling():
 			unbridled_velocity.y = max(0, unbridled_velocity.y)
 		else:
-			if _just_jumped and Input.is_action_just_released("jump"):
-				_just_jumped = false
-				unbridled_velocity.y *= SHORT_JUMP_MULT
+			if _just_jumped:
+				if unbridled_velocity.y > 0:
+					_just_jumped = false
+				elif Input.is_action_just_released("jump"):
+					_just_jumped = false
+					unbridled_velocity.y *= SHORT_JUMP_MULT
 			
 		unbridled_velocity += get_gravity() * delta			# Apply gravity here
 	else:
-		unbridled_velocity.y = 0
+		unbridled_velocity.y = min(0, unbridled_velocity.y)
 		if _switching_dir:
 			_switching_dir = false
 		if _just_jumped:
@@ -148,6 +167,7 @@ func wall_jump() -> void:
 			_can_wall_jump = false
 			
 			sprite.flip_h = not sprite.flip_h
+			_just_jumped = true
 
 # Floor if positive + ceil if negative (flpcen)
 func flpcen(value: float) -> float:
