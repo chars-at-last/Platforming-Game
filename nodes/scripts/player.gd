@@ -20,7 +20,8 @@ enum LOOKING_DIRS {
 }
 
 # Variables
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: Sprite2D = $Sprite2D								## The Sprite
+@onready var gun: Gun = $Gun											## The Gun
 
 var direction: float													## Direction of movement
 
@@ -40,7 +41,7 @@ var _can_wall_jump: bool = false										## Flag if can wall jump
 var _just_jumped: bool = false											## Tracks if character just jumped
 
 
-var can_control: bool = true #If the player character is still alive and can be controled by the player
+var _can_control: bool = true 											## If the player character is still alive and can be controled by the player
 
 
 # Process
@@ -53,7 +54,7 @@ func _physics_process(delta: float) -> void:
 	#print(_wall_normal)
 	#print()
 	
-	if not can_control: return #If the player died, the player character will not be controlled by the player
+	if not _can_control: return #If the player died, the player character will not be controlled by the player
 	
 	physics_looking(delta)
 	physics_gravity(delta)				# Gravity stuff
@@ -71,14 +72,15 @@ func _physics_process(delta: float) -> void:
 
 # Looking direction
 func physics_looking(_delta: float) -> void:
-	if Input.is_action_pressed("look_up"):
-		self._looking_direction = LOOKING_DIRS.UP
-	elif Input.is_action_pressed("look_down"):
+	if Input.is_action_pressed("look_down"):
 		self._looking_direction = LOOKING_DIRS.DOWN
+	elif Input.is_action_pressed("look_up"):
+		self._looking_direction = LOOKING_DIRS.UP
 	else:
 		self._looking_direction = LOOKING_DIRS.STRAIGHT
 
 # Facing direction
+## TODO: Handle gun direction
 func face() -> void:
 	if direction:
 		sprite.flip_h = direction < 0
@@ -112,7 +114,7 @@ func physics_gravity(delta: float) -> void:
 func physics_direction(_delta: float) -> void:
 	acceleration.x = max(acceleration.x, move_accel)
 	direction = Input.get_axis("move_left", "move_right")
-	if direction:
+	if not is_ducking() and direction:
 		var addition: float = acceleration.x * direction
 		
 		var same_signs: bool = is_equal_approx(signf(direction), signf(unbridled_velocity.x))
@@ -157,7 +159,7 @@ func physics_wall(_delta: float) -> void:
 # Other floor stuff
 func physics_floor(_delta: float) -> void:
 	if is_on_floor():
-		if not (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")):
+		if is_ducking() or (not (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"))):
 			velocity.x = floor(velocity.x * VELOCITY_GROUND_NERF)				# Nerf x velocity here
 			unbridled_velocity.x = flpcen(unbridled_velocity.x * VELOCITY_GROUND_NERF)
 		else:
@@ -166,7 +168,7 @@ func physics_floor(_delta: float) -> void:
 
 # Wall jump
 func wall_jump() -> void:
-	if (_can_wall_jump and not is_on_floor()) or is_on_wall_only():
+	if not is_ducking() and ((_can_wall_jump and not is_on_floor()) or is_on_wall_only()):
 		if Input.is_action_just_pressed("jump"):
 			unbridled_velocity.y = min(0, unbridled_velocity.y)
 			unbridled_velocity += Vector2.from_angle(WALL_JUMP_ANGLE_L if _wall_normal.x < 0 else WALL_JUMP_ANGLE_R) * wall_jump_vel_boost
@@ -179,6 +181,26 @@ func wall_jump() -> void:
 func flpcen(value: float) -> float:
 	return floor(value) if value > 0 else ceil(value)
 
+# Checks if ducking
+func is_ducking() -> bool:
+	return self._looking_direction == LOOKING_DIRS.DOWN
+
+#This function will determine what happens if the player character dies
+func on_death() -> void:
+	print("Player Died!")
+	visible = false
+	_can_control = false
+	
+	await get_tree().create_timer(1).timeout
+	reset_player()
+
+
+func reset_player() -> void:
+	global_position = Vector2(110, 43)
+	visible = true
+	_can_control = true
+
+
 # Signal method(s) #
 
 func _on_area_2d_body_entered(_body: Node2D) -> void:
@@ -188,19 +210,3 @@ func _on_area_2d_body_exited(_body: Node2D) -> void:
 	if $Area2D.get_overlapping_bodies().is_empty():
 		_can_wall_jump = false
 		
-
-#This function will determine what happens if the player character dies
-func on_death() -> void:
-	print("Player Died!")
-	visible = false
-	can_control = false
-	
-	await get_tree().create_timer(1).timeout
-	reset_player()
-
-
-
-func reset_player() -> void:
-	global_position = Vector2(110, 43)
-	visible = true
-	can_control = true

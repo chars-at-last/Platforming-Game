@@ -17,7 +17,7 @@ var _can_fire: bool = true								## Flag if the gun can charge/fire
 # Process
 func _physics_process(_delta: float) -> void:
 	# LOOK AT ME HECTOR
-	self.look_at(get_viewport().get_mouse_position())
+	self.look_at(get_viewport().get_mouse_position() + self.position)
 	
 	# Gun
 	physics_gun_control(_delta)

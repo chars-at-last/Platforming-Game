@@ -1,16 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://d2a0dv2u0u0vc"]
 
 [ext_resource type="Script" path="res://nodes/scripts/gun.gd" id="1_7h6wt"]
-[ext_resource type="Texture2D" uid="uid://cw2k3f0xge5dl" path="res://icon.svg" id="1_vpqll"]
+[ext_resource type="Texture2D" uid="uid://5h70if3nn0yk" path="res://assets/art/player_spritesheet.png" id="2_275g3"]
 
 [node name="Gun" type="Node2D"]
 editor_description = "Gun for the player."
 script = ExtResource("1_7h6wt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(6, 0)
-scale = Vector2(0.1, 0.04)
-texture = ExtResource("1_vpqll")
+rotation = -1.5708
+texture = ExtResource("2_275g3")
+region_enabled = true
+region_rect = Rect2(96, 64, 32, 32)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
