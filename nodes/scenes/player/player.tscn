@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://crtbnkmpoyka2"]
+[gd_scene load_steps=76 format=3 uid="uid://crtbnkmpoyka2"]
 
 [ext_resource type="Script" path="res://nodes/scripts/player.gd" id="1_u04yn"]
 [ext_resource type="Texture2D" uid="uid://5h70if3nn0yk" path="res://assets/art/player_spritesheet.png" id="2_s22yy"]
@@ -198,6 +198,39 @@ tracks/0/keys = {
 "values": [22, 23]
 }
 
+[sub_resource type="Animation" id="Animation_03eck"]
+resource_name = "jump_look_up"
+length = 0.033
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [15, 16]
+}
+
+[sub_resource type="Animation" id="Animation_b8hut"]
+resource_name = "jump_looking_up"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [16, 17]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mn3du"]
 _data = {
 "RESET": SubResource("Animation_xs0bs"),
@@ -205,6 +238,8 @@ _data = {
 "falling": SubResource("Animation_nrt24"),
 "idle": SubResource("Animation_yvu4o"),
 "jump": SubResource("Animation_jxlgt"),
+"jump_look_up": SubResource("Animation_03eck"),
+"jump_looking_up": SubResource("Animation_b8hut"),
 "look_up": SubResource("Animation_7q1nk"),
 "looking_up": SubResource("Animation_uv2is"),
 "walking": SubResource("Animation_7vqd5"),
@@ -224,6 +259,12 @@ animation = &"idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qbwxs"]
 animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tmnde"]
+animation = &"jump_look_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4svf7"]
+animation = &"jump_looking_up"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s8kg2"]
 animation = &"look_up"
@@ -376,16 +417,52 @@ advance_expression = "is_on_floor() or is_ducking()"
 advance_mode = 2
 advance_expression = "unbridled_velocity.y < 0"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kd8jc"]
+advance_mode = 2
+advance_expression = "_looking_direction == LOOKING_DIRS.UP"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pyk5k"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gvtix"]
+advance_mode = 2
+advance_expression = "_looking_direction == LOOKING_DIRS.STRAIGHT"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0tmrk"]
+advance_mode = 2
+advance_expression = "_looking_direction == LOOKING_DIRS.STRAIGHT"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1mr67"]
+advance_mode = 2
+advance_expression = "is_on_floor()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_drpxk"]
+advance_mode = 2
+advance_expression = "not (is_on_floor() or is_ducking()) and unbridled_velocity.y < 0"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ap0cl"]
+advance_mode = 2
+advance_expression = "not (is_on_floor() or is_ducking()) and unbridled_velocity.y < 0"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eoa33"]
+advance_mode = 2
+advance_expression = "is_on_floor()"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_cn2te"]
 states/End/position = Vector2(1213, 427)
 states/duck/node = SubResource("AnimationNodeAnimation_dn4u4")
 states/duck/position = Vector2(238, 248)
 states/falling/node = SubResource("AnimationNodeAnimation_olpbv")
-states/falling/position = Vector2(457, -53.4053)
+states/falling/position = Vector2(471, -37.4053)
 states/idle/node = SubResource("AnimationNodeAnimation_30rtg")
 states/idle/position = Vector2(346, 100)
 states/jump/node = SubResource("AnimationNodeAnimation_qbwxs")
-states/jump/position = Vector2(238, -53.4053)
+states/jump/position = Vector2(346, -179.405)
+states/jump_look_up/node = SubResource("AnimationNodeAnimation_tmnde")
+states/jump_look_up/position = Vector2(624, -114.405)
+states/jump_looking_up/node = SubResource("AnimationNodeAnimation_4svf7")
+states/jump_looking_up/position = Vector2(948, -179.405)
 states/look_down/node = SubResource("AnimationNodeAnimation_s8kg2")
 states/look_down/position = Vector2(570, 248)
 states/look_up/node = SubResource("AnimationNodeAnimation_ho57i")
@@ -400,8 +477,8 @@ states/walking_look_up2/node = SubResource("AnimationNodeAnimation_ejima")
 states/walking_look_up2/position = Vector2(1069, 100)
 states/walking_looking_up/node = SubResource("AnimationNodeAnimation_m0v4i")
 states/walking_looking_up/position = Vector2(810, 427)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_40udu"), "idle", "walking", SubResource("AnimationNodeStateMachineTransition_lsakw"), "walking", "idle", SubResource("AnimationNodeStateMachineTransition_bvbt0"), "idle", "look_up", SubResource("AnimationNodeStateMachineTransition_schur"), "look_up", "looking_up", SubResource("AnimationNodeStateMachineTransition_3nrua"), "looking_up", "look_down", SubResource("AnimationNodeStateMachineTransition_fwgvm"), "look_down", "idle", SubResource("AnimationNodeStateMachineTransition_x8488"), "look_down", "look_up", SubResource("AnimationNodeStateMachineTransition_nnos2"), "look_up", "look_down", SubResource("AnimationNodeStateMachineTransition_4tyhf"), "idle", "duck", SubResource("AnimationNodeStateMachineTransition_5pq61"), "duck", "idle", SubResource("AnimationNodeStateMachineTransition_xrx5p"), "looking_up", "duck", SubResource("AnimationNodeStateMachineTransition_o87ho"), "look_up", "duck", SubResource("AnimationNodeStateMachineTransition_0xe1f"), "look_down", "duck", SubResource("AnimationNodeStateMachineTransition_ul5sk"), "duck", "look_up", SubResource("AnimationNodeStateMachineTransition_rnu8t"), "walking", "walking_look_up", SubResource("AnimationNodeStateMachineTransition_j8eir"), "walking_look_up", "walking", SubResource("AnimationNodeStateMachineTransition_rlvjg"), "walking_look_up", "walking_looking_up", SubResource("AnimationNodeStateMachineTransition_m7d52"), "walking_looking_up", "walking", SubResource("AnimationNodeStateMachineTransition_7jvwe"), "look_up", "walking_look_up", SubResource("AnimationNodeStateMachineTransition_qq7e5"), "looking_up", "walking_looking_up", SubResource("AnimationNodeStateMachineTransition_nussn"), "walking_looking_up", "looking_up", SubResource("AnimationNodeStateMachineTransition_xoed4"), "walking_look_up", "look_up", SubResource("AnimationNodeStateMachineTransition_n7mha"), "walking", "walking_look_up2", SubResource("AnimationNodeStateMachineTransition_chiaj"), "walking_look_up2", "walking", SubResource("AnimationNodeStateMachineTransition_5y1xt"), "walking_look_up2", "walking_looking_up", SubResource("AnimationNodeStateMachineTransition_hfj86"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_3fsxv"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_qe3j8"), "jump", "falling", SubResource("AnimationNodeStateMachineTransition_qcap5"), "idle", "falling", SubResource("AnimationNodeStateMachineTransition_luf7y"), "falling", "idle", SubResource("AnimationNodeStateMachineTransition_runif"), "falling", "jump", SubResource("AnimationNodeStateMachineTransition_ngsir")]
-graph_offset = Vector2(88, -232.405)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_40udu"), "idle", "walking", SubResource("AnimationNodeStateMachineTransition_lsakw"), "walking", "idle", SubResource("AnimationNodeStateMachineTransition_bvbt0"), "idle", "look_up", SubResource("AnimationNodeStateMachineTransition_schur"), "look_up", "looking_up", SubResource("AnimationNodeStateMachineTransition_3nrua"), "looking_up", "look_down", SubResource("AnimationNodeStateMachineTransition_fwgvm"), "look_down", "idle", SubResource("AnimationNodeStateMachineTransition_x8488"), "look_down", "look_up", SubResource("AnimationNodeStateMachineTransition_nnos2"), "look_up", "look_down", SubResource("AnimationNodeStateMachineTransition_4tyhf"), "idle", "duck", SubResource("AnimationNodeStateMachineTransition_5pq61"), "duck", "idle", SubResource("AnimationNodeStateMachineTransition_xrx5p"), "looking_up", "duck", SubResource("AnimationNodeStateMachineTransition_o87ho"), "look_up", "duck", SubResource("AnimationNodeStateMachineTransition_0xe1f"), "look_down", "duck", SubResource("AnimationNodeStateMachineTransition_ul5sk"), "duck", "look_up", SubResource("AnimationNodeStateMachineTransition_rnu8t"), "walking", "walking_look_up", SubResource("AnimationNodeStateMachineTransition_j8eir"), "walking_look_up", "walking", SubResource("AnimationNodeStateMachineTransition_rlvjg"), "walking_look_up", "walking_looking_up", SubResource("AnimationNodeStateMachineTransition_m7d52"), "walking_looking_up", "walking", SubResource("AnimationNodeStateMachineTransition_7jvwe"), "look_up", "walking_look_up", SubResource("AnimationNodeStateMachineTransition_qq7e5"), "looking_up", "walking_looking_up", SubResource("AnimationNodeStateMachineTransition_nussn"), "walking_looking_up", "looking_up", SubResource("AnimationNodeStateMachineTransition_xoed4"), "walking_look_up", "look_up", SubResource("AnimationNodeStateMachineTransition_n7mha"), "walking", "walking_look_up2", SubResource("AnimationNodeStateMachineTransition_chiaj"), "walking_look_up2", "walking", SubResource("AnimationNodeStateMachineTransition_5y1xt"), "walking_look_up2", "walking_looking_up", SubResource("AnimationNodeStateMachineTransition_hfj86"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_3fsxv"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_qe3j8"), "jump", "falling", SubResource("AnimationNodeStateMachineTransition_qcap5"), "idle", "falling", SubResource("AnimationNodeStateMachineTransition_luf7y"), "falling", "idle", SubResource("AnimationNodeStateMachineTransition_runif"), "falling", "jump", SubResource("AnimationNodeStateMachineTransition_ngsir"), "jump", "jump_look_up", SubResource("AnimationNodeStateMachineTransition_kd8jc"), "jump_look_up", "jump_looking_up", SubResource("AnimationNodeStateMachineTransition_pyk5k"), "jump_look_up", "jump", SubResource("AnimationNodeStateMachineTransition_gvtix"), "jump_looking_up", "jump", SubResource("AnimationNodeStateMachineTransition_0tmrk"), "jump_looking_up", "walking_looking_up", SubResource("AnimationNodeStateMachineTransition_1mr67"), "walking_looking_up", "jump_looking_up", SubResource("AnimationNodeStateMachineTransition_drpxk"), "looking_up", "jump_looking_up", SubResource("AnimationNodeStateMachineTransition_ap0cl"), "jump_looking_up", "looking_up", SubResource("AnimationNodeStateMachineTransition_eoa33")]
+graph_offset = Vector2(88, -174.324)
 
 [node name="Player" type="CharacterBody2D"]
 editor_description = "Player character."
