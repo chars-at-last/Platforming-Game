@@ -39,6 +39,10 @@ var _wall_boosted: bool = false											## Flag if move-jumping into wall
 var _can_wall_jump: bool = false										## Flag if can wall jump
 var _just_jumped: bool = false											## Tracks if character just jumped
 
+
+var can_control: bool = true #If the player character is still alive and can be controled by the player
+
+
 # Process
 func _physics_process(delta: float) -> void:
 	#print(acceleration.x)
@@ -48,6 +52,8 @@ func _physics_process(delta: float) -> void:
 	#print(_can_wall_jump)
 	#print(_wall_normal)
 	#print()
+	
+	if not can_control: return #If the player died, the player character will not be controlled by the player
 	
 	physics_looking(delta)
 	physics_gravity(delta)				# Gravity stuff
@@ -181,3 +187,20 @@ func _on_area_2d_body_entered(_body: Node2D) -> void:
 func _on_area_2d_body_exited(_body: Node2D) -> void:
 	if $Area2D.get_overlapping_bodies().is_empty():
 		_can_wall_jump = false
+		
+
+#This function will determine what happens if the player character dies
+func on_death() -> void:
+	print("Player Died!")
+	visible = false
+	can_control = false
+	
+	await get_tree().create_timer(1).timeout
+	reset_player()
+
+
+
+func reset_player() -> void:
+	global_position = Vector2(110, 43)
+	visible = true
+	can_control = true
