@@ -213,3 +213,7 @@ collision_mask = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes"]
 position = Vector2(239.5, 208)
 shape = SubResource("RectangleShape2D_7tigl")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Spikes"]
+position = Vector2(336, 209)
+shape = SubResource("RectangleShape2D_7tigl")
