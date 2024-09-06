@@ -12,6 +12,7 @@ const WALL_BOOST_MULT: float = .25					## Velocity multiplier when move-jumping 
 const WALL_JUMP_ANGLE_R: float = PI * 7.1 / 4		## Wall jump angle (Rightward normal)
 const WALL_JUMP_ANGLE_L: float = PI * 4.9 / 4		## Wall jump angle (Leftward normal)
 const SHORT_JUMP_MULT: float = .25					## Short jump multiplier
+const BRAKE_ANIM_THRES: float = 400					## Threshold for doing brake animation
 
 enum LOOKING_DIRS {
 	STRAIGHT = 0,
@@ -36,6 +37,7 @@ var _wall_normal: Vector2												## Wall normal
 var _looking_direction: LOOKING_DIRS = LOOKING_DIRS.STRAIGHT			## Direction of looking (-1 is up, 1 is down)
 
 var _switching_dir: bool = false										## Flag for switching direction
+var _is_braking: bool = false											## Flag if the character should be braking (animation)
 var _wall_boosted: bool = false											## Flag if move-jumping into wall
 var _can_wall_jump: bool = false										## Flag if can wall jump
 var _just_jumped: bool = false											## Tracks if character just jumped
@@ -69,7 +71,7 @@ func _physics_process(delta: float) -> void:
 
 	physics_floor(delta)				# Floor stuff
 	move_and_slide()
-
+	
 # Looking direction
 func physics_looking(_delta: float) -> void:
 	if Input.is_action_pressed("look_down"):
@@ -78,11 +80,13 @@ func physics_looking(_delta: float) -> void:
 		self._looking_direction = LOOKING_DIRS.UP
 	else:
 		self._looking_direction = LOOKING_DIRS.STRAIGHT
-
+		
 # Facing direction
 ## TODO: Handle gun direction
 func face() -> void:
-	if direction:
+	if not is_on_floor() and (is_on_wall() or _can_wall_jump):
+		sprite.flip_h = _wall_normal.x < 0
+	elif direction:
 		sprite.flip_h = direction < 0
 
 # Gravity and other stuff
@@ -106,7 +110,7 @@ func physics_gravity(delta: float) -> void:
 	else:
 		unbridled_velocity.y = min(0, unbridled_velocity.y)
 		if _switching_dir:
-			_switching_dir = false
+			set_switching_dir(false)
 		if _just_jumped:
 			_just_jumped = false
 
@@ -120,18 +124,18 @@ func physics_direction(_delta: float) -> void:
 		var same_signs: bool = is_equal_approx(signf(direction), signf(unbridled_velocity.x))
 		if not is_on_floor():
 			if not same_signs:
-				_switching_dir = true
+				set_switching_dir(true)
 		else:
 			if not same_signs:
-				_switching_dir = true
+				set_switching_dir(true)
 			elif _switching_dir:
-				_switching_dir = false
+				set_switching_dir(false)
 			
 		if _switching_dir:
 			addition *= DIFF_DIRECTION_MULT
 		unbridled_velocity.x += addition
 	elif _switching_dir:
-		_switching_dir = false
+		set_switching_dir(false)
 
 # Handle jump
 func physics_jump(_delta: float) -> void:
@@ -174,7 +178,6 @@ func wall_jump() -> void:
 			unbridled_velocity += Vector2.from_angle(WALL_JUMP_ANGLE_L if _wall_normal.x < 0 else WALL_JUMP_ANGLE_R) * wall_jump_vel_boost
 			_can_wall_jump = false
 			
-			sprite.flip_h = not sprite.flip_h
 			_just_jumped = true
 
 # Floor if positive + ceil if negative (flpcen)
@@ -184,6 +187,15 @@ func flpcen(value: float) -> float:
 # Checks if ducking
 func is_ducking() -> bool:
 	return self._looking_direction == LOOKING_DIRS.DOWN
+
+# Sets switching_dir to true
+func set_switching_dir(value: bool) -> void:
+	if value:
+		_switching_dir = true
+		_is_braking = absf(unbridled_velocity.x) >= BRAKE_ANIM_THRES
+	else:
+		_switching_dir = false
+		_is_braking = false 
 
 #This function will determine what happens if the player character dies
 func on_death() -> void:
