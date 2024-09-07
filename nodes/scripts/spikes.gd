@@ -16,6 +16,7 @@ extends Area2D
 func _on_body_entered(body):
 	if body is Player:
 		print("Spike touched, Player Died!")
+		print(SpawnPosition.global_vector)
 		#body.on_death()
 		on_death(body)
 
@@ -27,6 +28,7 @@ func on_death(body) -> void:
 	reset_player(body)
 	
 func reset_player(body) -> void:
-	body.global_position = Vector2(110, 43)
+	#body.global_position = Vector2(110, 43)
+	body.global_position = SpawnPosition.global_vector
 	body.visible = true
 	body._can_control = true
