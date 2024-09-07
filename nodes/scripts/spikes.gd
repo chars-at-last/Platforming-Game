@@ -15,7 +15,7 @@ extends Area2D
 
 func _on_body_entered(body):
 	if body is Player:
-		print("Player Died!")
+		print("Spike touched, Player Died!")
 		#body.on_death()
 		on_death(body)
 
