@@ -15,5 +15,18 @@ extends Area2D
 
 func _on_body_entered(body):
 	if body is Player:
-		print("hello")
-		body.on_death()
+		print("Player Died!")
+		#body.on_death()
+		on_death(body)
+
+func on_death(body) -> void:
+	body.visible = false
+	body._can_control = false
+	
+	await get_tree().create_timer(1).timeout
+	reset_player(body)
+	
+func reset_player(body) -> void:
+	body.global_position = Vector2(110, 43)
+	body.visible = true
+	body._can_control = true

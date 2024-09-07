@@ -198,19 +198,19 @@ func set_switching_dir(value: bool) -> void:
 		_is_braking = false 
 
 #This function will determine what happens if the player character dies
-func on_death() -> void:
-	print("Player Died!")
-	visible = false
-	_can_control = false
+#func on_death() -> void:
+	#print("Player Died!")
+	#visible = false
+	#_can_control = false
 	
-	await get_tree().create_timer(1).timeout
-	reset_player()
+	#await get_tree().create_timer(1).timeout
+	#reset_player()
 
 
-func reset_player() -> void:
-	global_position = Vector2(110, 43)
-	visible = true
-	_can_control = true
+#func reset_player() -> void:
+	#global_position = Vector2(110, 43)
+	#visible = true
+	#_can_control = true
 
 
 # Signal method(s) #
