@@ -1,4 +1,4 @@
-extends Area2D
+class_name Spikes extends Tile
 
 
 # Called when the node enters the scene tree for the first time.
@@ -10,15 +10,11 @@ extends Area2D
 #func _process(delta: float) -> void:
 	#pass
 
-	
-
-
-func _on_body_entered(body):
-	if body is Player:
-		print("Spike touched, Player Died!")
-		print(SpawnPosition.global_vector)
+func handle_collision(collider: Node) -> void:
+	if collider is Player:
+		print("Player Died!")
 		#body.on_death()
-		on_death(body)
+		on_death(collider)
 
 func on_death(body) -> void:
 	body.visible = false
@@ -28,7 +24,6 @@ func on_death(body) -> void:
 	reset_player(body)
 	
 func reset_player(body) -> void:
-	#body.global_position = Vector2(110, 43)
-	body.global_position = SpawnPosition.global_vector
+	body.global_position = Vector2(110, 43)
 	body.visible = true
 	body._can_control = true

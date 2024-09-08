@@ -23,6 +23,8 @@ enum LOOKING_DIRS {
 # Variables
 @onready var sprite: Sprite2D = $Sprite2D								## The Sprite
 @onready var gun: Gun = $Gun											## The Gun
+@onready var wja: Area2D = $WallJumpArea								## Wall jump area
+@onready var tile_area: Area2D = $TileArea								## Area for "Special" tiles
 
 var direction: float													## Direction of movement
 
@@ -219,6 +221,9 @@ func _on_area_2d_body_entered(_body: Node2D) -> void:
 	_can_wall_jump = true
 
 func _on_area_2d_body_exited(_body: Node2D) -> void:
-	if $Area2D.get_overlapping_bodies().is_empty():
+	if wja.get_overlapping_bodies().is_empty():
 		_can_wall_jump = false
 		
+func _on_tile_area_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+	if body is Tile:
+		body.handle_collision(self)

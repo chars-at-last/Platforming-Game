@@ -1,15 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://vyj36j0hv8jy"]
 
-[ext_resource type="Script" path="res://nodes/scripts/spikes.gd" id="1_3hmlh"]
+[ext_resource type="TileSet" uid="uid://wctw80adwhtu" path="res://assets/resources/placeholder_tileset.tres" id="2_bikw5"]
+[ext_resource type="Script" path="res://nodes/scripts/obstacles/spikes.gd" id="2_gh2gi"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4w1k"]
-
-[node name="Spikes" type="Area2D"]
-collision_layer = 0
-monitorable = false
-script = ExtResource("1_3hmlh")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_f4w1k")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="Spikes" type="TileMapLayer"]
+tile_set = ExtResource("2_bikw5")
+script = ExtResource("2_gh2gi")
