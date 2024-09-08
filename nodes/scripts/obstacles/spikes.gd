@@ -24,6 +24,6 @@ func on_death(body) -> void:
 	reset_player(body)
 	
 func reset_player(body) -> void:
-	body.global_position = Vector2(110, 43)
+	body.global_position = SpawnPoint.global_vector
 	body.visible = true
 	body._can_control = true

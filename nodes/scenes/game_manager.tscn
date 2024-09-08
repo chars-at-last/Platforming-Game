@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bqfiu2iio1r5q"]
+[gd_scene load_steps=14 format=3 uid="uid://bqfiu2iio1r5q"]
 
 [ext_resource type="PackedScene" uid="uid://crtbnkmpoyka2" path="res://nodes/scenes/player/player.tscn" id="1_1ulvm"]
 [ext_resource type="Script" path="res://nodes/scripts/game_manager.gd" id="1_p8b7o"]
 [ext_resource type="Shader" path="res://nodes/scripts/shaders/16bit_color_converter.gdshader" id="1_sv5m8"]
 [ext_resource type="TileSet" uid="uid://wctw80adwhtu" path="res://assets/resources/placeholder_tileset.tres" id="4_som4f"]
 [ext_resource type="PackedScene" uid="uid://vyj36j0hv8jy" path="res://nodes/scenes/Obstacles/spikes.tscn" id="5_ltc1a"]
+[ext_resource type="PackedScene" uid="uid://bax0hg5n0t3qk" path="res://nodes/scenes/check_point.tscn" id="6_1xxpy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oxpyf"]
 size = Vector2(1048, 114)
@@ -20,6 +21,14 @@ size = Vector2(143.5, 152)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lmv1b"]
 shader = ExtResource("1_sv5m8")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_xt1ic"]
+scenes/1/scene = ExtResource("6_1xxpy")
+
+[sub_resource type="TileSet" id="TileSet_wq2bi"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 2
+sources/0 = SubResource("TileSetScenesCollectionSource_xt1ic")
 
 [node name="GameManager" type="Node"]
 editor_description = "Main node of the game."
@@ -103,3 +112,10 @@ tile_set = ExtResource("4_som4f")
 
 [node name="Spikes" parent="." instance=ExtResource("5_ltc1a")]
 tile_map_data = PackedByteArray(0, 0, 7, 0, 6, 0, 0, 0, 4, 0, 0, 0, 0, 96, 10, 0, 6, 0, 0, 0, 4, 0, 0, 0, 0, 80)
+
+[node name="CheckPoint" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray(0, 0, 3, 0, 7, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0)
+tile_set = SubResource("TileSet_wq2bi")
+
+[connection signal="body_entered" from="CheckPoint/Area2D" to="CheckPoint/Area2D" method="_on_body_entered"]
+[connection signal="body_entered" from="CheckPoint/@Area2D@74601" to="CheckPoint/@Area2D@74601" method="_on_body_entered"]

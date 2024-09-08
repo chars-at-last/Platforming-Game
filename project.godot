@@ -18,7 +18,7 @@ boot_splash/minimum_display_time=1000
 
 [autoload]
 
-SpawnPosition="*res://checkpoint.gd"
+SpawnPoint="*res://nodes/scripts/spawn_point.gd"
 
 [display]
 
