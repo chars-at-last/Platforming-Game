@@ -18,6 +18,7 @@ boot_splash/minimum_display_time=1000
 
 [autoload]
 
+LevelManager="*res://nodes/singletons/level_manager.gd"
 SpawnPoint="*res://nodes/scripts/spawn_point.gd"
 
 [display]
