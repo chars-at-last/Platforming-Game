@@ -8,6 +8,7 @@ editor_description = "Gun for the player."
 script = ExtResource("1_7h6wt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 0
 rotation = -1.5708
 texture = ExtResource("2_275g3")
 region_enabled = true
