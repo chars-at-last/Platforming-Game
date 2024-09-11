@@ -18,7 +18,7 @@ boot_splash/minimum_display_time=1000
 
 [autoload]
 
-LevelManager="*res://nodes/singletons/level_manager.gd"
+GameManager="*res://nodes/scripts/game_manager.gd"
 SpawnPoint="*res://nodes/scripts/spawn_point.gd"
 
 [display]
@@ -87,6 +87,7 @@ killbind={
 2d_physics/layer_4="Death"
 2d_physics/layer_5="Checkpoint"
 2d_physics/layer_6="Background"
+2d_physics/layer_7="Goal"
 
 [rendering]
 

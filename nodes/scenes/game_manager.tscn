@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=4 uid="uid://bqfiu2iio1r5q"]
+[gd_scene load_steps=11 format=4 uid="uid://bqfiu2iio1r5q"]
 
 [ext_resource type="PackedScene" uid="uid://crtbnkmpoyka2" path="res://nodes/scenes/player/player.tscn" id="1_1ulvm"]
-[ext_resource type="Script" path="res://nodes/scripts/game_manager.gd" id="1_p8b7o"]
 [ext_resource type="Shader" path="res://nodes/scripts/shaders/16bit_color_converter.gdshader" id="1_sv5m8"]
 [ext_resource type="TileSet" uid="uid://bsuhy77c6mhv3" path="res://assets/resources/comp195_tileset.tres" id="4_mby6d"]
 [ext_resource type="PackedScene" uid="uid://vyj36j0hv8jy" path="res://nodes/scenes/Obstacles/spikes.tscn" id="5_ltc1a"]
 [ext_resource type="PackedScene" uid="uid://bax0hg5n0t3qk" path="res://nodes/scenes/check_point.tscn" id="6_1xxpy"]
+[ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="6_2tw34"]
+[ext_resource type="PackedScene" uid="uid://cf02ai7i3ygsy" path="res://nodes/scenes/level_manager.tscn" id="7_5cnyl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lmv1b"]
 shader = ExtResource("1_sv5m8")
@@ -20,7 +21,6 @@ sources/0 = SubResource("TileSetScenesCollectionSource_xt1ic")
 
 [node name="GameManager" type="Node"]
 editor_description = "Main node of the game."
-script = ExtResource("1_p8b7o")
 
 [node name="Player" parent="." instance=ExtResource("1_1ulvm")]
 position = Vector2(110, 43)
@@ -72,5 +72,10 @@ offset_bottom = 260.0
 scale = Vector2(0.25, 0.25)
 text = "Checkpoint"
 
-[connection signal="body_entered" from="CheckPoint/Area2D" to="CheckPoint/Area2D" method="_on_body_entered"]
-[connection signal="body_entered" from="CheckPoint/@Area2D@48823" to="CheckPoint/@Area2D@48823" method="_on_body_entered"]
+[node name="TileMapLayer" parent="." instance=ExtResource("6_2tw34")]
+tile_map_data = PackedByteArray("AAAHAAgAAAAAAAAAAAA=")
+
+[node name="LevelManager" parent="." instance=ExtResource("7_5cnyl")]
+
+[connection signal="complete_level" from="TileMapLayer" to="LevelManager" method="next"]
+[connection signal="complete_level" from="TileMapLayer" to="LevelManager" method="_on_tile_map_layer_complete_level"]
