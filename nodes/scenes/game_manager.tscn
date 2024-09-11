@@ -6,6 +6,8 @@
 [ext_resource type="TileSet" uid="uid://bsuhy77c6mhv3" path="res://assets/resources/comp195_tileset.tres" id="4_mby6d"]
 [ext_resource type="PackedScene" uid="uid://vyj36j0hv8jy" path="res://nodes/scenes/Obstacles/spikes.tscn" id="5_ltc1a"]
 [ext_resource type="PackedScene" uid="uid://bax0hg5n0t3qk" path="res://nodes/scenes/check_point.tscn" id="6_1xxpy"]
+[ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="6_2tw34"]
+[ext_resource type="PackedScene" uid="uid://cf02ai7i3ygsy" path="res://nodes/scenes/level_manager.tscn" id="7_5cnyl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lmv1b"]
 shader = ExtResource("1_sv5m8")
@@ -33,7 +35,6 @@ offset_right = 640.0
 offset_bottom = 360.0
 
 [node name="Ground (Backgorund)" type="TileMapLayer" parent="."]
-visible = false
 modulate = Color(0.513726, 0.513726, 0.494118, 1)
 z_index = -8
 scale = Vector2(0.5, 0.5)
@@ -72,3 +73,11 @@ offset_right = 191.0
 offset_bottom = 260.0
 scale = Vector2(0.25, 0.25)
 text = "Checkpoint"
+
+[node name="TileMapLayer" parent="." instance=ExtResource("6_2tw34")]
+tile_map_data = PackedByteArray("AAAHAAgAAAAAAAAAAAA=")
+
+[node name="LevelManager" parent="." instance=ExtResource("7_5cnyl")]
+
+[connection signal="complete_level" from="TileMapLayer" to="LevelManager" method="next"]
+[connection signal="complete_level" from="TileMapLayer" to="LevelManager" method="_on_tile_map_layer_complete_level"]

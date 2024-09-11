@@ -22,4 +22,6 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		print("CheckPoint Reached!")
 		SpawnPoint.global_vector = body.global_position
+		SpawnPoint.check_point_level = GameManager.current_level_manager
+		print(SpawnPoint.check_point_level)
 		$CollisionShape2D.call_deferred("set_disabled", true)
