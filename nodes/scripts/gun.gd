@@ -8,6 +8,7 @@ const CHARGE_TIME: float = .5							## Charge time for the gun
 const GUN_BOOST_MAGNITUDE: float = 800					## Magnitude of the gun knockback
 
 # Variable(s)
+@onready var sprite: Sprite2D = $Sprite2D				## Sprite2D
 @onready var timer: Timer = $Timer						## Timer
 @export var base_node: Player							## The player
 
@@ -41,3 +42,4 @@ func physics_gun_control(_delta: float) -> void:
 func fire_gun(percent: float) -> void:
 	base_node.unbridled_velocity -= GUN_BOOST_MAGNITUDE * percent * Vector2.from_angle(self.rotation)
 	_can_fire = false
+	

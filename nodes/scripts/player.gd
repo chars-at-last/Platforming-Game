@@ -86,10 +86,19 @@ func physics_looking(_delta: float) -> void:
 # Facing direction
 ## TODO: Handle gun direction
 func face() -> void:
+	var changing: bool = true
+	var temp_flip_h: bool = false
+	
 	if not is_on_floor() and (is_on_wall() or _can_wall_jump):
-		sprite.flip_h = _wall_normal.x < 0
+		temp_flip_h = _wall_normal.x < 0
 	elif direction:
-		sprite.flip_h = direction < 0
+		temp_flip_h = direction < 0
+	else:
+		changing = false
+		
+	if changing:
+		sprite.flip_h = temp_flip_h
+		#gun.update_position(not temp_flip_h)
 
 # Gravity and other stuff
 func physics_gravity(delta: float) -> void:
