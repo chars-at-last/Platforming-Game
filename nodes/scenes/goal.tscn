@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d2cg1ygpdb07v"]
 
 [ext_resource type="TileSet" uid="uid://wctw80adwhtu" path="res://assets/resources/placeholder_tileset.tres" id="1_2p66l"]
-[ext_resource type="Script" path="res://nodes/scenes/goal.gd" id="2_v0cw2"]
+[ext_resource type="Script" path="res://nodes/scripts/goal.gd" id="2_v0cw2"]
 
 [node name="Tile" type="TileMapLayer"]
 tile_set = ExtResource("1_2p66l")
