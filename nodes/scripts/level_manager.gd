@@ -33,7 +33,7 @@ func _ready() -> void:
 
 func level_loaded(instance1):
 	#add_child(instance1)
-	next_level = instance1
+	next_level = instance1.get_path()
 
 
 #func _on_goal_tile_complete_level() -> void:

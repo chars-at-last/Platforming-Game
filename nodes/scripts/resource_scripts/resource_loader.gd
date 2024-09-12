@@ -20,8 +20,8 @@ func preload_scenes():
 	# get_tree().root.add_child(instance2)
 
 	# Signal that preloading is done
-	print("Scenes preloaded", "res://nodes/scenes/level.tscn")
-	emit_signal("finished_loading", "res://nodes/scenes/level.tscn")
+	print("Scenes preloaded", scene1)
+	emit_signal("finished_loading", scene1)
 
 func _exit_tree():
 	thread.wait_to_finish()
