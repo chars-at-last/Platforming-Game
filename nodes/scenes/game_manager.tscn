@@ -81,7 +81,5 @@ tile_map_data = PackedByteArray("AAAAAAEAAAAAAAAAAAA=")
 
 [connection signal="death" from="Spikes" to="LevelManager" method="on_death"]
 [connection signal="death" from="SpikesSmall" to="LevelManager" method="on_death"]
-[connection signal="body_entered" from="CheckPoint/Area2D" to="CheckPoint/Area2D" method="_on_body_entered"]
-[connection signal="body_entered" from="CheckPoint/@Area2D@17255" to="CheckPoint/@Area2D@17255" method="_on_body_entered"]
 [connection signal="complete_level" from="TileMapLayer" to="LevelManager" method="next"]
 [connection signal="complete_level" from="TileMapLayer" to="LevelManager" method="_on_tile_map_layer_complete_level"]
