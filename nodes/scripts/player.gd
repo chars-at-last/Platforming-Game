@@ -24,6 +24,7 @@ enum LOOKING_DIRS {
 @onready var sprite: Sprite2D = $Sprite2D								## The Sprite
 @onready var gun: Gun = $Gun											## The Gun
 @onready var wja: Area2D = $WallJumpArea								## Wall jump area
+@onready var w_shape: CollisionShape2D = $WallJumpArea/CollisionShape2D	## Wall jump area col shape
 @onready var tile_area: Area2D = $TileArea								## Area for "Special" tiles
 
 var direction: float													## Direction of movement
@@ -44,9 +45,12 @@ var _wall_boosted: bool = false											## Flag if move-jumping into wall
 var _can_wall_jump: bool = false										## Flag if can wall jump
 var _just_jumped: bool = false											## Tracks if character just jumped
 
-
 var _can_control: bool = true 											## If the player character is still alive and can be controled by the player
 
+# Ready
+func _ready() -> void:
+	direction = 1
+	face()
 
 # Process
 func _physics_process(delta: float) -> void:
@@ -98,7 +102,8 @@ func face() -> void:
 		
 	if changing:
 		sprite.flip_h = temp_flip_h
-		#gun.update_position(not temp_flip_h)
+		w_shape.position.x = abs(w_shape.position.x) * (1 if temp_flip_h else -1)
+		gun.flip(not temp_flip_h)
 
 # Gravity and other stuff
 func physics_gravity(delta: float) -> void:

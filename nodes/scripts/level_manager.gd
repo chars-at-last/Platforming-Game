@@ -31,7 +31,7 @@ func _ready() -> void:
 func next() -> void:
 	print("Switching level")
 	print(SpawnPoint.check_point_level)
-	get_tree().change_scene_to_file("res://nodes/scenes/level.tscn")
+	get_tree().call_deferred("change_scene_to_file", "res://nodes/scenes/level.tscn")
 
 
 func _on_goal_tile_complete_level() -> void:
