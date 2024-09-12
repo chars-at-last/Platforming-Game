@@ -2,6 +2,7 @@
 
 extends Node
 var current_level_manager
+var current_level_id
 
 
 # Called when the node enters the scene tree for the first time.

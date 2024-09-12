@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bqfiu2iio1r5q"]
+[gd_scene load_steps=12 format=4 uid="uid://bqfiu2iio1r5q"]
 
 [ext_resource type="PackedScene" uid="uid://crtbnkmpoyka2" path="res://nodes/scenes/player/player.tscn" id="1_1ulvm"]
 [ext_resource type="Script" path="res://nodes/scripts/game_manager.gd" id="1_p8b7o"]
@@ -79,5 +79,9 @@ tile_map_data = PackedByteArray("AAAHAAgAAAAAAAAAAAA=")
 
 [node name="LevelManager" parent="." instance=ExtResource("7_5cnyl")]
 
+[connection signal="death" from="Spikes" to="LevelManager" method="on_death"]
+[connection signal="death" from="SpikesSmall" to="LevelManager" method="on_death"]
+[connection signal="body_entered" from="CheckPoint/Area2D" to="CheckPoint/Area2D" method="_on_body_entered"]
+[connection signal="body_entered" from="CheckPoint/@Area2D@17255" to="CheckPoint/@Area2D@17255" method="_on_body_entered"]
 [connection signal="complete_level" from="TileMapLayer" to="LevelManager" method="next"]
 [connection signal="complete_level" from="TileMapLayer" to="LevelManager" method="_on_tile_map_layer_complete_level"]
