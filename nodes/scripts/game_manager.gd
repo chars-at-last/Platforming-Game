@@ -1,8 +1,9 @@
 @icon("res://icon.svg")
 
 extends Node
-var current_level_manager
-var current_level_id
+
+# Variable(s)
+var current_level_manager: LevelManager				## Current LevelManager
 
 
 # Called when the node enters the scene tree for the first time.

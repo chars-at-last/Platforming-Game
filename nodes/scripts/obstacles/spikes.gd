@@ -11,6 +11,12 @@ class_name Spikes extends Tile
 	#pass
 signal death(body)
 
+# Ready
+func _ready() -> void:
+	if GameManager.current_level_manager:
+		connect("death", Callable(GameManager.current_level_manager, "on_death"))
+
+# Handle collision
 func handle_collision(collider: Node) -> void:
 	if collider is Player:
 		print("Player Died!")

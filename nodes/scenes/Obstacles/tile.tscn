@@ -4,6 +4,6 @@
 [ext_resource type="TileSet" uid="uid://bsuhy77c6mhv3" path="res://assets/resources/comp195_tileset.tres" id="1_77m1u"]
 
 [node name="Tile" type="TileMapLayer"]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.5, 0.5)
 tile_set = ExtResource("1_77m1u")
 script = ExtResource("1_5yxb0")

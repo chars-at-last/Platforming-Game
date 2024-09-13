@@ -1,15 +1,37 @@
-extends Node2D
+class_name LevelManager extends Node2D
 
 
-# Variable(s)
-static var _cur_level: Level = null
-#static var _cur_checkpoint: Checkpoint = null
+# Constant(s)
+const PLAYER_PATH: String = "res://nodes/scenes/player/player.tscn"
 
 # Signal(s)
 signal level_set
 signal checkpoint_set
 
-var next_level
+# Variable(s)
+static var _cur_level: Level = null
+static var cur_checkpoint: Checkpoint = null
+static var cur_player: Player = null
+
+# TODO: Change this default_level later
+@export var default_level: PackedScene = preload("res://nodes/scenes/levels/created levels/level_01.tscn")
+@export var level_collection: Dictionary = {"base_collection": preload("res://assets/resources/base_level_collection.tres")}
+
+@onready var level_loader: LevelLoader = $LevelLoader
+
+
+# Ready
+func _ready() -> void:
+	GameManager.current_level_manager = self
+	# TODO: Allow for any level to be the default
+	add_child(default_level.instantiate())
+	
+	# TODO: Allow for the current checkpoint to be loaded from a save file
+	if not cur_checkpoint:
+		if not cur_player:
+			cur_player = load(PLAYER_PATH).instantiate()
+		_cur_level.add_child(cur_player)
+		cur_player.position = Level.to_pixel_coords(_cur_level.default_spawn)
 
 # Sets current level
 func set_cur_level(level: Level) -> void:
@@ -21,29 +43,42 @@ func get_cur_level() -> Level:
 	if not _cur_level:
 		await level_set
 	return _cur_level
-	
 
-func _ready() -> void:
-	#print("Hello")
-	GameManager.current_level_manager = self
-	#$"/root/LevelManager".connect("complete_level", next)
-	#$GoalTile.connect("complete_level", next)
-	#var preloader = $resource_loader  # Adjust the path to your Preloader node
-	#preloader.connect("finished_loading", self, "_on_preloading_done")
+# Setup upcoming levels
+func setup_levels(level_keys: Array[String], level_collection: Array[String]) -> void:
+	var true_level_names: Array[String]
+	var levels_path: Array[String]
+	for i in range(0, level_keys.size()):		
+		true_level_names.append(self.level_collection[level_collection[i]].collection[level_keys[i]])
+		levels_path.append(self.level_collection[level_collection[i]].levels_path)
+		
+	level_loader.load_levels(true_level_names, levels_path, level_keys)
 
-func level_loaded(instance1):
+#func level_loaded(instance1):
 	#add_child(instance1)
-	next_level = instance1.get_path()
-
+	#next_level = instance1.get_path()
 
 #func _on_goal_tile_complete_level() -> void:
-func next() -> void:
-	print("Switching level", next_level)
-	print(SpawnPoint.check_point_level)
+func next(next_level_key: String, next_level_pos_add: Vector2) -> void:
+	print("Switching level")
+	#print(SpawnPoint.check_point_level)
 	#get_tree().call_deferred("change_scene_to_file", "res://nodes/scenes/level.tscn")
 	#var scene = $instance
-	get_tree().call_deferred("change_scene_to_file",next_level)
-
+	#get_tree().call_deferred("change_scene_to_file", next_level)
+	
+	if level_loader.loaded_levels.has(next_level_key):
+		_cur_level.call_deferred("remove_child", cur_player)									# Save player
+		_cur_level.queue_free()																	# Remove old level
+		#print(level_loader.loaded_levels)
+		var next_level: Level = level_loader.loaded_levels[next_level_key].instantiate()		# Get next level
+		level_loader.clear_levels()																# Clear old loaded levels
+		add_child(next_level)																	# Add next level
+		
+		_cur_level.call_deferred("add_child", cur_player)										# Add back player
+		cur_player.position += Level.to_pixel_coords(next_level_pos_add)						# Change player position
+		
+		print("Switching level complete")
+	
 func on_death(body) -> void:
 	body.visible = false
 	body._can_control = false
@@ -52,18 +87,12 @@ func on_death(body) -> void:
 	reset_player(body)
 	
 func reset_player(body) -> void:
-	body.global_position = SpawnPoint.global_vector
+	# TODO: Add checkpoint functionality (SpawnPoint Singleton should be deleted, LevelManager will handle Checkpoint info)
+	body.position = Level.to_pixel_coords(_cur_level.default_spawn)
 	body.visible = true
 	body._can_control = true
+	body.velocity = Vector2.ZERO
+	body.unbridled_velocity = Vector2.ZERO
 
-
-
-func back() -> void:
-	print("Switching level")
-	print(SpawnPoint.check_point_level)
-	get_tree().change_scene_to_file("res://nodes/scenes/game_manager.tscn")
-
-
-func _on_goal_tile_complete_level() -> void:
-	#pass # Replace with function body.
-	next()
+func _on_goal_tile_complete_level(next_level_key: String, next_level_pos_add: Vector2) -> void:
+	next(next_level_key, next_level_pos_add)

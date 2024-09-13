@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LevelCollection" load_steps=2 format=3 uid="uid://sa566wo55kh7"]
+
+[ext_resource type="Script" path="res://nodes/scripts/resource_scripts/level_collection.gd" id="1_l4pf6"]
+
+[resource]
+script = ExtResource("1_l4pf6")
+levels_path = "res://nodes/scenes/level/created_levels"
+collection = {
+"": "",
+"1x1": "level_01",
+"1x2": "level_02"
+}
