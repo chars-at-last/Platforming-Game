@@ -81,7 +81,7 @@ func next(next_level_key: String, next_level_pos_add: Vector2) -> void:
 		
 		_cur_level.call_deferred("add_child", cur_player)										# Add back player
 		cur_player.position += Level.to_pixel_coords(next_level_pos_add)						# Change player position
-		#print("Switching level complete, player is at ", cur_player.position)
+		print("Switching level complete, player is at ", cur_player.position)
 		#print("Intended spawn point ", next_level_pos_add)
 	
 func on_death(body) -> void:

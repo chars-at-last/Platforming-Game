@@ -1096,7 +1096,7 @@ fill = 1
 fill_from = Vector2(0.482906, 0.525641)
 fill_to = Vector2(0.183761, 0.115385)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Can_Die"]]
 editor_description = "Player character."
 light_mask = 0
 collision_mask = 2
@@ -1135,9 +1135,9 @@ tree_root = SubResource("AnimationNodeStateMachine_cn2te")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="TileArea" type="Area2D" parent="."]
+[node name="TileArea" type="Area2D" parent="." groups=["Can_Die"]]
 collision_layer = 0
-collision_mask = 92
+collision_mask = 220
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileArea"]
 shape = SubResource("CapsuleShape2D_xlpux")

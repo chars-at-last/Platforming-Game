@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2ku6teggg8ok"]
+
+[ext_resource type="TileSet" uid="uid://wctw80adwhtu" path="res://assets/resources/placeholder_tileset.tres" id="1_y0s03"]
+[ext_resource type="Script" path="res://nodes/scripts/obstacles/death_block.gd" id="2_btde4"]
+
+[node name="DeathBlock" type="TileMapLayer" groups=["Can_Die"]]
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray(0, 0, 250, 255, 6, 0, 0, 0, 4, 0, 0, 0, 0, 0)
+tile_set = ExtResource("1_y0s03")
+script = ExtResource("2_btde4")

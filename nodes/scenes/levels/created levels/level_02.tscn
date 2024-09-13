@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://beytovgwbjxul"]
+[gd_scene load_steps=6 format=4 uid="uid://beytovgwbjxul"]
 
 [ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_38h8w"]
 [ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="2_wyl4l"]
 [ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_y6f1j"]
 [ext_resource type="PackedScene" uid="uid://vyj36j0hv8jy" path="res://nodes/scenes/Obstacles/spikes.tscn" id="3_gufr5"]
+[ext_resource type="PackedScene" uid="uid://b2ku6teggg8ok" path="res://nodes/scenes/Obstacles/death_block.tscn" id="5_gktie"]
 
 [node name="Level02" instance=ExtResource("1_38h8w")]
 position = Vector2(320, 180)
@@ -26,5 +27,5 @@ tile_map_data = PackedByteArray("AAD2//r/AQABAAIAAAAKAPr/AQACAAIAAAAKAPn/AQACAAA
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAD//wAAAQADAAAAADAAAAAAAQADAAAAADAHAPv/AQADAAAAADD4//7/AQADAAAAAFA=")
 
-[node name="Spikes" parent="." index="5" instance=ExtResource("3_gufr5")]
-tile_map_data = PackedByteArray("AAD7/wQAAQADAAAAAAD8/wQAAQADAAAAAAD9/wQAAQADAAAAAAD+/wQAAQADAAAAAAD//wQAAQADAAAAAAAAAAQAAQADAAAAAAABAAQAAQADAAAAAAACAAQAAQADAAAAAAADAAQAAQADAAAAAAAEAAQAAQADAAAAAAA=")
+[node name="DeathBlock" parent="." index="5" instance=ExtResource("5_gktie")]
+tile_map_data = PackedByteArray("AAD6/wYAAAAEAAAAAAD1/wYAAAAEAAAAAAD2/wYAAAAEAAAAAAD3/wYAAAAEAAAAAAD4/wYAAAAEAAAAAAD5/wYAAAAEAAAAAAD7/wYAAAAEAAAAAAD8/wYAAAAEAAAAAAD9/wYAAAAEAAAAAAD+/wYAAAAEAAAAAAD//wYAAAAEAAAAAAAAAAYAAAAEAAAAAAABAAYAAAAEAAAAAAACAAYAAAAEAAAAAAADAAYAAAAEAAAAAAAEAAYAAAAEAAAAAAAFAAYAAAAEAAAAAAAGAAYAAAAEAAAAAAAHAAYAAAAEAAAAAAAIAAYAAAAEAAAAAAAJAAYAAAAEAAAAAAAKAAYAAAAEAAAAAAALAAYAAAAEAAAAAAA=")
