@@ -16,6 +16,7 @@ const DEFAULT_SPAWN: Vector2 = Vector2.ZERO
 
 # Ready
 func _ready() -> void:
+	SpawnPoint.original_spawn = default_spawn
 	if GameManager.current_level_manager:
 		GameManager.current_level_manager.set_cur_level(self)
 	
