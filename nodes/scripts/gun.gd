@@ -29,6 +29,8 @@ func _physics_process(_delta: float) -> void:
 	
 	# Gun
 	physics_gun_control(_delta)
+	
+	#print(base_position)
 		
 # Controls the gun charging
 func physics_gun_control(_delta: float) -> void:

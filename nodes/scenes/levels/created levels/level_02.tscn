@@ -24,7 +24,7 @@ tile_map_data = PackedByteArray("AAD2//r/AQABAAIAAAAKAPr/AQACAAIAAAAKAPn/AQACAAA
 
 [node name="Spikes2" parent="." index="4" instance=ExtResource("3_gufr5")]
 scale = Vector2(0.5, 0.5)
-tile_map_data = PackedByteArray("AAD//wAAAQADAAAAADAAAAAAAQADAAAAADD4//7/AQADAAAAAFAHAP7/AQADAAAAAGA=")
+tile_map_data = PackedByteArray("AAD//wAAAQADAAAAADAAAAAAAQADAAAAADAHAPv/AQADAAAAADD4//7/AQADAAAAAFA=")
 
 [node name="Spikes" parent="." index="5" instance=ExtResource("3_gufr5")]
 tile_map_data = PackedByteArray("AAD7/wQAAQADAAAAAAD8/wQAAQADAAAAAAD9/wQAAQADAAAAAAD+/wQAAQADAAAAAAD//wQAAQADAAAAAAAAAAQAAQADAAAAAAABAAQAAQADAAAAAAACAAQAAQADAAAAAAADAAQAAQADAAAAAAAEAAQAAQADAAAAAAA=")
