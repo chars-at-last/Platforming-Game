@@ -3,6 +3,7 @@ extends Node
 
 var global_vector = Vector2(110, 43)
 var check_point_level
+var check_point_on = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

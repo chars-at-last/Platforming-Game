@@ -92,8 +92,9 @@ func on_death(body) -> void:
 	reset_player(body)
 	
 func reset_player(body) -> void:
+	print(SpawnPoint.check_point_on)
 	# if the last checkpoint is in a different level, we will change the scene back to the correct level first before spawning the player
-	if SpawnPoint.check_point_level == cur_level_key:
+	if !SpawnPoint.check_point_on or SpawnPoint.check_point_level == cur_level_key:
 		print("Spawning in current level", cur_level_key)
 		body.position = Level.to_pixel_coords(_cur_level.default_spawn)
 	else:

@@ -12,8 +12,12 @@ class_name Checkpoint extends Tile
 	#pass
 	
 
+#When the player collide with a checkpoint, this method will update the variables
+#in singleton SpawnPoint to reflect the latest player spawnpoint and the level 
+#they are in. This will also deactivate the checkpoint
 func handle_collision(collider: Node) -> void:
 	if collider is Player:
+		SpawnPoint.check_point_on = true
 		print("CheckPoint Reached!", collider.global_position)
 		SpawnPoint.global_vector = collider.global_position
 		print(checkpoint_level_id)
