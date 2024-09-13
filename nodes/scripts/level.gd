@@ -23,6 +23,7 @@ func _ready() -> void:
 		var keys: Array[String]
 		var collection: Array[String]
 		for goal: Goal in goals.get_children():
+			print("test",goal.current_level_key)
 			keys.append(goal.next_level_key)
 			collection.append(goal.level_collection_key)
 			

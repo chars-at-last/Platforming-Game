@@ -7,7 +7,7 @@
 
 [node name="Level02" instance=ExtResource("1_38h8w")]
 position = Vector2(320, 180)
-default_spawn = Vector2(-10, -4)
+default_spawn = Vector2(-5, 0)
 
 [node name="Goal" parent="Goals" index="0" instance=ExtResource("2_y6f1j")]
 scale = Vector2(0.5, 0.5)
