@@ -1,5 +1,6 @@
-class_name Checkpoint extends Area2D
+class_name Checkpoint extends Tile
 
+@export var checkpoint_level_id: String				##Level id that the checkpoint is in
 
 # Called when the node enters the scene tree for the first time.
 #func _ready() -> void:
@@ -11,17 +12,18 @@ class_name Checkpoint extends Area2D
 	#pass
 	
 
-#func handle_collision(collider: Node) -> void:
-	#if collider is Player:
-		#print("CheckPoint Reached!")
-		#body.on_death()
-		#SpawnPoint.global_vector = collider.global_position
-
-
-func _on_body_entered(body: Node2D) -> void:
-	if body is Player:
-		print("CheckPoint Reached!")
-		SpawnPoint.global_vector = body.global_position
-		SpawnPoint.check_point_level = GameManager.current_level_manager
-		print(SpawnPoint.check_point_level)
-		$CollisionShape2D.call_deferred("set_disabled", true)
+#When the player collide with a checkpoint, this method will update the variables
+#in singleton SpawnPoint to reflect the latest player spawnpoint and the level 
+#they are in. This will also deactivate the checkpoint
+func handle_collision(collider: Node) -> void:
+	if collider is Player:
+		SpawnPoint.check_point_on = true
+		print("CheckPoint Reached!", collider.global_position)
+		SpawnPoint.global_vector = collider.global_position
+		print(checkpoint_level_id)
+		SpawnPoint.check_point_level = checkpoint_level_id
+		for cell in get_used_cells():
+			var tile_id = get_cell_source_id(cell)
+			tile_set.set_physics_layer_collision_layer(tile_id, 0)
+			tile_set.set_physics_layer_collision_mask(tile_id, 0)
+			
