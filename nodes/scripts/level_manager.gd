@@ -80,10 +80,9 @@ func next(next_level_key: String, next_level_pos_add: Vector2) -> void:
 		add_child(next_level)																	# Add next level
 		
 		_cur_level.call_deferred("add_child", cur_player)										# Add back player
-		#cur_player.position += Level.to_pixel_coords(next_level_pos_add)						# Change player position
-		cur_player.position = next_level_pos_add
-		print("Switching level complete, player is at ", cur_player.position)
-		print("Intended spawn point ", next_level_pos_add)
+		cur_player.position += Level.to_pixel_coords(next_level_pos_add)						# Change player position
+		#print("Switching level complete, player is at ", cur_player.position)
+		#print("Intended spawn point ", next_level_pos_add)
 	
 func on_death(body) -> void:
 	body.visible = false
@@ -97,14 +96,18 @@ func reset_player(body) -> void:
 	# if the last checkpoint is in a different level, we will change the scene back to the correct level first before spawning the player
 	if SpawnPoint.check_point_level == cur_level_key:
 		print("Spawning in current level", cur_level_key)
-		body.position = Level.to_pixel_coords(SpawnPoint.global_vector)
+		#print(SpawnPoint.global_vector)
+		body.position = SpawnPoint.global_vector
 	elif !SpawnPoint.check_point_on:
 		print("No checkpoint, restarting game")
-		next(SpawnPoint.original_spawn_key, Level.to_pixel_coords(SpawnPoint.original_spawn))
+		next(SpawnPoint.original_spawn_key, Level.to_pixel_coords(Vector2.ZERO))
+		cur_player.position = Level.to_pixel_coords(_cur_level.default_spawn)
 	else:
 		print("Last checkpoint in previous level, switching level")
-		next(SpawnPoint.check_point_level, Vector2(20, 0))#SpawnPoint.global_vector)
+		next(SpawnPoint.check_point_level, Vector2.ZERO)#SpawnPoint.global_vector)
+		cur_player.position = SpawnPoint.global_vector
 		print("Spawning player ", SpawnPoint.global_vector)
+		
 	body.visible = true
 	body._can_control = true
 	body.velocity = Vector2.ZERO

@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://bax0hg5n0t3qk"]
 
-[ext_resource type="Script" path="res://nodes/scripts/check_point.gd" id="2_gixcy"]
+[ext_resource type="Script" path="res://nodes/scripts/check_point.gd" id="1_ag2p6"]
 
 [sub_resource type="TileSet" id="TileSet_yppq2"]
 
 [node name="Checkpoint" type="TileMapLayer"]
 tile_set = SubResource("TileSet_yppq2")
-script = ExtResource("2_gixcy")
+script = ExtResource("1_ag2p6")
 checkpoint_level_id = "1x1"
 
 [node name="Timer" type="Timer" parent="."]

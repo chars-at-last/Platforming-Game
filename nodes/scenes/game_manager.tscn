@@ -5,7 +5,7 @@
 [ext_resource type="Shader" path="res://nodes/scripts/shaders/16bit_color_converter.gdshader" id="1_sv5m8"]
 [ext_resource type="TileSet" uid="uid://bsuhy77c6mhv3" path="res://assets/resources/comp195_tileset.tres" id="4_mby6d"]
 [ext_resource type="PackedScene" uid="uid://vyj36j0hv8jy" path="res://nodes/scenes/Obstacles/spikes.tscn" id="5_ltc1a"]
-[ext_resource type="PackedScene" uid="uid://bax0hg5n0t3qk" path="res://nodes/scenes/check_point.tscn" id="6_1xxpy"]
+[ext_resource type="PackedScene" uid="uid://bax0hg5n0t3qk" path="res://nodes/scenes/Obstacles/check_point.tscn" id="6_1xxpy"]
 [ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="6_2tw34"]
 [ext_resource type="PackedScene" uid="uid://cf02ai7i3ygsy" path="res://nodes/scenes/level_manager.tscn" id="7_5cnyl"]
 

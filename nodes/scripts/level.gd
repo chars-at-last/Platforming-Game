@@ -24,7 +24,7 @@ func _ready() -> void:
 		var keys: Array[String]
 		var collection: Array[String]
 		for goal: Goal in goals.get_children():
-			print("test",goal.current_level_key)
+			#print("test",goal.current_level_key)
 			keys.append(goal.next_level_key)
 			collection.append(goal.level_collection_key)
 			
@@ -33,6 +33,10 @@ func _ready() -> void:
 # Convert from "map" coordinates
 static func to_pixel_coords(coords: Vector2) -> Vector2:
 	return coords * BASE_TILE_SIZE
+	
+# Convert to "map" coordinates
+static func to_map_coords(coords: Vector2) -> Vector2:
+	return coords / BASE_TILE_SIZE
 
 # Called when the node enters the scene tree for the first time.
 #func _ready() -> void:

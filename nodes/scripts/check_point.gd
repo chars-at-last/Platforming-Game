@@ -1,5 +1,9 @@
 class_name Checkpoint extends Tile
 
+# Constant(s)
+const RESPAWN_OFFSET: Vector2 = Vector2(.5, 0)
+
+# Variable(s)
 @export var checkpoint_level_id: String				##Level id that the checkpoint is in
 
 # Called when the node enters the scene tree for the first time.
@@ -19,7 +23,10 @@ func handle_collision(collider: Node) -> void:
 	if collider is Player:
 		SpawnPoint.check_point_on = true
 		print("CheckPoint Reached!", collider.global_position)
-		SpawnPoint.global_vector = collider.global_position
+		#SpawnPoint.global_vector = spawn_point.global_position
+		
+		
+		
 		print(checkpoint_level_id)
 		SpawnPoint.check_point_level = checkpoint_level_id
 		for cell in get_used_cells():
@@ -27,3 +34,4 @@ func handle_collision(collider: Node) -> void:
 			tile_set.set_physics_layer_collision_layer(tile_id, 0)
 			tile_set.set_physics_layer_collision_mask(tile_id, 0)
 			
+			SpawnPoint.global_vector = Level.to_pixel_coords(Vector2(cell) + RESPAWN_OFFSET)

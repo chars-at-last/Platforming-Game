@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="4_gntsh"]
 [ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="4_yeom8"]
 [ext_resource type="PackedScene" uid="uid://vyj36j0hv8jy" path="res://nodes/scenes/Obstacles/spikes.tscn" id="5_3yx6m"]
-[ext_resource type="PackedScene" uid="uid://bax0hg5n0t3qk" path="res://nodes/scenes/check_point.tscn" id="7_nmdi6"]
+[ext_resource type="PackedScene" uid="uid://bax0hg5n0t3qk" path="res://nodes/scenes/Obstacles/check_point.tscn" id="7_nmdi6"]
 [ext_resource type="Texture2D" uid="uid://xgsjr2kjuw0g" path="res://assets/art/tilemap_placeholder.png" id="8_uhmfk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_18aqr"]
@@ -46,9 +46,9 @@ script = ExtResource("3_xvx0j")
 
 [node name="Goal01" parent="Goals" index="0" instance=ExtResource("4_gntsh")]
 scale = Vector2(0.5, 0.5)
-tile_map_data = PackedByteArray("AAAVAPv/AAAAAAAAAAAVAPr/AAAAAAAAAAAVAPn/AAAAAAAAAAAVAPj/AAAAAAAAAAAVAPf/AAAAAAAAAAAVAPb/AAAAAAAAAAAPAAcAAAAAAAAAAAAPAAYAAAAAAAAAAAAPAAUAAAAAAAAAAAAPAAQAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAVAPv/AAAAAAAAAAAVAPr/AAAAAAAAAAAVAPn/AAAAAAAAAAAVAPj/AAAAAAAAAAAVAPf/AAAAAAAAAAAVAPb/AAAAAAAAAAA=")
 next_level_key = "1x2"
-next_level_position_add = Vector2(20, 0)
+next_level_position_add = Vector2(-20, 0)
 
 [node name="Spikes2" parent="." index="3" instance=ExtResource("5_3yx6m")]
 scale = Vector2(0.25, 0.25)
