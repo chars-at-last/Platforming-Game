@@ -8,5 +8,6 @@ levels_path = "res://nodes/scenes/level/created_levels"
 collection = {
 "": "",
 "1x1": "level_01",
-"1x2": "level_02"
+"1x2": "level_02",
+"1x3": "level_03"
 }

@@ -37,6 +37,7 @@ func _ready() -> void:
 			cur_player = load(PLAYER_PATH).instantiate()
 		_cur_level.add_child(cur_player)
 		cur_player.position = Level.to_pixel_coords(_cur_level.default_spawn)
+		handle_player_camera()
 
 # Sets current level
 func set_cur_level(level: Level) -> void:
@@ -76,13 +77,25 @@ func next(next_level_key: String, next_level_pos_add: Vector2) -> void:
 		_cur_level.queue_free()																	# Remove old level
 		#print(level_loader.loaded_levels)
 		var next_level: Level = level_loader.loaded_levels[next_level_key].instantiate()		# Get next level
-		level_loader.clear_levels()																# Clear old loaded levels
+		level_loader.clear_levels([SpawnPoint.check_point_level])								# Clear old loaded levels
 		add_child(next_level)																	# Add next level
 		
+		cur_player.set_position(cur_player.position + Level.to_pixel_coords(next_level_pos_add))# Change player position
 		_cur_level.call_deferred("add_child", cur_player)										# Add back player
-		cur_player.position += Level.to_pixel_coords(next_level_pos_add)						# Change player position
 		print("Switching level complete, player is at ", cur_player.position)
 		#print("Intended spawn point ", next_level_pos_add)
+		
+		handle_player_camera()																	# Handle player camera
+	
+		cur_level_key = next_level_key															# Update key
+	
+# Handles the player's camera
+func handle_player_camera() -> void:
+	# Player Camera stuff
+	var level_size = _cur_level.size * Level.BASE_TILE_SIZE
+	cur_player.camera.set_limit(SIDE_RIGHT, level_size.x)
+	cur_player.camera.set_limit(SIDE_BOTTOM, level_size.y)
+	#pass
 	
 func on_death(body) -> void:
 	body.visible = false
@@ -113,6 +126,11 @@ func reset_player(body) -> void:
 	body.velocity = Vector2.ZERO
 	body.unbridled_velocity = Vector2.ZERO
 
+# Signal method(s) #
+
 func _on_goal_tile_complete_level(next_level_key: String, next_level_pos_add: Vector2) -> void:
-	next(next_level_key, next_level_pos_add)
-	cur_level_key = next_level_key
+	if cur_level_key != next_level_key:
+		next(next_level_key, next_level_pos_add)
+		
+func _on_checkpoint_reached() -> void:
+	SpawnPoint.check_point_level = cur_level_key

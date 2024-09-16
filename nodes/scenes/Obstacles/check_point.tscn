@@ -7,7 +7,6 @@
 [node name="Checkpoint" type="TileMapLayer"]
 tile_set = SubResource("TileSet_yppq2")
 script = ExtResource("1_ag2p6")
-checkpoint_level_id = "1x1"
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1

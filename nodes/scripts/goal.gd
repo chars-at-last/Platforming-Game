@@ -6,7 +6,7 @@ signal complete_level(next_level_key: String, next_level_pos_add: Vector2)
 # Variable(s)
 @export var next_level_key: String									## Key of next level
 @export var level_collection_key: String = "base_collection"		## Key of next level collection
-@export var current_level_key: String		## Key of current level
+#@export var current_level_key: String		## Key of current level
 
 @export var next_level_position_add: Vector2						## How to add to player position in transition to next level
 

@@ -26,6 +26,7 @@ enum LOOKING_DIRS {
 @onready var wja: Area2D = $WallJumpArea								## Wall jump area
 @onready var w_shape: CollisionShape2D = $WallJumpArea/CollisionShape2D	## Wall jump area col shape
 @onready var tile_area: Area2D = $TileArea								## Area for "Special" tiles
+@onready var camera: Camera2D = $Camera2D								## Camera
 
 var direction: float													## Direction of movement
 
@@ -34,7 +35,7 @@ var acceleration: Vector2												## Rate of change of the velocity
 @export var move_accel: float = 10										## What the acceleration is set to when moving
 
 @export var jump_vel_boost: float = 20									## Boost to velocity when jumping off ground
-@export var wall_jump_vel_boost: float = 500							## Boost to velocity when jumping off wall
+@export var wall_jump_vel_boost: float = 600							## Boost to velocity when jumping off wall
 var _wall_normal: Vector2												## Wall normal
 
 var _looking_direction: LOOKING_DIRS = LOOKING_DIRS.STRAIGHT			## Direction of looking (-1 is up, 1 is down)
@@ -193,7 +194,7 @@ func wall_jump() -> void:
 			unbridled_velocity.y = min(0, unbridled_velocity.y)
 			unbridled_velocity += Vector2.from_angle(WALL_JUMP_ANGLE_L if _wall_normal.x < 0 else WALL_JUMP_ANGLE_R) * wall_jump_vel_boost
 			_can_wall_jump = false
-			
+			set_switching_dir(true)
 			_just_jumped = true
 
 # Floor if positive + ceil if negative (flpcen)

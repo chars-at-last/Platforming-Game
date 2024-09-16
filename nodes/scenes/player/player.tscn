@@ -1146,10 +1146,11 @@ shape = SubResource("CapsuleShape2D_xlpux")
 position = Vector2(0, 11)
 shape = SubResource("RectangleShape2D_7tpoi")
 
-[node name="Gun" parent="." node_paths=PackedStringArray("base_node") instance=ExtResource("3_arsik")]
+[node name="Gun" parent="." node_paths=PackedStringArray("base_node", "camera") instance=ExtResource("3_arsik")]
 light_mask = 0
 position = Vector2(-7, 0)
 base_node = NodePath("..")
+camera = NodePath("../Camera2D")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 show_behind_parent = true
@@ -1157,6 +1158,10 @@ shadow_enabled = true
 shadow_filter = 2
 shadow_item_cull_mask = 2
 texture = SubResource("GradientTexture2D_jg3i3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
 
 [connection signal="body_entered" from="WallJumpArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="WallJumpArea" to="." method="_on_area_2d_body_exited"]

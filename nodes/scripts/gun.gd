@@ -11,6 +11,7 @@ const GUN_BOOST_MAGNITUDE: float = 800					## Magnitude of the gun knockback
 @onready var sprite: Sprite2D = $Sprite2D				## Sprite2D
 @onready var timer: Timer = $Timer						## Timer
 @export var base_node: Player							## The player
+@export var camera: Camera2D							## The Camera (usually of the player)
 
 var base_position: Vector2								## Base gun position
 var flipped: bool = false								## Whether or not gun is "flipped"
@@ -25,7 +26,7 @@ func _ready() -> void:
 # Process
 func _physics_process(_delta: float) -> void:
 	# LOOK AT ME HECTOR
-	self.look_at(get_viewport().get_mouse_position() + self.position)
+	self.look_at(get_global_mouse_position() + self.position)
 	
 	# Gun
 	physics_gun_control(_delta)
