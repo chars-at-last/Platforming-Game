@@ -45,7 +45,7 @@ func physics_gun_control(_delta: float) -> void:
 			fire_gun(1.0 - (timer.time_left / CHARGE_TIME))
 			timer.stop()
 			
-	if not _can_fire and base_node.is_on_floor():
+	if not _can_fire and base_node.unbridled_velocity.y >= 0 and base_node.is_on_floor():
 		_can_fire = true
 		
 # Fires the gun

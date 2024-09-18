@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://vfdfhefydgcf"]
+[gd_scene load_steps=8 format=4 uid="uid://vfdfhefydgcf"]
 
 [ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_7va63"]
 [ext_resource type="TileSet" uid="uid://bsuhy77c6mhv3" path="res://assets/resources/comp195_tileset.tres" id="2_6qtp4"]
@@ -7,32 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="4_yeom8"]
 [ext_resource type="PackedScene" uid="uid://vyj36j0hv8jy" path="res://nodes/scenes/Obstacles/spikes.tscn" id="5_3yx6m"]
 [ext_resource type="PackedScene" uid="uid://bax0hg5n0t3qk" path="res://nodes/scenes/Obstacles/check_point.tscn" id="7_nmdi6"]
-[ext_resource type="Texture2D" uid="uid://xgsjr2kjuw0g" path="res://assets/art/tilemap_placeholder.png" id="8_uhmfk"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_18aqr"]
-texture = ExtResource("8_uhmfk")
-2:0/size_in_atlas = Vector2i(2, 2)
-2:0/0 = 0
-2:0/0/terrain_set = 0
-2:0/0/terrain = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-2:0/0/terrains_peering_bit/right_side = 0
-2:0/0/terrains_peering_bit/bottom_right_corner = 0
-2:0/0/terrains_peering_bit/bottom_side = 0
-2:0/0/terrains_peering_bit/bottom_left_corner = 0
-2:0/0/terrains_peering_bit/left_side = 0
-2:0/0/terrains_peering_bit/top_left_corner = 0
-2:0/0/terrains_peering_bit/top_side = 0
-2:0/0/terrains_peering_bit/top_right_corner = 0
-
-[sub_resource type="TileSet" id="TileSet_ip0l2"]
-tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 16
-physics_layer_0/collision_mask = 0
-terrain_set_0/mode = 0
-terrain_set_0/terrain_0/name = "Terrain 0"
-terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
-sources/0 = SubResource("TileSetAtlasSource_18aqr")
 
 [node name="Level01" instance=ExtResource("1_7va63")]
 default_spawn = Vector2(-5, 0)
@@ -62,5 +36,5 @@ scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAACAPz/AQADAAAAAAABAPz/AQADAAAAAAAAAP3/AQADAAAAAGAAAP7/AQADAAAAAGABAP//AQADAAAAADACAP//AQADAAAAADA=")
 
 [node name="Checkpoint" parent="." index="5" instance=ExtResource("7_nmdi6")]
-tile_map_data = PackedByteArray("AAD//wMAAAACAAAAAAAHAAMAAAACAAAAAAD2/wMAAAACAAAAAAA=")
-tile_set = SubResource("TileSet_ip0l2")
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAD//wMAAQAEAAIAAAD//wIAAQAEAAEAAAADAAMAAQAEAAIAAAADAAIAAQAEAAEAAAA=")
