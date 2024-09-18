@@ -1,14 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2a0dv2u0u0vc"]
+[gd_scene load_steps=6 format=3 uid="uid://d2a0dv2u0u0vc"]
 
 [ext_resource type="Script" path="res://nodes/scripts/gun.gd" id="1_7h6wt"]
 [ext_resource type="Texture2D" uid="uid://5h70if3nn0yk" path="res://assets/art/player_spritesheet.png" id="2_275g3"]
+[ext_resource type="Shader" path="res://nodes/scripts/shaders/gun.gdshader" id="3_7hoha"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x6lgf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5htu4"]
+shader = ExtResource("3_7hoha")
+shader_parameter/shake_amount = 2.0
+shader_parameter/base_color = Color(1, 1, 1, 1)
+shader_parameter/change_color = null
+shader_parameter/tolerance = 0.01
+shader_parameter/do_change = true
 
 [node name="Gun" type="Node2D"]
 editor_description = "Gun for the player."
+material = SubResource("ShaderMaterial_x6lgf")
 script = ExtResource("1_7h6wt")
+charged_color = Color(1, 1, 1, 1)
+charging_color_start = Color(1, 1, 0, 1)
+charging_color_end = Color(1, 0, 0, 1)
+empty_color = Color(0, 0.427451, 0.552941, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 0
+material = SubResource("ShaderMaterial_5htu4")
 rotation = -1.5708
 texture = ExtResource("2_275g3")
 region_enabled = true

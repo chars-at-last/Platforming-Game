@@ -34,3 +34,11 @@ scale = Vector2(0.25, 0.25)
 tile_map_data = PackedByteArray("AAAVAPv/AAAAAAAAAAAVAPr/AAAAAAAAAAAVAPn/AAAAAAAAAAAVAPj/AAAAAAAAAAAVAPf/AAAAAAAAAAAVAPb/AAAAAAAAAAA=")
 next_level_key = "1x3"
 next_level_position_add = Vector2(-20, 16)
+
+[node name="ColorRect" type="ColorRect" parent="." index="5"]
+z_index = -1
+offset_left = -292.0
+offset_top = -178.0
+offset_right = 299.0
+offset_bottom = 213.0
+color = Color(0, 0, 0, 1)

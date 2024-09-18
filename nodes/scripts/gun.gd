@@ -16,12 +16,21 @@ const GUN_BOOST_MAGNITUDE: float = 800					## Magnitude of the gun knockback
 var base_position: Vector2								## Base gun position
 var flipped: bool = false								## Whether or not gun is "flipped"
 
+@export var charged_color: Color						## Color when gun is charged
+@export var charging_color_start: Color					## Color when gun is charging (start)
+@export var charging_color_end: Color					## Color when gun is charging (end)
+@export var empty_color: Color							## Color when gun has no charges
+@export var shake_amount: float = 4						## Shaking of gun when charging
+var gun_color_tween: Tween								## Tween for gun color
+
 var _charging: bool = false								## Flag if charging gun
 var _can_fire: bool = true								## Flag if the gun can charge/fire
 
 # Ready
 func _ready() -> void:
 	self.base_position = position
+	self.change_gun_color(charged_color)
+	self.change_gun_shake(0)
 
 # Process
 func _physics_process(_delta: float) -> void:
@@ -40,18 +49,32 @@ func physics_gun_control(_delta: float) -> void:
 			_charging = true
 			timer.start(CHARGE_TIME)
 			
+			# Tween
+			if self.gun_color_tween:
+				gun_color_tween.kill()
+			
+			self.gun_color_tween = self.create_tween().set_parallel()
+			gun_color_tween.tween_method(change_gun_color, charging_color_start, charging_color_end, CHARGE_TIME)
+			gun_color_tween.tween_method(change_gun_shake, 0, shake_amount, CHARGE_TIME)
+			
 		if _charging and Input.is_action_just_released("charge_gun"):
 			_charging = false
 			fire_gun(1.0 - (timer.time_left / CHARGE_TIME))
 			timer.stop()
 			
+			# Tween
+			if self.gun_color_tween:
+				gun_color_tween.kill()
+			change_gun_color(empty_color)
+			change_gun_shake(0)
+			
 	if not _can_fire and base_node.unbridled_velocity.y >= 0 and base_node.is_on_floor():
-		_can_fire = true
+		change_can_fire(true)
 		
 # Fires the gun
 func fire_gun(percent: float) -> void:
 	base_node.unbridled_velocity -= GUN_BOOST_MAGNITUDE * percent * Vector2.from_angle(self.rotation)
-	_can_fire = false
+	change_can_fire(false)
 	
 # Updates base position
 func update_base_position(new_base: Vector2, change_position: bool = false) -> void:
@@ -67,3 +90,16 @@ func update_position() -> void:
 func flip(is_flipped: bool) -> void:
 	flipped = is_flipped
 	update_position()
+
+# Change if gun can be fired
+func change_can_fire(can_fire: bool) -> void:
+	_can_fire = can_fire
+	change_gun_color(charged_color if can_fire else empty_color)
+
+# Change gun color
+func change_gun_color(color: Color) -> void:
+	sprite.material.set_shader_parameter("change_color", color)
+	
+# Change gun shake
+func change_gun_shake(amount: float) -> void:
+	sprite.material.set_shader_parameter("shake_amount", amount)
