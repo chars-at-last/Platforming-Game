@@ -30,30 +30,29 @@ func handle_collision(collider: Node) -> void:
 		SpawnPoint.check_point_on = true
 		print("CheckPoint Reached!", collider.global_position)
 		emit_signal("checkpoint_reached")
-		#SpawnPoint.global_vector = spawn_point.global_position
 		
-		#print(checkpoint_level_id)
-		#SpawnPoint.check_point_level = checkpoint_level_id
+		
+		#Get the position of the cell, store the position into an array 
+		#called cells, then get the distance of the cell from player and store
+		#the distance into the array called distances. We will then find the min
+		#distance, the cell with the minimum distance to the player will be the
+		#checkpoint that the player will spawn in, since it will be the last 
+		#checkpoint the player touched. We will reset the arrays at the end so
+		#the player can touch and respawn at the other checkpoints without issue.
+		#Note: all print statements are used for testing
 		for cell in get_used_cells():
-		#if cell in get_used_cells():
 			var cell_world_position = Level.to_pixel_coords(Vector2(cell))
-			#var cell_world_position = map_to_local(cell)
+			
 			cells.append(cell)
-			print(cell)
-			#print("tile position: ", cell_world_position)
-			print("player", Level.to_pixel_coords(collider.global_position))
-			print("distance to player: ",cell_world_position.distance_to(collider.global_position - Vector2(320, 180)))
+			print("distance to player: ",cell_world_position.distance_to(local_to_map(collider.global_position - Vector2(320, 180))))
+			#print("distance to player: ",cell_world_position.distance_to(collider.global_position - Vector2(640, 360)))
 			distances.append(cell_world_position.distance_to(Level.to_pixel_coords(local_to_map(collider.global_position - Vector2(320, 180)))))
-			#if (cell_world_position.distance_to(collider.global_position) < 200):
-			#var tile_id = get_cell_source_id(cell)
-			#tile_set.set_physics_layer_collision_layer(tile_id, 0)
-			#tile_set.set_physics_layer_collision_mask(tile_id, 0)
-		#for cell in get_used_cells():
-			#distances.min()
 		var index = distances.find(distances.min(), 0)
-		print(index)
+		
+		print("all cells ", cells)
+		print("and their perspective distances to player", distances)
 		
 		SpawnPoint.global_vector = Level.to_pixel_coords(Vector2(cells[index]) + RESPAWN_OFFSET)
 		distances = []
 		cells = []
-			#print(SpawnPoint.global_vector)
+		print(SpawnPoint.global_vector)
