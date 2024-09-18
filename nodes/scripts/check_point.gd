@@ -5,6 +5,8 @@ const RESPAWN_OFFSET: Vector2 = Vector2(.5, 0)
 
 # Variable(s)
 #var checkpoint_level_id: String				##Level id that the checkpoint is in
+var distances = []
+var cells = []
 
 # Signal(s)
 signal checkpoint_reached()
@@ -30,13 +32,28 @@ func handle_collision(collider: Node) -> void:
 		emit_signal("checkpoint_reached")
 		#SpawnPoint.global_vector = spawn_point.global_position
 		
-		
-		
 		#print(checkpoint_level_id)
 		#SpawnPoint.check_point_level = checkpoint_level_id
 		for cell in get_used_cells():
-			var tile_id = get_cell_source_id(cell)
-			tile_set.set_physics_layer_collision_layer(tile_id, 0)
-			tile_set.set_physics_layer_collision_mask(tile_id, 0)
-			
-			SpawnPoint.global_vector = Level.to_pixel_coords(Vector2(cell) + RESPAWN_OFFSET)
+		#if cell in get_used_cells():
+			var cell_world_position = Level.to_pixel_coords(Vector2(cell))
+			#var cell_world_position = map_to_local(cell)
+			cells.append(cell)
+			print(cell)
+			#print("tile position: ", cell_world_position)
+			print("player", Level.to_pixel_coords(collider.global_position))
+			print("distance to player: ",cell_world_position.distance_to(collider.global_position - Vector2(320, 180)))
+			distances.append(cell_world_position.distance_to(Level.to_pixel_coords(local_to_map(collider.global_position - Vector2(320, 180)))))
+			#if (cell_world_position.distance_to(collider.global_position) < 200):
+			#var tile_id = get_cell_source_id(cell)
+			#tile_set.set_physics_layer_collision_layer(tile_id, 0)
+			#tile_set.set_physics_layer_collision_mask(tile_id, 0)
+		#for cell in get_used_cells():
+			#distances.min()
+		var index = distances.find(distances.min(), 0)
+		print(index)
+		
+		SpawnPoint.global_vector = Level.to_pixel_coords(Vector2(cells[index]) + RESPAWN_OFFSET)
+		distances = []
+		cells = []
+			#print(SpawnPoint.global_vector)

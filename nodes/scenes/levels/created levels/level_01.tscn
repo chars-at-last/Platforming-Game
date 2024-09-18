@@ -62,5 +62,5 @@ scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAACAPz/AQADAAAAAAABAPz/AQADAAAAAAAAAP3/AQADAAAAAGAAAP7/AQADAAAAAGABAP//AQADAAAAADACAP//AQADAAAAADA=")
 
 [node name="Checkpoint" parent="." index="5" instance=ExtResource("7_nmdi6")]
-tile_map_data = PackedByteArray("AAD//wMAAAACAAAAAAA=")
+tile_map_data = PackedByteArray("AAD//wMAAAACAAAAAAAHAAMAAAACAAAAAAD2/wMAAAACAAAAAAA=")
 tile_set = SubResource("TileSet_ip0l2")
