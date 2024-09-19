@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://wdm6oy015gdj"]
+[gd_scene load_steps=7 format=4 uid="uid://wdm6oy015gdj"]
 
 [ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_ajhbu"]
 [ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_1lvvy"]
 [ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="2_xj4vj"]
 [ext_resource type="PackedScene" uid="uid://vyj36j0hv8jy" path="res://nodes/scenes/Obstacles/spikes.tscn" id="4_wmfl0"]
 [ext_resource type="PackedScene" uid="uid://bax0hg5n0t3qk" path="res://nodes/scenes/Obstacles/check_point.tscn" id="5_2l0mt"]
+[ext_resource type="PackedScene" uid="uid://3x5mk8srema3" path="res://nodes/scenes/pause_menu.tscn" id="6_71p6a"]
 
 [node name="Level03" instance=ExtResource("1_ajhbu")]
 size = Vector2(20, 22)
@@ -36,3 +37,7 @@ tile_map_data = PackedByteArray("AAD///b/AQADAAAAADD9/wAAAQADAAAAAGAFABYAAQADAAA
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAABAA0AAQAEAAIAAAD+//T/AQAEAAIAAAD+//P/AQAEAAIAAAD+//L/AQAEAAEAAAA=")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="7"]
+
+[node name="PauseMenu" parent="CanvasLayer" index="0" instance=ExtResource("6_71p6a")]
