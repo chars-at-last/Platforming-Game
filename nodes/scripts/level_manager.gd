@@ -13,7 +13,10 @@ static var _cur_level: Level = null
 static var cur_checkpoint: Checkpoint = null
 static var cur_player: Player = null
 
+var loading_from_save: bool = false		#Is the player loading from a saved game?
 var cur_level_key: String = "1x1"
+var save = Save_Manager.new()				#Used to access save data
+
 
 # TODO: Change this default_level later
 @export var default_level: PackedScene = preload("res://nodes/scenes/levels/created levels/level_01.tscn")
@@ -38,6 +41,13 @@ func _ready() -> void:
 		_cur_level.add_child(cur_player)
 		cur_player.position = Level.to_pixel_coords(_cur_level.default_spawn)
 		handle_player_camera()
+		print("test")
+	#Calling save manager to see if the last saved player location is the 
+	#starting level, if not, load the current level that the player is in
+	if save.level() != SpawnPoint.original_spawn_key:
+		print("in")
+		loading_from_save = true
+		next(save.level(), save.player())
 
 # Sets current level
 func set_cur_level(level: Level) -> void:
@@ -80,7 +90,13 @@ func next(next_level_key: String, next_level_pos_add: Vector2) -> void:
 		level_loader.clear_levels([SpawnPoint.check_point_level])								# Clear old loaded levels
 		add_child(next_level)																	# Add next level
 		
-		cur_player.set_position(cur_player.position + Level.to_pixel_coords(next_level_pos_add))# Change player position
+		#If we are loading from a save file, we will spawn the player in some other way
+		if loading_from_save:
+			loading_from_save = false
+			print("loaded")
+			cur_player.set_position(cur_player.position - next_level_pos_add)
+		else:
+			cur_player.set_position(cur_player.position + Level.to_pixel_coords(next_level_pos_add))# Change player position
 		_cur_level.call_deferred("add_child", cur_player)										# Add back player
 		print("Switching level complete, player is at ", cur_player.position)
 		#print("Intended spawn point ", next_level_pos_add)
@@ -88,6 +104,7 @@ func next(next_level_key: String, next_level_pos_add: Vector2) -> void:
 		handle_player_camera()																	# Handle player camera
 	
 		cur_level_key = next_level_key															# Update key
+		SpawnPoint.spawn_key = cur_level_key
 	
 # Handles the player's camera
 func handle_player_camera() -> void:

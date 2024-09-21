@@ -18,8 +18,8 @@ boot_splash/minimum_display_time=1000
 
 [autoload]
 
-GameManager="*res://nodes/scripts/game_manager.gd"
-SpawnPoint="*res://nodes/scripts/spawn_point.gd"
+GameManager="*res://nodes/singletons/game_manager.gd"
+SpawnPoint="*res://nodes/singletons/spawn_point.gd"
 
 [display]
 

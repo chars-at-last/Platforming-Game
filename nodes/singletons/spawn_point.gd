@@ -5,6 +5,7 @@ var global_vector = Vector2(110, 43)
 var check_point_level
 var check_point_on = false
 var original_spawn
+var spawn_key:String = "1x1"
 
 const original_spawn_key:String = "1x1"
 
