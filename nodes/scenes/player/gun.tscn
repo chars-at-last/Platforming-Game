@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2a0dv2u0u0vc"]
+[gd_scene load_steps=12 format=3 uid="uid://d2a0dv2u0u0vc"]
 
 [ext_resource type="Script" path="res://nodes/scripts/gun.gd" id="1_7h6wt"]
 [ext_resource type="Texture2D" uid="uid://5h70if3nn0yk" path="res://assets/art/player_spritesheet.png" id="2_275g3"]
 [ext_resource type="Shader" path="res://nodes/scripts/shaders/gun.gdshader" id="3_7hoha"]
+[ext_resource type="Script" path="res://addons/resonate/sound_manager/sound_bank.gd" id="4_fcomd"]
+[ext_resource type="Script" path="res://addons/resonate/sound_manager/sound_event_resource.gd" id="5_2yrbf"]
+[ext_resource type="AudioStream" uid="uid://ci4jbelpdmb2b" path="res://assets/audio/sfx/gun_charge.wav" id="6_5hymq"]
+[ext_resource type="AudioStream" uid="uid://r5wpejnwwtyy" path="res://assets/audio/sfx/gun_cannon.wav" id="7_q016t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x6lgf"]
 
@@ -13,6 +17,22 @@ shader_parameter/base_color = Color(1, 1, 1, 1)
 shader_parameter/change_color = null
 shader_parameter/tolerance = 0.01
 shader_parameter/do_change = true
+
+[sub_resource type="Resource" id="Resource_poxcp"]
+script = ExtResource("5_2yrbf")
+name = "charging"
+bus = ""
+volume = -8.0
+pitch = 1.0
+streams = Array[AudioStream]([ExtResource("6_5hymq")])
+
+[sub_resource type="Resource" id="Resource_p0im3"]
+script = ExtResource("5_2yrbf")
+name = "blast"
+bus = ""
+volume = -6.0
+pitch = 1.0
+streams = Array[AudioStream]([ExtResource("7_q016t")])
 
 [node name="Gun" type="Node2D"]
 editor_description = "Gun for the player."
@@ -34,3 +54,8 @@ region_rect = Rect2(96, 64, 32, 32)
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="SoundBank" type="Node" parent="."]
+script = ExtResource("4_fcomd")
+label = "gun"
+events = Array[ExtResource("5_2yrbf")]([SubResource("Resource_poxcp"), SubResource("Resource_p0im3")])

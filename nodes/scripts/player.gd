@@ -76,8 +76,11 @@ func _physics_process(delta: float) -> void:
 	
 	face()								# Which way is the character facing
 
+	var on_floor: bool = is_on_floor()
 	physics_floor(delta)				# Floor stuff
 	move_and_slide()
+	if not on_floor and is_on_floor():
+		SoundManager.play("player", "land", "SFX Echo")
 	
 # Looking direction
 func physics_looking(_delta: float) -> void:
@@ -154,12 +157,17 @@ func physics_direction(_delta: float) -> void:
 	elif _switching_dir:
 		set_switching_dir(false)
 
+# Jumped
+func jumped() -> void:
+	_just_jumped = true
+	SoundManager.play("player", "jump", "SFX Echo")
+
 # Handle jump
 func physics_jump(_delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		unbridled_velocity.y = JUMP_VELOCITY
 		unbridled_velocity.x += jump_vel_boost * direction
-		_just_jumped = true
+		jumped()
 
 # Walls
 func physics_wall(_delta: float) -> void:
@@ -195,7 +203,7 @@ func wall_jump() -> void:
 			unbridled_velocity += Vector2.from_angle(WALL_JUMP_ANGLE_L if _wall_normal.x < 0 else WALL_JUMP_ANGLE_R) * wall_jump_vel_boost
 			_can_wall_jump = false
 			set_switching_dir(true)
-			_just_jumped = true
+			jumped()
 
 # Floor if positive + ceil if negative (flpcen)
 func flpcen(value: float) -> float:

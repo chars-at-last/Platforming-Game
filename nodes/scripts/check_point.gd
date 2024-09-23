@@ -16,7 +16,6 @@ func _ready() -> void:
 	var level_manager: LevelManager = GameManager.current_level_manager
 	connect("checkpoint_reached", Callable(level_manager, "_on_checkpoint_reached"))
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 	#pass
@@ -50,19 +49,25 @@ func handle_collision(collider: Node) -> void:
 			cells.append(cell)
 			print("distance to player: ",cell_world_position.distance_to(local_to_map(collider.global_position - Vector2(320, 180))))
 			#print("distance to player: ",cell_world_position.distance_to(collider.global_position - Vector2(640, 360)))
-			distances.append(cell_world_position.distance_to(Level.to_pixel_coords(local_to_map(collider.global_position - Vector2(320, 180)))))
+			distances.append(cell_world_position.distance_to(Level.to_pixel_coords(local_to_map(collider.position))))
 		var index = distances.find(distances.min(), 0)
 		
 		#print("all cells ", cells)
 		#print("and their perspective distances to player", distances)
 		
-		SpawnPoint.global_vector = Level.to_pixel_coords(Vector2(cells[index]) + RESPAWN_OFFSET)
-		print(get_cell_atlas_coords(cells[index]))
-		
 		#If the checkpoint has the sign on it, we switch the tile to the one without the sign
-		if get_cell_atlas_coords(cells[index]) == Vector2i(4, 1):
-			#print()
-			set_cell(cells[index], 1, Vector2i(3, 1))
+		var offset: Vector2i = Vector2i.ZERO
+		while true:
+			var pos: Vector2i = cells[index] + offset
+			var coords := get_cell_atlas_coords(pos)
+			if coords == Vector2i(4, 1):
+				set_cell(pos, 1, Vector2i(3, 1))
+				break
+			elif coords == Vector2i(4, 2):
+				offset.y -= 1
+
+		SpawnPoint.global_vector = Level.to_pixel_coords((Vector2(cells[index]) + RESPAWN_OFFSET))
+		print(get_cell_atlas_coords(cells[index]))
 
 		distances = []
 		cells = []
