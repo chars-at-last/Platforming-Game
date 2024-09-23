@@ -8,6 +8,7 @@ const RESPAWN_OFFSET: Vector2 = Vector2(.5, 0)
 var distances = []
 var cells = []
 
+
 # Signal(s)
 signal checkpoint_reached()
 
@@ -65,7 +66,6 @@ func handle_collision(collider: Node) -> void:
 				break
 			elif coords == Vector2i(4, 2):
 				offset.y -= 1
-
 		SpawnPoint.global_vector = Level.to_pixel_coords((Vector2(cells[index]) + RESPAWN_OFFSET))
 		print(get_cell_atlas_coords(cells[index]))
 

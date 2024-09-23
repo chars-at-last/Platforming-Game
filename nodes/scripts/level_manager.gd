@@ -13,7 +13,7 @@ static var _cur_level: Level = null
 static var cur_checkpoint: Checkpoint = null
 static var cur_player: Player = null
 
-var loading_from_save: bool = false		#Is the player loading from a saved game?
+#var loading_from_save: bool = false		#Is the player loading from a saved game?
 var cur_level_key: String = "1x1"
 var save = Save_Manager.new()				#Used to access save data
 
@@ -44,15 +44,17 @@ func _ready() -> void:
 		print("test")
 	#Calling save manager to see if the last saved player location is the 
 	#starting level, if not, load the current level that the player is in
+	print(save.level, save.player)
+	#if save.level != "error": #and save.check_point_level() != null and save.check_point_loc() != null:
 	if save.level() != SpawnPoint.original_spawn_key:
-		print("saved checkpoint in different level, loading level")
-		loading_from_save = true
 		next(save.level(), save.player())
 		cur_player.position = save.player()
 	else:
-		#print("in first level")
-		cur_player.position = save.player()
 		print("in first level")
+		cur_player.position = save.player()
+	if save.check_point_loc() != null:
+		SpawnPoint.global_vector = save.check_point_loc()
+		SpawnPoint.check_point_level = save.check_point_level()
 
 # Sets current level
 func set_cur_level(level: Level) -> void:
@@ -96,12 +98,12 @@ func next(next_level_key: String, next_level_pos_add: Vector2) -> void:
 		add_child(next_level)																	# Add next level
 		
 		#If we are loading from a save file, we will spawn the player in some other way
-		if !loading_from_save:
+		#if loading_from_save:
 			#loading_from_save = false
 			#print("loaded")
 			#cur_player.set_position(cur_player.position - next_level_pos_add)
 		#else:
-			cur_player.set_position(cur_player.position + Level.to_pixel_coords(next_level_pos_add))# Change player position
+		cur_player.set_position(cur_player.position + Level.to_pixel_coords(next_level_pos_add))# Change player position
 		_cur_level.call_deferred("add_child", cur_player)										# Add back player
 		print("Switching level complete, player is at ", cur_player.position)
 		#print("Intended spawn point ", next_level_pos_add)
@@ -133,7 +135,7 @@ func reset_player(body) -> void:
 		print("Spawning in current level", cur_level_key)
 		#print(SpawnPoint.global_vector)
 		body.position = SpawnPoint.global_vector
-	elif !SpawnPoint.check_point_on:
+	elif !SpawnPoint.check_point_on and save.check_point_level() == null:
 		print("No checkpoint, restarting game")
 		next(SpawnPoint.original_spawn_key, Level.to_pixel_coords(Vector2.ZERO))
 		cur_player.position = Level.to_pixel_coords(_cur_level.default_spawn)

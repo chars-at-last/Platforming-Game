@@ -12,6 +12,7 @@ var is_paused: bool = false:
 	set = set_paused
 
 var saving = Save_Manager.new()
+var level_manager = LevelManager.new()
 
 
 #hide the pause menu on start up
@@ -45,5 +46,5 @@ func _on_control_pressed() -> void:
 
 
 func _on_save_quit_pressed() -> void:
-	saving.save(SpawnPoint.check_point_level, SpawnPoint.global_vector)
+	saving.save(SpawnPoint.spawn_key, level_manager.cur_player.position, SpawnPoint.check_point_level, SpawnPoint.global_vector)
 	get_tree().quit()
