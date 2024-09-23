@@ -45,5 +45,5 @@ func _on_control_pressed() -> void:
 
 
 func _on_save_quit_pressed() -> void:
-	saving.save(SpawnPoint.spawn_key, SpawnPoint.global_vector)
+	saving.save(SpawnPoint.check_point_level, SpawnPoint.global_vector)
 	get_tree().quit()

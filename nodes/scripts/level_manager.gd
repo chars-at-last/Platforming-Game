@@ -45,9 +45,14 @@ func _ready() -> void:
 	#Calling save manager to see if the last saved player location is the 
 	#starting level, if not, load the current level that the player is in
 	if save.level() != SpawnPoint.original_spawn_key:
-		print("in")
+		print("saved checkpoint in different level, loading level")
 		loading_from_save = true
 		next(save.level(), save.player())
+		cur_player.position = save.player()
+	else:
+		#print("in first level")
+		cur_player.position = save.player()
+		print("in first level")
 
 # Sets current level
 func set_cur_level(level: Level) -> void:
@@ -91,11 +96,11 @@ func next(next_level_key: String, next_level_pos_add: Vector2) -> void:
 		add_child(next_level)																	# Add next level
 		
 		#If we are loading from a save file, we will spawn the player in some other way
-		if loading_from_save:
-			loading_from_save = false
-			print("loaded")
-			cur_player.set_position(cur_player.position - next_level_pos_add)
-		else:
+		if !loading_from_save:
+			#loading_from_save = false
+			#print("loaded")
+			#cur_player.set_position(cur_player.position - next_level_pos_add)
+		#else:
 			cur_player.set_position(cur_player.position + Level.to_pixel_coords(next_level_pos_add))# Change player position
 		_cur_level.call_deferred("add_child", cur_player)										# Add back player
 		print("Switching level complete, player is at ", cur_player.position)
