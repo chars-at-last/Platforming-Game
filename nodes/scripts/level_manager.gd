@@ -3,6 +3,7 @@ class_name LevelManager extends Node2D
 
 # Constant(s)
 const PLAYER_PATH: String = "res://nodes/scenes/player/player.tscn"
+const PAUSE_PATH: String = "res://nodes/scenes/pause_menu.tscn"
 
 # Signal(s)
 signal level_set
@@ -15,8 +16,6 @@ static var cur_player: Player = null
 
 #var loading_from_save: bool = false		#Is the player loading from a saved game?
 var cur_level_key: String = "1x1"
-var save = Save_Manager.new()				#Used to access save data
-
 
 # TODO: Change this default_level later
 @export var default_level: PackedScene = preload("res://nodes/scenes/levels/created levels/level_01.tscn")
@@ -47,17 +46,26 @@ func _ready() -> void:
 		print("test")
 	#Calling save manager to see if the last saved player location is the 
 	#starting level, if not, load the current level that the player is in
-	print(save.level, save.player)
+	print(SaveManager.level, SaveManager.player)
 	#if save.level != "error": #and save.check_point_level() != null and save.check_point_loc() != null:
-	if save.level() != SpawnPoint.original_spawn_key:
-		next(save.level(), save.player())
-		cur_player.position = save.player()
-	else:
+	if SaveManager.level() != SpawnPoint.original_spawn_key: #and SaveManager.level() != null:
+		next(SaveManager.level(), Vector2(0,0))
+		cur_player.position = SaveManager.player()
+	elif SaveManager.player() != null:
 		print("in first level")
-		cur_player.position = save.player()
-	if save.check_point_loc() != null:
-		SpawnPoint.global_vector = save.check_point_loc()
-		SpawnPoint.check_point_level = save.check_point_level()
+		cur_player.position = SaveManager.player()
+	if SaveManager.check_point_loc() != null:
+		SpawnPoint.global_vector = SaveManager.check_point_loc()
+		SpawnPoint.check_point_level = SaveManager.check_point_level()
+		
+		
+	#var instance = load(PAUSE_PATH).instantiate()
+	#print("test", instance.position)
+	#instance.position = get_viewport().get_camera_2d().global_position
+	#add_child(instance)
+	#$PauseMenu.global_position = get_viewport().get_camera_2d().global_position
+	
+	print("camera: ", get_viewport().get_camera_2d().global_position)
 
 # Sets current level
 func set_cur_level(level: Level) -> void:
@@ -138,7 +146,7 @@ func reset_player(body) -> void:
 		print("Spawning in current level", cur_level_key)
 		#print(SpawnPoint.global_vector)
 		body.position = SpawnPoint.global_vector
-	elif !SpawnPoint.check_point_on and save.check_point_level() == null:
+	elif !SpawnPoint.check_point_on and SaveManager.check_point_level() == null:
 		print("No checkpoint, restarting game")
 		next(SpawnPoint.original_spawn_key, Level.to_pixel_coords(Vector2.ZERO))
 		cur_player.position = Level.to_pixel_coords(_cur_level.default_spawn)

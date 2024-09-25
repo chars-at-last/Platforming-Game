@@ -1,8 +1,18 @@
 class_name Save_Manager extends Node2D
 
+const level_key: String = "1x1"
+const player_location: Vector2 = Vector2(110, 43)
+#const check_point_lev = "1x1"
+#constcheck
+
+
 
 # Called when the node enters the scene tree for the first time.
-#func _ready() -> void:
+func _init() -> void:
+	var read = FileAccess.open(path, FileAccess.READ)
+	print("hello")
+	if read == null:
+		save(level_key, player_location, null, null)
 	#pass # Replace with function body.
 
 
@@ -12,7 +22,7 @@ class_name Save_Manager extends Node2D
 	
 	
 	
-var path = "res://saves/player_saves.json"
+var path = "user://player_saves.json"
 
 #Save the level key and the player location
 func save(level, player_loc, check_point_level, check_point_loc):
@@ -36,49 +46,54 @@ func save(level, player_loc, check_point_level, check_point_loc):
 	#save_file.store_line(JSON.stringify(save_data))
 	
 #Return the saved level key
-func level() -> String:
+func level():
 	var read = FileAccess.open(path, FileAccess.READ)
-	var data = read.get_as_text()
-	read.close()
-	
-	var output = JSON.parse_string(data)
-	print(output.level)
-	return output.level
+	if read != null:
+		var data = read.get_as_text()
+		read.close()
+		
+		var output = JSON.parse_string(data)
+		print(output.level)
+		return output.level
 
 
 #Return the saved player location
-func player() -> Vector2:
+func player():
 	var read = FileAccess.open(path, FileAccess.READ)
-	var data = read.get_as_text()
-	read.close()
-	
-	var output = JSON.parse_string(data)
-	print(output.player_location)
-	return str_to_var("Vector2" + output.player_location)
+	if read != null:
+		var data = read.get_as_text()
+		read.close()
 		
+		var output = JSON.parse_string(data)
+		if output.check_point_loc != null:
+			print(output.player_location)
+			return str_to_var("Vector2" + output.player_location)
+			
 
 
 #Return the level key of the last checkpoint the player touched 
 func check_point_level():
 	var read = FileAccess.open(path, FileAccess.READ)
-	var data = read.get_as_text()
-	read.close()
-	
-	var output = JSON.parse_string(data)
-	print(output.check_point_level)
-	return output.check_point_level
+	if read != null:
+		var data = read.get_as_text()
+		read.close()
+		
+		var output = JSON.parse_string(data)
+		print(output.check_point_level)
+		return output.check_point_level
 
 
 
 #Return the location of the last checkpoint the player touched 
 func check_point_loc():
 	var read = FileAccess.open(path, FileAccess.READ)
-	var data = read.get_as_text()
-	read.close()
-	
-	var output = JSON.parse_string(data)
-	print(output.check_point_loc)
-	if output.check_point_loc != null:
-		return str_to_var("Vector2" + output.check_point_loc)
-	else:
-		return null
+	if read != null:
+		var data = read.get_as_text()
+		read.close()
+		
+		var output = JSON.parse_string(data)
+		print(output.check_point_loc)
+		if output.check_point_loc != null:
+			return str_to_var("Vector2" + output.check_point_loc)
+		else:
+			return null
