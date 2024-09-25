@@ -34,9 +34,8 @@ scale = Vector2(0.25, 0.25)
 tile_map_data = PackedByteArray("AAD///b/AQADAAAAADD9/wAAAQADAAAAAGAFABYAAQADAAAAADAEABYAAQADAAAAADA=")
 
 [node name="Checkpoint" parent="." index="6" instance=ExtResource("5_2l0mt")]
-rotation = 3.14159
 scale = Vector2(0.5, 0.5)
-tile_map_data = PackedByteArray("AAABAA0AAQAEAAIAAAD+//T/AQAEAAIAAAD+//P/AQAEAAIAAAD+//L/AQAEAAEAAAA=")
+tile_map_data = PackedByteArray("AAABAA0AAQAEAAIAAAABAAwAAQAEAAEAAAA=")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="7"]
 

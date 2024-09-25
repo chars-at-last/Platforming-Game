@@ -27,10 +27,15 @@ manager/music/bus="Music"
 
 [autoload]
 
-GameManager="*res://nodes/singletons/game_manager.gd"
-SpawnPoint="*res://nodes/singletons/spawn_point.gd"
+<<<<<<< HEAD
+GameManager="*res://nodes/scripts/game_manager.gd"
+SpawnPoint="*res://nodes/scripts/spawn_point.gd"
 SoundManager="*res://addons/resonate/sound_manager/sound_manager.gd"
 MusicManager="*res://addons/resonate/music_manager/music_manager.gd"
+=======
+GameManager="*res://nodes/singletons/game_manager.gd"
+SpawnPoint="*res://nodes/singletons/spawn_point.gd"
+>>>>>>> 7d8f1298080187b5ffcd9ea8eba85bf75b3f2048
 
 [display]
 
