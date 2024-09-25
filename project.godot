@@ -113,6 +113,8 @@ pause={
 2d_physics/layer_6="Background"
 2d_physics/layer_7="Goal"
 2d_physics/layer_8="Death"
+2d_physics/layer_9="Interactive"
+2d_physics/layer_10="Solid"
 
 [rendering]
 

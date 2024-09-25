@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=3 uid="uid://crtbnkmpoyka2"]
+[gd_scene load_steps=126 format=3 uid="uid://crtbnkmpoyka2"]
 
 [ext_resource type="Script" path="res://nodes/scripts/player.gd" id="1_u04yn"]
 [ext_resource type="Texture2D" uid="uid://5h70if3nn0yk" path="res://assets/art/player_spritesheet.png" id="2_s22yy"]
@@ -1116,10 +1116,14 @@ volume = -10.0
 pitch = 1.0
 streams = Array[AudioStream]([ExtResource("7_xwf5l")])
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1n3h5"]
+radius = 17.0
+height = 44.0
+
 [node name="Player" type="CharacterBody2D" groups=["Can_Die"]]
 editor_description = "Player character."
 light_mask = 0
-collision_mask = 2
+collision_mask = 514
 script = ExtResource("1_u04yn")
 move_accel = 5.0
 
@@ -1187,6 +1191,16 @@ limit_top = 0
 script = ExtResource("4_0jdyg")
 label = "player"
 events = Array[ExtResource("5_sr5wi")]([SubResource("Resource_etjql"), SubResource("Resource_fe1s6")])
+
+[node name="InteractiveArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea"]
+shape = SubResource("CapsuleShape2D_1n3h5")
+
+[node name="InteractiveMarker" type="Marker2D" parent="."]
+position = Vector2(17, 0)
 
 [connection signal="body_entered" from="WallJumpArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="WallJumpArea" to="." method="_on_area_2d_body_exited"]

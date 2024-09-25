@@ -44,7 +44,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="GridContainer"]
 layout_mode = 2
-text = "Pasued"
+text = "Paused"
 horizontal_alignment = 1
 
 [node name="Resume" type="Button" parent="GridContainer"]

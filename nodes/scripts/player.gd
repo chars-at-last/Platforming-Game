@@ -13,6 +13,7 @@ const WALL_JUMP_ANGLE_R: float = PI * 7.1 / 4		## Wall jump angle (Rightward nor
 const WALL_JUMP_ANGLE_L: float = PI * 4.9 / 4		## Wall jump angle (Leftward normal)
 const SHORT_JUMP_MULT: float = .25					## Short jump multiplier
 const BRAKE_ANIM_THRES: float = 400					## Threshold for doing brake animation
+const PUSH_FORCE: float = 100						## Player push force on Interactives
 
 enum LOOKING_DIRS {
 	STRAIGHT = 0,
@@ -27,6 +28,8 @@ enum LOOKING_DIRS {
 @onready var w_shape: CollisionShape2D = $WallJumpArea/CollisionShape2D	## Wall jump area col shape
 @onready var tile_area: Area2D = $TileArea								## Area for "Special" tiles
 @onready var camera: Camera2D = $Camera2D								## Camera
+@onready var interactive_area: Area2D = $InteractiveArea				## InteractiveArea
+@onready var interactive_marker: Marker2D = $InteractiveMarker			## InteractiveMarker
 
 var direction: float													## Direction of movement
 
@@ -45,6 +48,7 @@ var _is_braking: bool = false											## Flag if the character should be braki
 var _wall_boosted: bool = false											## Flag if move-jumping into wall
 var _can_wall_jump: bool = false										## Flag if can wall jump
 var _just_jumped: bool = false											## Tracks if character just jumped
+var _holding: Interactive = null										## Whether or not the player is holding something
 
 var _can_control: bool = true 											## If the player character is still alive and can be controled by the player
 
@@ -70,7 +74,8 @@ func _physics_process(delta: float) -> void:
 	physics_direction(delta)			# Directional stuff
 	physics_jump(delta)					# Jump stuff
 	physics_wall(delta)					# Wall stuff
-		
+	physics_grabbing(delta)				# Grabbing stuff
+	
 	# Velocity
 	velocity = unbridled_velocity		# Velocity
 	
@@ -79,6 +84,8 @@ func _physics_process(delta: float) -> void:
 	var on_floor: bool = is_on_floor()
 	physics_floor(delta)				# Floor stuff
 	move_and_slide()
+	physics_interactive(delta)			# Interactive stuff
+	
 	if not on_floor and is_on_floor():
 		SoundManager.play("player", "land", "SFX Echo")
 	
@@ -195,6 +202,35 @@ func physics_floor(_delta: float) -> void:
 			velocity.x = flpcen(velocity.x * VELOCITY_GROUND_MOVEMENT_NERF)
 			#unbridled_velocity.x = floor(unbridled_velocity.x * VELOCITY_GROUND_MOVEMENT_NERF)
 
+# Interactive handling
+func physics_interactive(_delta: float) -> void:
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider is Interactive and collider.pushable:
+			var impulse = -collision.get_normal()
+			collider.apply_central_impulse(impulse * PUSH_FORCE)
+
+# Grabbing
+func physics_grabbing(_delta: float) -> void:
+	if not _holding and Input.is_action_pressed("pick_up"):
+		print(1)
+		var pickup: Interactive = null
+		for body in interactive_area.get_overlapping_bodies():
+			if body is Interactive:
+				# Assign if pickup is null or distance to player is lesser
+				if not pickup or body.position.distance_squared_to(position) < pickup.position.distance_squared_to(position):
+					pickup = body
+					
+		if pickup:
+			_holding = pickup
+			pickup.reparent(interactive_marker, false)
+			pickup.position = Vector2.ZERO
+			
+	#if _holding and Input.is_action_just_released("pick_up"):
+		#_holding.reparent(GameManager.current_level_manager._cur_level)
+		#_holding = null
+
 # Wall jump
 func wall_jump() -> void:
 	if not is_ducking() and ((_can_wall_jump and not is_on_floor()) or is_on_wall_only()):
@@ -221,22 +257,6 @@ func set_switching_dir(value: bool) -> void:
 	else:
 		_switching_dir = false
 		_is_braking = false 
-
-#This function will determine what happens if the player character dies
-#func on_death() -> void:
-	#print("Player Died!")
-	#visible = false
-	#_can_control = false
-	
-	#await get_tree().create_timer(1).timeout
-	#reset_player()
-
-
-#func reset_player() -> void:
-	#global_position = Vector2(110, 43)
-	#visible = true
-	#_can_control = true
-
 
 # Signal method(s) #
 

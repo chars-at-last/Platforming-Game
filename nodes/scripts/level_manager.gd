@@ -30,6 +30,9 @@ var save = Save_Manager.new()				#Used to access save data
 
 # Ready
 func _ready() -> void:
+	if not SoundManager.has_loaded:
+		await SoundManager.loaded
+	
 	GameManager.current_level_manager = self
 	# TODO: Allow for any level to be the default
 	add_child(default_level.instantiate())

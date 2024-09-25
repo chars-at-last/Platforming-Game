@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb1fpa10ig116"]
+
+[ext_resource type="PackedScene" uid="uid://cdgoq2id47lpe" path="res://nodes/scenes/interactive.tscn" id="1_kgwj4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mbh7a"]
+
+[node name="InteractiveTest" instance=ExtResource("1_kgwj4")]
+collision_layer = 768
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+shape = SubResource("RectangleShape2D_mbh7a")
+
+[node name="ColorRect" type="ColorRect" parent="." index="1"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
