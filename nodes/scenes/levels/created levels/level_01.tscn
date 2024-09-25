@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://vfdfhefydgcf"]
+[gd_scene load_steps=8 format=4 uid="uid://vfdfhefydgcf"]
 
 [ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_7va63"]
 [ext_resource type="TileSet" uid="uid://bsuhy77c6mhv3" path="res://assets/resources/comp195_tileset.tres" id="2_6qtp4"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="4_yeom8"]
 [ext_resource type="PackedScene" uid="uid://vyj36j0hv8jy" path="res://nodes/scenes/Obstacles/spikes.tscn" id="5_3yx6m"]
 [ext_resource type="PackedScene" uid="uid://bax0hg5n0t3qk" path="res://nodes/scenes/Obstacles/check_point.tscn" id="7_nmdi6"]
-[ext_resource type="PackedScene" uid="uid://3x5mk8srema3" path="res://nodes/scenes/pause_menu.tscn" id="8_prt0u"]
 
 [node name="Level01" instance=ExtResource("1_7va63")]
 default_spawn = Vector2(-5, 0)
@@ -39,7 +38,3 @@ tile_map_data = PackedByteArray("AAACAPz/AQADAAAAAAABAPz/AQADAAAAAAAAAP3/AQADAAA
 [node name="Checkpoint" parent="." index="5" instance=ExtResource("7_nmdi6")]
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAD+/wMAAQAEAAIAAAD+/wIAAQAEAAEAAAADAAMAAQAEAAIAAAADAAIAAQAEAAEAAAA=")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="6"]
-
-[node name="PauseMenu" parent="CanvasLayer" index="0" instance=ExtResource("8_prt0u")]

@@ -31,6 +31,7 @@ GameManager="*res://nodes/singletons/game_manager.gd"
 SpawnPoint="*res://nodes/singletons/spawn_point.gd"
 SoundManager="*res://addons/resonate/sound_manager/sound_manager.gd"
 MusicManager="*res://addons/resonate/music_manager/music_manager.gd"
+SaveManager="*res://nodes/scripts/save_manager.gd"
 
 [display]
 
