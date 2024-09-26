@@ -6,7 +6,8 @@ class_name Level extends Node2D
 # Constant(s)
 const BASE_LEVEL_SIZE: Vector2 = Vector2(20, 12)
 const BASE_TILE_SIZE: Vector2 = Vector2.ONE * 32
-const DEFAULT_SPAWN: Vector2 = Vector2.ZERO
+#const DEFAULT_SPAWN: Vector2 = Vector2.ZERO
+const DEFAULT_SPAWN: Vector2 = Vector2(-250, 0)
 
 # Variable(s)
 @export var size: Vector2 = BASE_LEVEL_SIZE

@@ -18,7 +18,8 @@ static var cur_player: Player = null
 var cur_level_key: String = "1x1"
 
 # TODO: Change this default_level later
-@export var default_level: PackedScene = preload("res://nodes/scenes/levels/created levels/level_01.tscn")
+#@export var default_level: PackedScene = preload("res://nodes/scenes/levels/created levels/level_01.tscn")
+@export var default_level: PackedScene = preload("res://nodes/scenes/levels/created levels/tutorial_level.tscn")
 @export var level_collection: Dictionary = {"base_collection": preload("res://assets/resources/base_level_collection.tres")}
 
 @onready var level_loader: LevelLoader = $LevelLoader
@@ -43,13 +44,12 @@ func _ready() -> void:
 		_cur_level.add_child(cur_player)
 		cur_player.position = Level.to_pixel_coords(_cur_level.default_spawn)
 		handle_player_camera()
-		print("test")
 	#Calling save manager to see if the last saved player location is the 
 	#starting level, if not, load the current level that the player is in
 	print(SaveManager.level, SaveManager.player)
 	#if save.level != "error": #and save.check_point_level() != null and save.check_point_loc() != null:
 	if SaveManager.level() != SpawnPoint.original_spawn_key: #and SaveManager.level() != null:
-		next(SaveManager.level(), Vector2(0,0))
+		next(SaveManager.level(), SaveManager.player())
 		cur_player.position = SaveManager.player()
 	elif SaveManager.player() != null:
 		print("in first level")
@@ -149,6 +149,7 @@ func reset_player(body) -> void:
 	elif !SpawnPoint.check_point_on and SaveManager.check_point_level() == null:
 		print("No checkpoint, restarting game")
 		next(SpawnPoint.original_spawn_key, Level.to_pixel_coords(Vector2.ZERO))
+		print(Level.to_pixel_coords(_cur_level.default_spawn))
 		cur_player.position = Level.to_pixel_coords(_cur_level.default_spawn)
 	else:
 		print("Last checkpoint in previous level, switching level")
