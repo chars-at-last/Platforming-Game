@@ -7,6 +7,7 @@
 [node name="InteractiveTest" instance=ExtResource("1_kgwj4")]
 collision_layer = 768
 collision_mask = 2
+lock_rotation = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource("RectangleShape2D_mbh7a")

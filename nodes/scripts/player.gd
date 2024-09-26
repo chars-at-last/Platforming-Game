@@ -14,11 +14,17 @@ const WALL_JUMP_ANGLE_L: float = PI * 4.9 / 4		## Wall jump angle (Leftward norm
 const SHORT_JUMP_MULT: float = .25					## Short jump multiplier
 const BRAKE_ANIM_THRES: float = 400					## Threshold for doing brake animation
 const PUSH_FORCE: float = 100						## Player push force on Interactives
+const THROW_FORCE: float = 400						## Throw force for Interactives
 
 enum LOOKING_DIRS {
 	STRAIGHT = 0,
 	DOWN = 1,
 	UP = -1
+}
+
+enum HLOOKING_DIRS {
+	RIGHT = 1,
+	LEFT = -1
 }
 
 # Variables
@@ -42,6 +48,7 @@ var acceleration: Vector2												## Rate of change of the velocity
 var _wall_normal: Vector2												## Wall normal
 
 var _looking_direction: LOOKING_DIRS = LOOKING_DIRS.STRAIGHT			## Direction of looking (-1 is up, 1 is down)
+var _h_looking_direction: HLOOKING_DIRS = HLOOKING_DIRS.LEFT			## Horizontal looking direction
 
 var _switching_dir: bool = false										## Flag for switching direction
 var _is_braking: bool = false											## Flag if the character should be braking (animation)
@@ -112,9 +119,12 @@ func face() -> void:
 		changing = false
 		
 	if changing:
+		var temp: float = (1 if temp_flip_h else -1)
 		sprite.flip_h = temp_flip_h
-		w_shape.position.x = abs(w_shape.position.x) * (1 if temp_flip_h else -1)
+		w_shape.position.x = abs(w_shape.position.x) * temp
 		gun.flip(not temp_flip_h)
+		interactive_marker.position.x = abs(interactive_marker.position.x) * -temp
+		_h_looking_direction = HLOOKING_DIRS.LEFT if temp > 0 else HLOOKING_DIRS.RIGHT
 
 # Gravity and other stuff
 func physics_gravity(delta: float) -> void:
@@ -214,7 +224,6 @@ func physics_interactive(_delta: float) -> void:
 # Grabbing
 func physics_grabbing(_delta: float) -> void:
 	if not _holding and Input.is_action_pressed("pick_up"):
-		print(1)
 		var pickup: Interactive = null
 		for body in interactive_area.get_overlapping_bodies():
 			if body is Interactive:
@@ -224,12 +233,14 @@ func physics_grabbing(_delta: float) -> void:
 					
 		if pickup:
 			_holding = pickup
+			pickup.disable()
 			pickup.reparent(interactive_marker, false)
 			pickup.position = Vector2.ZERO
 			
-	#if _holding and Input.is_action_just_released("pick_up"):
-		#_holding.reparent(GameManager.current_level_manager._cur_level)
-		#_holding = null
+	if _holding and Input.is_action_just_released("pick_up"):
+		_holding.reparent(GameManager.current_level_manager._cur_level)
+		_holding.throw(THROW_FORCE + abs(velocity.x), Vector2.RIGHT * _h_looking_direction)
+		_holding = null
 
 # Wall jump
 func wall_jump() -> void:
@@ -270,3 +281,7 @@ func _on_area_2d_body_exited(_body: Node2D) -> void:
 func _on_tile_area_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if body is Tile:
 		body.handle_collision(self)
+
+func _on_interactive_area_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+	if body != _holding:
+		body.make_solid()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://crtbnkmpoyka2"]
+[gd_scene load_steps=127 format=3 uid="uid://crtbnkmpoyka2"]
 
 [ext_resource type="Script" path="res://nodes/scripts/player.gd" id="1_u04yn"]
 [ext_resource type="Texture2D" uid="uid://5h70if3nn0yk" path="res://assets/art/player_spritesheet.png" id="2_s22yy"]
@@ -1189,6 +1189,7 @@ limit_left = 0
 limit_top = 0
 
 [node name="PauseMenu" parent="Camera2D" instance=ExtResource("4_rqlhw")]
+visible = false
 
 [node name="SoundBank" type="Node" parent="."]
 script = ExtResource("4_0jdyg")
@@ -1208,3 +1209,4 @@ position = Vector2(17, 0)
 [connection signal="body_entered" from="WallJumpArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="WallJumpArea" to="." method="_on_area_2d_body_exited"]
 [connection signal="body_shape_entered" from="TileArea" to="." method="_on_tile_area_body_shape_entered"]
+[connection signal="body_shape_exited" from="InteractiveArea" to="." method="_on_interactive_area_body_shape_exited"]

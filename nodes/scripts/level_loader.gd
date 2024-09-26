@@ -57,4 +57,5 @@ func get_loaded_level(key: String) -> PackedScene:
 	return loaded_levels[key]
 
 func _exit_tree():
-	thread.wait_to_finish()
+	if thread and thread.is_started():
+		thread.wait_to_finish()
