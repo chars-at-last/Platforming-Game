@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=3 uid="uid://crtbnkmpoyka2"]
+[gd_scene load_steps=128 format=3 uid="uid://crtbnkmpoyka2"]
 
 [ext_resource type="Script" path="res://nodes/scripts/player.gd" id="1_u04yn"]
 [ext_resource type="Texture2D" uid="uid://5h70if3nn0yk" path="res://assets/art/player_spritesheet.png" id="2_s22yy"]
@@ -1121,6 +1121,9 @@ streams = Array[AudioStream]([ExtResource("7_xwf5l")])
 radius = 17.0
 height = 44.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4bg2"]
+size = Vector2(22, 33)
+
 [node name="Player" type="CharacterBody2D" groups=["Can_Die"]]
 editor_description = "Player character."
 light_mask = 0
@@ -1203,10 +1206,18 @@ collision_mask = 256
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea"]
 shape = SubResource("CapsuleShape2D_1n3h5")
 
+[node name="InteractiveAreaCheck" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveAreaCheck"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_u4bg2")
+
 [node name="InteractiveMarker" type="Marker2D" parent="."]
 position = Vector2(17, 0)
 
 [connection signal="body_entered" from="WallJumpArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="WallJumpArea" to="." method="_on_area_2d_body_exited"]
 [connection signal="body_shape_entered" from="TileArea" to="." method="_on_tile_area_body_shape_entered"]
-[connection signal="body_shape_exited" from="InteractiveArea" to="." method="_on_interactive_area_body_shape_exited"]
+[connection signal="body_exited" from="InteractiveAreaCheck" to="." method="_on_interactive_area_check_body_exited"]

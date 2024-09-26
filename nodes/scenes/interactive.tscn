@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://nodes/scripts/interactive.gd" id="1_2p6nb"]
 
-[node name="Interactive" type="RigidBody2D"]
+[node name="Interactive" type="CharacterBody2D"]
 editor_description = "Interactive elements in the game."
 collision_layer = 256
 collision_mask = 0

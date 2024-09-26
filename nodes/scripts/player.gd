@@ -15,6 +15,8 @@ const SHORT_JUMP_MULT: float = .25					## Short jump multiplier
 const BRAKE_ANIM_THRES: float = 400					## Threshold for doing brake animation
 const PUSH_FORCE: float = 100						## Player push force on Interactives
 const THROW_FORCE: float = 400						## Throw force for Interactives
+const VERT_THROW_MULT: float = 2					## Vertical throw force multiplier
+const HORIZ_VERT_THROW_MULT: float = .25			## Horizontal throw multiplier when throwing vertically
 
 enum LOOKING_DIRS {
 	STRAIGHT = 0,
@@ -35,6 +37,7 @@ enum HLOOKING_DIRS {
 @onready var tile_area: Area2D = $TileArea								## Area for "Special" tiles
 @onready var camera: Camera2D = $Camera2D								## Camera
 @onready var interactive_area: Area2D = $InteractiveArea				## InteractiveArea
+@onready var interactive_area_check: Area2D = $InteractiveAreaCheck		## InteractiveArea for checking
 @onready var interactive_marker: Marker2D = $InteractiveMarker			## InteractiveMarker
 
 var direction: float													## Direction of movement
@@ -219,7 +222,7 @@ func physics_interactive(_delta: float) -> void:
 		var collider = collision.get_collider()
 		if collider is Interactive and collider.pushable:
 			var impulse = -collision.get_normal()
-			collider.apply_central_impulse(impulse * PUSH_FORCE)
+			collider.velocity = impulse * PUSH_FORCE
 
 # Grabbing
 func physics_grabbing(_delta: float) -> void:
@@ -239,7 +242,20 @@ func physics_grabbing(_delta: float) -> void:
 			
 	if _holding and Input.is_action_just_released("pick_up"):
 		_holding.reparent(GameManager.current_level_manager._cur_level)
-		_holding.throw(THROW_FORCE + abs(velocity.x), Vector2.RIGHT * _h_looking_direction)
+		
+		var throw_vector: Vector2
+		
+		match _looking_direction:
+			LOOKING_DIRS.STRAIGHT:
+				throw_vector = Vector2.RIGHT * _h_looking_direction
+			LOOKING_DIRS.UP:
+				throw_vector = Vector2.RIGHT * _h_looking_direction * HORIZ_VERT_THROW_MULT * int(bool(direction)) + Vector2.DOWN * VERT_THROW_MULT * _looking_direction
+			LOOKING_DIRS.DOWN:
+				throw_vector = Vector2.RIGHT * _h_looking_direction * HORIZ_VERT_THROW_MULT
+				
+		_holding.throw(THROW_FORCE + abs(velocity.x), throw_vector, _looking_direction, func(x: Interactive) -> bool: return x in interactive_area_check.get_overlapping_bodies())
+		#_holding.throw(THROW_FORCE + abs(velocity.x), Vector2.RIGHT * _h_looking_direction + Vector2.DOWN * VERT_THROW_MULT * _looking_direction)
+		
 		_holding = null
 
 # Wall jump
@@ -282,6 +298,6 @@ func _on_tile_area_body_shape_entered(body_rid: RID, body: Node2D, body_shape_in
 	if body is Tile:
 		body.handle_collision(self)
 
-func _on_interactive_area_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+func _on_interactive_area_check_body_exited(body: Node2D) -> void:
 	if body != _holding:
 		body.make_solid()

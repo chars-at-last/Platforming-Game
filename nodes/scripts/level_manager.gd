@@ -101,12 +101,15 @@ func next(next_level_key: String, next_level_pos_add: Vector2) -> void:
 	#get_tree().call_deferred("change_scene_to_file", next_level)
 	
 	if level_loader.loaded_levels.has(next_level_key):
+		#await get_tree().physics_frame
 		_cur_level.call_deferred("remove_child", cur_player)									# Save player
 		_cur_level.queue_free()																	# Remove old level
 		#print(level_loader.loaded_levels)
 		var next_level: Level = level_loader.loaded_levels[next_level_key].instantiate()		# Get next level
 		level_loader.clear_levels([SpawnPoint.check_point_level])								# Clear old loaded levels
+		#await get_tree().physics_frame
 		add_child(next_level)																	# Add next level
+		#self.call_deferred("add_child", next_level)
 		
 		#If we are loading from a save file, we will spawn the player in some other way
 		#if loading_from_save:
