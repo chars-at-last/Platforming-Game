@@ -1,7 +1,7 @@
 class_name Save_Manager extends Node2D
 
 const level_key: String = "1x1"
-const player_location: Vector2 = Vector2(110, 43)
+const player_location: Vector2 = Vector2(-250, 0)
 #const check_point_lev = "1x1"
 #constcheck
 
@@ -61,11 +61,12 @@ func level():
 func player():
 	var read = FileAccess.open(path, FileAccess.READ)
 	if read != null:
+		print("returning player")
 		var data = read.get_as_text()
 		read.close()
 		
 		var output = JSON.parse_string(data)
-		if output.check_point_loc != null:
+		if output.player_location != null:
 			print(output.player_location)
 			return str_to_var("Vector2" + output.player_location)
 			
