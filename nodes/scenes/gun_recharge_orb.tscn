@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxkind4xikk3o"]
+
+[ext_resource type="Script" path="res://nodes/scripts/gun_recharge_orb.gd" id="1_hpb4r"]
+[ext_resource type="Texture2D" uid="uid://xgsjr2kjuw0g" path="res://assets/art/tilemap_placeholder.png" id="2_gx5r1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_liqje"]
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_hpb4r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_liqje")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1.19209e-07)
+scale = Vector2(0.135417, 0.5)
+texture = ExtResource("2_gx5r1")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
