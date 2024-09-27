@@ -12,6 +12,8 @@ config_version=5
 
 config/name="Platforming Game"
 run/main_scene="res://nodes/scenes/level_manager.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="PMP"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=1000

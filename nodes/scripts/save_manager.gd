@@ -1,7 +1,7 @@
 class_name Save_Manager extends Node2D
 
 const level_key: String = "1x1"
-const player_location: Vector2 = Vector2(-250, 0)
+const player_location: Vector2 = Vector2(-8, 4) * Level.BASE_TILE_SIZE
 #const check_point_lev = "1x1"
 #constcheck
 
@@ -13,6 +13,10 @@ func _init() -> void:
 	print("hello")
 	if read == null:
 		save(level_key, player_location, null, null)
+		print('save created')
+	else:
+		print('save exists')
+		
 	#pass # Replace with function body.
 
 

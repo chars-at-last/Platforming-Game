@@ -15,7 +15,7 @@ static var cur_checkpoint: Checkpoint = null
 static var cur_player: Player = null
 
 #var loading_from_save: bool = false		#Is the player loading from a saved game?
-var cur_level_key: String = "1x1"
+@export var cur_level_key: String = "1x1"
 
 # TODO: Change this default_level later
 #@export var default_level: PackedScene = preload("res://nodes/scenes/levels/created levels/level_01.tscn")
@@ -39,24 +39,31 @@ func _ready() -> void:
 	
 	# TODO: Allow for the current checkpoint to be loaded from a save file
 	if not cur_checkpoint:
+		#print('!')
 		if not cur_player:
 			cur_player = load(PLAYER_PATH).instantiate()
 		_cur_level.add_child(cur_player)
 		cur_player.position = Level.to_pixel_coords(_cur_level.default_spawn)
+		#print('player coords: ', Level.to_pixel_coords(_cur_level.default_spawn))
 		handle_player_camera()
 	#Calling save manager to see if the last saved player location is the 
 	#starting level, if not, load the current level that the player is in
 	print(SaveManager.level, SaveManager.player)
 	#if save.level != "error": #and save.check_point_level() != null and save.check_point_loc() != null:
+	
 	if SaveManager.level() != SpawnPoint.original_spawn_key: #and SaveManager.level() != null:
 		next(SaveManager.level(), SaveManager.player())
 		cur_player.position = SaveManager.player()
+		print(8)
 	elif SaveManager.player() != null:
 		print("in first level")
 		cur_player.position = SaveManager.player()
+		print(9)
+		
 	if SaveManager.check_point_loc() != null:
 		SpawnPoint.global_vector = SaveManager.check_point_loc()
 		SpawnPoint.check_point_level = SaveManager.check_point_level()
+		print(0)
 		
 		
 	#var instance = load(PAUSE_PATH).instantiate()
@@ -126,6 +133,7 @@ func next(next_level_key: String, next_level_pos_add: Vector2) -> void:
 	
 		cur_level_key = next_level_key															# Update key
 		SpawnPoint.spawn_key = cur_level_key
+		print(';;', cur_level_key)
 	
 # Handles the player's camera
 func handle_player_camera() -> void:
@@ -173,3 +181,6 @@ func _on_goal_tile_complete_level(next_level_key: String, next_level_pos_add: Ve
 		
 func _on_checkpoint_reached() -> void:
 	SpawnPoint.check_point_level = cur_level_key
+	
+	print('::', cur_level_key)
+	print(':', SpawnPoint.check_point_level)

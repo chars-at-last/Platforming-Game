@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://dkufdwrljynos"]
+[gd_scene load_steps=7 format=4 uid="uid://cefy54xbl5hli"]
 
 [ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_hgpi0"]
 [ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_fgpbn"]
@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="6_sqgtv"]
 
 [node name="TutorialLevel" instance=ExtResource("1_hgpi0")]
-default_spawn = Vector2(-8, 0)
+default_spawn = Vector2(-8, 4)
 
 [node name="Goal01" parent="Goals" index="0" instance=ExtResource("2_fgpbn")]
 scale = Vector2(0.5, 0.5)

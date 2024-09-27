@@ -7,7 +7,7 @@ class_name Level extends Node2D
 const BASE_LEVEL_SIZE: Vector2 = Vector2(20, 12)
 const BASE_TILE_SIZE: Vector2 = Vector2.ONE * 32
 #const DEFAULT_SPAWN: Vector2 = Vector2.ZERO
-const DEFAULT_SPAWN: Vector2 = Vector2(-250, 0)
+const DEFAULT_SPAWN: Vector2 = Vector2(0, 0)
 
 # Variable(s)
 @export var size: Vector2 = BASE_LEVEL_SIZE
@@ -30,7 +30,6 @@ func _ready() -> void:
 			collection.append(goal.level_collection_key)
 			
 		GameManager.current_level_manager.setup_levels(keys, collection)
-		
 
 # Convert from "map" coordinates
 static func to_pixel_coords(coords: Vector2) -> Vector2:

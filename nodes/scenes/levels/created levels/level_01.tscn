@@ -7,20 +7,20 @@
 [ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="4_yeom8"]
 [ext_resource type="PackedScene" uid="uid://vyj36j0hv8jy" path="res://nodes/scenes/Obstacles/spikes.tscn" id="5_3yx6m"]
 [ext_resource type="PackedScene" uid="uid://bax0hg5n0t3qk" path="res://nodes/scenes/Obstacles/check_point.tscn" id="7_nmdi6"]
-[ext_resource type="PackedScene" uid="uid://bb1fpa10ig116" path="res://nodes/scenes/interactives/interactive_test.tscn" id="8_8udlf"]
+[ext_resource type="PackedScene" uid="uid://bb1fpa10ig116" path="res://nodes/scenes/interactives/interactive_test.tscn" id="8_23ijv"]
 
 [node name="Level01" instance=ExtResource("1_7va63")]
 default_spawn = Vector2(-5, 0)
 
 [node name="Goal01" parent="Goals" index="0" instance=ExtResource("4_gntsh")]
 scale = Vector2(0.5, 0.5)
-tile_map_data = PackedByteArray("AAAVAPv/AAAAAAAAAAAVAPr/AAAAAAAAAAAVAPn/AAAAAAAAAAAVAPj/AAAAAAAAAAAVAPf/AAAAAAAAAAAVAPb/AAAAAAAAAAAKAPv/AAAAAAAAAAAKAPz/AAAAAAAAAAAKAP3/AAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAKAPv/AAAAAAAAAAAKAPz/AAAAAAAAAAAKAP3/AAAAAAAAAAA=")
 next_level_key = "1x4"
 next_level_position_add = Vector2(-20, 0)
 
 [node name="Goal02" parent="Goals" index="1" instance=ExtResource("4_gntsh")]
 scale = Vector2(0.5, 0.5)
-tile_map_data = PackedByteArray("AAAVAPv/AAAAAAAAAAAVAPr/AAAAAAAAAAAVAPn/AAAAAAAAAAAVAPj/AAAAAAAAAAAVAPf/AAAAAAAAAAAVAPb/AAAAAAAAAAAKAPv/AAAAAAAAAAAKAPz/AAAAAAAAAAAKAP3/AAAAAAAAAAD1/wIAAAAAAAAAAAD1/wMAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD1/wIAAAAAAAAAAAD1/wMAAAAAAAAAAAA=")
 next_level_key = "1x2"
 next_level_position_add = Vector2(20, 0)
 
@@ -46,5 +46,5 @@ tile_map_data = PackedByteArray("AAACAPz/AQADAAAAAAABAPz/AQADAAAAAAAAAP3/AQADAAA
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAD+/wMAAQAEAAIAAAD+/wIAAQAEAAEAAAADAAMAAQAEAAIAAAADAAIAAQAEAAEAAAA=")
 
-[node name="InteractiveTest" parent="." index="6" instance=ExtResource("8_8udlf")]
-position = Vector2(-107, 5)
+[node name="InteractiveTest" parent="." index="6" instance=ExtResource("8_23ijv")]
+position = Vector2(-120, 116)
