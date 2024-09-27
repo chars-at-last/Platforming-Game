@@ -14,7 +14,6 @@ scenes/1/scene = ExtResource("7_d2e0i")
 sources/0 = SubResource("TileSetScenesCollectionSource_gy13k")
 
 [node name="TutorialLevel2" instance=ExtResource("1_hxu22")]
-size = Vector2(20, 12)
 
 [node name="Goal01" parent="Goals" index="0" instance=ExtResource("2_3svi3")]
 scale = Vector2(0.5, 0.5)

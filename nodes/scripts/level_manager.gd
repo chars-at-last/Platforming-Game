@@ -35,9 +35,11 @@ func _ready() -> void:
 	
 	GameManager.current_level_manager = self
 	# TODO: Allow for any level to be the default
-	add_child(default_level.instantiate())
+	if SaveManager.level() == "1x1":
+		add_child(default_level.instantiate())
+	else:
+		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[SaveManager.level()] + ".tscn").instantiate())
 	
-	# TODO: Allow for the current checkpoint to be loaded from a save file
 	if not cur_checkpoint:
 		#print('!')
 		if not cur_player:
@@ -49,7 +51,7 @@ func _ready() -> void:
 	#Calling save manager to see if the last saved player location is the 
 	#starting level, if not, load the current level that the player is in
 	print(SaveManager.level, SaveManager.player)
-	#if save.level != "error": #and save.check_point_level() != null and save.check_point_loc() != null:
+		#if save.level != "error": #and save.check_point_level() != null and save.check_point_loc() != null:
 	
 	if SaveManager.level() != SpawnPoint.original_spawn_key: #and SaveManager.level() != null:
 		next(SaveManager.level(), SaveManager.player())

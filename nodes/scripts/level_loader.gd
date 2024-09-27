@@ -26,7 +26,7 @@ func load_levels(keys: Array[String], levels_paths: Array[String], level_keys: A
 		var i: int = 0
 		for key in keys:
 			if key not in loaded_levels:
-				loaded_levels[level_keys[i]] = load("res://nodes/scenes/levels/created levels/" + key + ".tscn")
+				loaded_levels[level_keys[i]] = load(levels_paths[i] + key + ".tscn")
 			i += 1
 		mutex.unlock()
 		)
