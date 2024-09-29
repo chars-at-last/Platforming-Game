@@ -108,7 +108,6 @@ func next(next_level_key: String, next_level_pos_add: Vector2) -> void:
 	#get_tree().call_deferred("change_scene_to_file", "res://nodes/scenes/level.tscn")
 	#var scene = $instance
 	#get_tree().call_deferred("change_scene_to_file", next_level)
-	
 	if level_loader.loaded_levels.has(next_level_key):
 		#await get_tree().physics_frame
 		_cur_level.call_deferred("remove_child", cur_player)									# Save player
@@ -161,8 +160,18 @@ func reset_player(body) -> void:
 		body.position = SpawnPoint.global_vector
 	elif !SpawnPoint.check_point_on and SaveManager.check_point_level() == null:
 		print("No checkpoint, restarting game")
+		
+		
+		#In case if we died in another level after we used the level_select, 
+		#re-setup the starting level so we can spawn the player at the beginning
+		var keys: Array[String]
+		var collection: Array[String]
+		keys.append("1x1")
+		collection.append("base_collection")
+		setup_levels(keys, collection)
+		
 		next(SpawnPoint.original_spawn_key, Level.to_pixel_coords(Vector2.ZERO))
-		print(Level.to_pixel_coords(_cur_level.default_spawn))
+		#print(Level.to_pixel_coords(_cur_level.default_spawn))
 		cur_player.position = Level.to_pixel_coords(_cur_level.default_spawn)
 	else:
 		print("Last checkpoint in previous level, switching level")

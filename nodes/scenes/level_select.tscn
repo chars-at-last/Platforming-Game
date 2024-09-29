@@ -1,0 +1,91 @@
+[gd_scene load_steps=2 format=3 uid="uid://cb4gvfdyshg1e"]
+
+[ext_resource type="Script" path="res://nodes/scripts/level_select.gd" id="1_ec6l2"]
+
+[node name="LevelSelect" type="Control"]
+process_mode = 3
+z_index = 4096
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ec6l2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.491
+anchor_top = 0.5
+anchor_right = 0.491
+anchor_bottom = 0.5
+offset_left = -83.24
+offset_top = -79.0
+offset_right = 1.76001
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+color = Color(1, 0.628979, 0.0941085, 1)
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -29.0
+offset_right = 35.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Levels"
+horizontal_alignment = 1
+
+[node name="tutorial_level_1" type="Button" parent="GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Tutorial level 1"
+
+[node name="tutorial_level_2" type="Button" parent="GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Tutorial level 2"
+
+[node name="level1" type="Button" parent="GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Level1"
+
+[node name="level2" type="Button" parent="GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Level2"
+
+[node name="level3" type="Button" parent="GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Level3"
+
+[node name="back" type="Button" parent="GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Go Back"
+
+[connection signal="pressed" from="GridContainer/tutorial_level_1" to="." method="_on_tutorial_level_1_pressed"]
+[connection signal="pressed" from="GridContainer/tutorial_level_1" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="GridContainer/tutorial_level_2" to="." method="_on_tutorial_level_2_pressed"]
+[connection signal="pressed" from="GridContainer/tutorial_level_2" to="." method="_on_control_pressed"]
+[connection signal="pressed" from="GridContainer/level1" to="." method="_on_level_1_pressed"]
+[connection signal="pressed" from="GridContainer/level1" to="." method="_on_save_quit_pressed"]
+[connection signal="pressed" from="GridContainer/level2" to="." method="_on_level_2_pressed"]
+[connection signal="pressed" from="GridContainer/level2" to="." method="_on_save_quit_pressed"]
+[connection signal="pressed" from="GridContainer/level3" to="." method="_on_level_3_pressed"]
+[connection signal="pressed" from="GridContainer/level3" to="." method="_on_save_quit_pressed"]
+[connection signal="pressed" from="GridContainer/back" to="." method="_on_back_pressed"]

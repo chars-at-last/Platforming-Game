@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://3x5mk8srema3"]
+[gd_scene load_steps=3 format=3 uid="uid://3x5mk8srema3"]
 
 [ext_resource type="Script" path="res://nodes/scripts/pause_menu.gd" id="1_klwgo"]
+[ext_resource type="PackedScene" uid="uid://cb4gvfdyshg1e" path="res://nodes/scenes/level_select.tscn" id="2_ronxo"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -21,9 +22,9 @@ anchor_top = 0.5
 anchor_right = 0.491
 anchor_bottom = 0.5
 offset_left = -83.24
-offset_top = -50.0
-offset_right = -0.240021
-offset_bottom = 1.0
+offset_top = -56.0
+offset_right = -0.23999
+offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
@@ -63,6 +64,15 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 8
 text = "Save & Quit"
 
+[node name="level_select" type="Button" parent="GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Change level"
+
+[node name="LevelSelect" parent="." instance=ExtResource("2_ronxo")]
+layout_mode = 1
+
 [connection signal="pressed" from="GridContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="GridContainer/Control" to="." method="_on_control_pressed"]
 [connection signal="pressed" from="GridContainer/Save&Quit" to="." method="_on_save_quit_pressed"]
+[connection signal="pressed" from="GridContainer/level_select" to="." method="_on_level_select_pressed"]
