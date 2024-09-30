@@ -35,7 +35,7 @@ func _ready() -> void:
 	
 	GameManager.current_level_manager = self
 	# TODO: Allow for any level to be the default
-	if SaveManager.level() == "1x1":
+	if SaveManager.level() == SaveManager.level_key:
 		add_child(default_level.instantiate())
 	else:
 		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[SaveManager.level()] + ".tscn").instantiate())

@@ -5,6 +5,7 @@ const player_location: Vector2 = Vector2(-8, 4) * Level.BASE_TILE_SIZE
 #const check_point_lev = "1x1"
 #constcheck
 
+var path = "user://player_saves.json"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -24,10 +25,6 @@ func _init() -> void:
 #func _process(delta: float) -> void:
 	#pass
 	
-	
-	
-var path = "user://player_saves.json"
-
 #Save the level key and the player location
 func save(level, player_loc, check_point_level, check_point_loc):
 	var save_data = {
