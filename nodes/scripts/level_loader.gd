@@ -39,6 +39,8 @@ func load_levels(keys: Array[String], levels_paths: Array[String], level_keys: A
 
 # Clears currently loaded level, save exceptions
 func clear_levels(exceptions: Array[String] = []) -> void:
+	exceptions.filter(func(x: String) -> bool: return not x.is_empty())
+	
 	thread = Thread.new()
 	thread.start(func() -> void:
 		mutex.lock()

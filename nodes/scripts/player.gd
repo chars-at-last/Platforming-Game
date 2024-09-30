@@ -241,7 +241,7 @@ func physics_grabbing(_delta: float) -> void:
 			pickup.position = Vector2.ZERO
 			
 	if _holding and Input.is_action_just_released("pick_up"):
-		_holding.reparent(GameManager.current_level_manager._cur_level)
+		_holding.reparent(GameManager.current_level_manager.cur_level)
 		
 		var throw_vector: Vector2
 		
@@ -249,7 +249,7 @@ func physics_grabbing(_delta: float) -> void:
 			LOOKING_DIRS.STRAIGHT:
 				throw_vector = Vector2.RIGHT * _h_looking_direction
 			LOOKING_DIRS.UP:
-				throw_vector = Vector2.RIGHT * _h_looking_direction * HORIZ_VERT_THROW_MULT * int(bool(direction)) + Vector2.DOWN * VERT_THROW_MULT * _looking_direction
+				throw_vector = Vector2.RIGHT * _h_looking_direction * HORIZ_VERT_THROW_MULT * int(bool(velocity.x)) + Vector2.DOWN * VERT_THROW_MULT * _looking_direction
 			LOOKING_DIRS.DOWN:
 				throw_vector = Vector2.RIGHT * _h_looking_direction * HORIZ_VERT_THROW_MULT
 				
@@ -284,6 +284,16 @@ func set_switching_dir(value: bool) -> void:
 	else:
 		_switching_dir = false
 		_is_braking = false 
+
+# Reset player
+func reset() -> void:
+	visible = true
+	_can_control = true
+	self.velocity = Vector2.ZERO
+	self.unbridled_velocity = Vector2.ZERO
+	for child in interactive_marker.get_children():
+		interactive_marker.remove_child(child)
+		child.queue_free()
 
 # Signal method(s) #
 

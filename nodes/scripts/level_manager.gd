@@ -10,7 +10,8 @@ signal level_set
 signal checkpoint_set
 
 # Variable(s)
-static var _cur_level: Level = null
+var _cur_packed_level: PackedScene = null
+static var cur_level: Level = null
 static var cur_checkpoint: Checkpoint = null
 static var cur_player: Player = null
 
@@ -44,9 +45,9 @@ func _ready() -> void:
 		#print('!')
 		if not cur_player:
 			cur_player = load(PLAYER_PATH).instantiate()
-		_cur_level.add_child(cur_player)
-		cur_player.position = Level.to_pixel_coords(_cur_level.default_spawn)
-		#print('player coords: ', Level.to_pixel_coords(_cur_level.default_spawn))
+		cur_level.add_child(cur_player)
+		cur_player.position = Level.to_pixel_coords(cur_level.default_spawn)
+		#print('player coords: ', Level.to_pixel_coords(cur_level.default_spawn))
 		handle_player_camera()
 	#Calling save manager to see if the last saved player location is the 
 	#starting level, if not, load the current level that the player is in
@@ -78,14 +79,16 @@ func _ready() -> void:
 
 # Sets current level
 func set_cur_level(level: Level) -> void:
-	_cur_level = level
-	emit_signal("level_set", _cur_level)
+	_cur_packed_level = PackedScene.new()
+	_cur_packed_level.pack(level)
+	cur_level = level
+	emit_signal("level_set", cur_level)
 	
 # Gets current level
 func get_cur_level() -> Level:
-	if not _cur_level:
+	if not cur_level:
 		await level_set
-	return _cur_level
+	return cur_level
 
 # Setup upcoming levels
 func setup_levels(level_keys: Array[String], level_collection: Array[String]) -> void:
@@ -110,8 +113,8 @@ func next(next_level_key: String, next_level_pos_add: Vector2) -> void:
 	#get_tree().call_deferred("change_scene_to_file", next_level)
 	if level_loader.loaded_levels.has(next_level_key):
 		#await get_tree().physics_frame
-		_cur_level.call_deferred("remove_child", cur_player)									# Save player
-		_cur_level.queue_free()																	# Remove old level
+		cur_level.call_deferred("remove_child", cur_player)									# Save player
+		cur_level.queue_free()																	# Remove old level
 		#print(level_loader.loaded_levels)
 		var next_level: Level = level_loader.loaded_levels[next_level_key].instantiate()		# Get next level
 		level_loader.clear_levels([SpawnPoint.check_point_level])								# Clear old loaded levels
@@ -126,7 +129,7 @@ func next(next_level_key: String, next_level_pos_add: Vector2) -> void:
 			#cur_player.set_position(cur_player.position - next_level_pos_add)
 		#else:
 		cur_player.set_position(cur_player.position + Level.to_pixel_coords(next_level_pos_add))# Change player position
-		_cur_level.call_deferred("add_child", cur_player)										# Add back player
+		cur_level.call_deferred("add_child", cur_player)										# Add back player
 		print("Switching level complete, player is at ", cur_player.position)
 		#print("Intended spawn point ", next_level_pos_add)
 		
@@ -139,7 +142,7 @@ func next(next_level_key: String, next_level_pos_add: Vector2) -> void:
 # Handles the player's camera
 func handle_player_camera() -> void:
 	# Player Camera stuff
-	var level_size = _cur_level.size * Level.BASE_TILE_SIZE
+	var level_size = cur_level.size * Level.BASE_TILE_SIZE
 	cur_player.camera.set_limit(SIDE_RIGHT, level_size.x)
 	cur_player.camera.set_limit(SIDE_BOTTOM, level_size.y)
 	#pass
@@ -152,11 +155,22 @@ func on_death(body) -> void:
 	reset_player(body)
 	
 func reset_player(body) -> void:
+	# Reload level
+	#remove_child(cur_level)
+	#cur_level.queue_free()
+	#add_child(_cur_packed_level.instantiate())
+	
 	print(SpawnPoint.check_point_on)
 	# if the last checkpoint is in a different level, we will change the scene back to the correct level first before spawning the player
 	if SpawnPoint.check_point_level == cur_level_key:
 		print("Spawning in current level", cur_level_key)
 		#print(SpawnPoint.global_vector)
+		
+		# Reload current level
+		#remove_child(cur_level)
+		#cur_level.queue_free()
+		#add_child(_cur_packed_level.instantiate())
+		next(cur_level_key, Vector2.ZERO)
 		body.position = SpawnPoint.global_vector
 	elif !SpawnPoint.check_point_on and SaveManager.check_point_level() == null:
 		print("No checkpoint, restarting game")
@@ -171,18 +185,17 @@ func reset_player(body) -> void:
 		setup_levels(keys, collection)
 		
 		next(SpawnPoint.original_spawn_key, Level.to_pixel_coords(Vector2.ZERO))
-		#print(Level.to_pixel_coords(_cur_level.default_spawn))
-		cur_player.position = Level.to_pixel_coords(_cur_level.default_spawn)
+		#print(Level.to_pixel_coords(cur_level.default_spawn))
+		cur_player.position = Level.to_pixel_coords(cur_level.default_spawn)
 	else:
 		print("Last checkpoint in previous level, switching level")
 		next(SpawnPoint.check_point_level, Vector2.ZERO)#SpawnPoint.global_vector)
 		cur_player.position = SpawnPoint.global_vector
 		print("Spawning player ", SpawnPoint.global_vector)
 		
-	body.visible = true
-	body._can_control = true
-	body.velocity = Vector2.ZERO
-	body.unbridled_velocity = Vector2.ZERO
+	#body.velocity = Vector2.ZERO
+	#body.unbridled_velocity = Vector2.ZERO
+	body.reset()
 
 # Signal method(s) #
 
