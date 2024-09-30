@@ -11,6 +11,8 @@ extends Control
 var is_paused: bool = false:
 	set = set_paused
 
+@onready var level_select = $LevelSelect
+
 #var saving = Save_Manager.new()
 #var level_manager = LevelManager.new()
 
@@ -34,6 +36,7 @@ func set_paused(value: bool) -> void:
 	is_paused = value
 	get_tree().paused = is_paused
 	visible = is_paused
+	level_select.visible = !is_paused
 
 
 
@@ -49,3 +52,9 @@ func _on_control_pressed() -> void:
 func _on_save_quit_pressed() -> void:
 	SaveManager.save(SpawnPoint.spawn_key, GameManager.current_level_manager.cur_player.position, SpawnPoint.check_point_level, SpawnPoint.global_vector)
 	get_tree().quit()
+
+
+func _on_level_select_pressed() -> void:
+	#self.visible = false
+	level_select.visible = true
+	
