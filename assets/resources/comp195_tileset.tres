@@ -1,6 +1,11 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://bsuhy77c6mhv3"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://bsuhy77c6mhv3"]
 
 [ext_resource type="Texture2D" uid="uid://dr3xpnwogtwk2" path="res://assets/art/comp195_tileset.png" id="1_045vx"]
+[ext_resource type="PackedScene" uid="uid://bxkind4xikk3o" path="res://nodes/scenes/gun_recharge_orb.tscn" id="1_q5wx7"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_rn60h"]
+scenes/1/scene = ExtResource("1_q5wx7")
+scenes/1/display_placeholder = ExtResource("1_q5wx7")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8s25b"]
 polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
@@ -300,3 +305,4 @@ terrain_set_1/mode = 0
 terrain_set_1/terrain_0/name = "Checkpoints"
 terrain_set_1/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/1 = SubResource("TileSetAtlasSource_y7qft")
+sources/0 = SubResource("TileSetScenesCollectionSource_rn60h")
