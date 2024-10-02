@@ -12,7 +12,7 @@ size = Vector2(20, 22)
 [node name="Goal" parent="Goals" index="0" instance=ExtResource("2_1lvvy")]
 scale = Vector2(0.25, 0.25)
 tile_map_data = PackedByteArray("AADq/xsAAAAAAAAAAADq/xoAAAAAAAAAAADq/xkAAAAAAAAAAADq/xgAAAAAAAAAAADq/xcAAAAAAAAAAADq/xYAAAAAAAAAAAA=")
-next_level_key = "1x4"
+next_level_key = "1x5"
 next_level_position_add = Vector2(20, -16)
 
 [node name="Background" parent="." index="1" instance=ExtResource("2_xj4vj")]

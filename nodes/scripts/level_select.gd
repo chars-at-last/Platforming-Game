@@ -51,19 +51,21 @@ func _on_tutorial_level_2_pressed() -> void:
 	hide()
 
 
-func _on_level_1_pressed() -> void:
+
+func _on_tutorial_level_3_pressed() -> void:
 	var keys: Array[String]
 	var collection: Array[String]
 	keys.append("1x3")
 	collection.append("base_collection")
 	GameManager.current_level_manager.setup_levels(keys, collection)
-	
+
 	emit_signal("switch", "1x3", Vector2.ZERO)
 	GameManager.current_level_manager.cur_player.position = Vector2(-8, 4) * Level.BASE_TILE_SIZE
 	hide()
 
 
-func _on_level_2_pressed() -> void:
+
+func _on_level_1_pressed() -> void:
 	var keys: Array[String]
 	var collection: Array[String]
 	keys.append("1x4")
@@ -75,7 +77,7 @@ func _on_level_2_pressed() -> void:
 	hide()
 
 
-func _on_level_3_pressed() -> void:
+func _on_level_2_pressed() -> void:
 	var keys: Array[String]
 	var collection: Array[String]
 	keys.append("1x5")
@@ -83,5 +85,17 @@ func _on_level_3_pressed() -> void:
 	GameManager.current_level_manager.setup_levels(keys, collection)
 	
 	emit_signal("switch", "1x5", Vector2.ZERO)
+	GameManager.current_level_manager.cur_player.position = Vector2(-8, 4) * Level.BASE_TILE_SIZE
+	hide()
+
+
+func _on_level_3_pressed() -> void:
+	var keys: Array[String]
+	var collection: Array[String]
+	keys.append("1x6")
+	collection.append("base_collection")
+	GameManager.current_level_manager.setup_levels(keys, collection)
+	
+	emit_signal("switch", "1x6", Vector2.ZERO)
 	GameManager.current_level_manager.cur_player.position = Vector2(-8, 4) * Level.BASE_TILE_SIZE
 	hide()

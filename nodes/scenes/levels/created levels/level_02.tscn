@@ -26,13 +26,13 @@ tile_map_data = PackedByteArray("AAD5/wcAAAAEAAAAAAD4/wcAAAAEAAAAAAD3/wcAAAAEAAA
 [node name="Goal" parent="Goals" index="0" instance=ExtResource("2_y6f1j")]
 scale = Vector2(0.25, 0.25)
 tile_map_data = PackedByteArray("AADq//v/AAAAAAAAAADq//r/AAAAAAAAAADq//n/AAAAAAAAAADq//j/AAAAAAAAAADq//f/AAAAAAAAAADq//b/AAAAAAAAAAA=")
-next_level_key = "1x3"
+next_level_key = "1x4"
 next_level_position_add = Vector2(20, 0)
 
 [node name="Goal2" parent="Goals" index="1" instance=ExtResource("2_y6f1j")]
 scale = Vector2(0.25, 0.25)
 tile_map_data = PackedByteArray("AAAVAPv/AAAAAAAAAAAVAPr/AAAAAAAAAAAVAPn/AAAAAAAAAAAVAPj/AAAAAAAAAAAVAPf/AAAAAAAAAAAVAPb/AAAAAAAAAAA=")
-next_level_key = "1x5"
+next_level_key = "1x6"
 next_level_position_add = Vector2(-20, 16)
 
 [node name="ColorRect" type="ColorRect" parent="." index="5"]

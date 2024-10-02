@@ -9,7 +9,8 @@ collection = {
 "": "",
 "1x1": "tutorial_level",
 "1x2": "tutorial_level_2",
-"1x3": "level_01",
-"1x4": "level_02",
-"1x5": "level_03"
+"1x3": "tutorial_level_3",
+"1x4": "level_01",
+"1x5": "level_02",
+"1x6": "level_03"
 }
