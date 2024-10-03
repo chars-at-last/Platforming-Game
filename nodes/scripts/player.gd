@@ -39,6 +39,7 @@ enum HLOOKING_DIRS {
 @onready var interactive_area: Area2D = $InteractiveArea				## InteractiveArea
 @onready var interactive_area_check: Area2D = $InteractiveAreaCheck		## InteractiveArea for checking
 @onready var interactive_marker: Marker2D = $InteractiveMarker			## InteractiveMarker
+@onready var light: PointLight2D = $PointLight2D						## Player's light source
 
 var direction: float													## Direction of movement
 
@@ -97,7 +98,7 @@ func _physics_process(delta: float) -> void:
 	physics_interactive(delta)			# Interactive stuff
 	
 	if not on_floor and is_on_floor():
-		SoundManager.play("player", "land", "SFX Echo")
+		SoundManager.play("player", "land", LevelManager.sfx_bus)
 	
 # Looking direction
 func physics_looking(_delta: float) -> void:
@@ -180,7 +181,7 @@ func physics_direction(_delta: float) -> void:
 # Jumped
 func jumped() -> void:
 	_just_jumped = true
-	SoundManager.play("player", "jump", "SFX Echo")
+	SoundManager.play("player", "jump", LevelManager.sfx_bus)
 
 # Handle jump
 func physics_jump(_delta: float) -> void:
@@ -284,6 +285,10 @@ func set_switching_dir(value: bool) -> void:
 	else:
 		_switching_dir = false
 		_is_braking = false 
+
+# Sets if light is enabled
+func set_light() -> void:
+	light.enabled = LevelManager.dark_level
 
 # Reset player
 func reset() -> void:

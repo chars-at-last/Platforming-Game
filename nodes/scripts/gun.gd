@@ -49,7 +49,7 @@ func physics_gun_control(_delta: float) -> void:
 	if _can_fire:
 		if Input.is_action_just_pressed("charge_gun"):
 			_charging = true
-			gun_charge_instance = SoundManager.instance_poly("gun", "charging", "SFX Echo")
+			gun_charge_instance = SoundManager.instance_poly("gun", "charging", LevelManager.sfx_bus)
 			gun_charge_instance.trigger()
 			timer.start(CHARGE_TIME)
 			
@@ -64,7 +64,7 @@ func physics_gun_control(_delta: float) -> void:
 		if _charging and Input.is_action_just_released("charge_gun"):
 			_charging = false
 			gun_charge_instance.release()
-			SoundManager.play("gun", "blast", "SFX Echo")
+			SoundManager.play("gun", "blast", LevelManager.sfx_bus)
 			fire_gun(1.0 - (timer.time_left / CHARGE_TIME))
 			timer.stop()
 			

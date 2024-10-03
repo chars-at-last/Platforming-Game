@@ -4,6 +4,8 @@ class_name LevelManager extends Node2D
 # Constant(s)
 const PLAYER_PATH: String = "res://nodes/scenes/player/player.tscn"
 const PAUSE_PATH: String = "res://nodes/scenes/pause_menu.tscn"
+const DEF_SFX_BUS: String = "SFX"
+const ECHO_SFX_BUS: String = "SFX Echo"
 
 # Signal(s)
 signal level_set
@@ -14,12 +16,18 @@ static var cur_level: Level = null
 static var cur_checkpoint: Checkpoint = null
 static var cur_player: Player = null
 
-#var loading_from_save: bool = false		#Is the player loading from a saved game?
-@export var cur_level_key: String = "1x1"
+static var sfx_bus: String = DEF_SFX_BUS
+static var dark_level: bool = false
 
+#var loading_from_save: bool = false		#Is the player loading from a saved game?
+@export var force_preloaded_level: bool = false		## If set, force preloaded level instead of default or saved level (ONLY USE FOR TESTING)
+
+@export var default_level_key: String = "1x1"
+@export var cur_level_key: String
 # TODO: Change this default_level later
 #@export var default_level: PackedScene = preload("res://nodes/scenes/levels/created levels/level_01.tscn")
 @export var default_level: PackedScene = preload("res://nodes/scenes/levels/created levels/tutorial_level.tscn")
+@export var preloaded_level: PackedScene
 @export var level_collection: Dictionary = {"base_collection": preload("res://assets/resources/base_level_collection.tres")}
 
 @onready var level_loader: LevelLoader = $LevelLoader
@@ -35,12 +43,15 @@ func _ready() -> void:
 	
 	GameManager.current_level_manager = self
 	# TODO: Allow for any level to be the default
-	if SaveManager.level() == SaveManager.level_key:
-		add_child(default_level.instantiate())
+	if cur_level_key.is_empty():
+		cur_level_key = default_level_key
+		
+	if force_preloaded_level or SaveManager.level() == SaveManager.level_key:
+		add_child((preloaded_level if preloaded_level != null else default_level).instantiate())
 	else:
 		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[SaveManager.level()] + ".tscn").instantiate())
 	
-	if not cur_checkpoint:
+	if force_preloaded_level or not cur_checkpoint:
 		#print('!')
 		if not cur_player:
 			cur_player = load(PLAYER_PATH).instantiate()
@@ -51,22 +62,22 @@ func _ready() -> void:
 	#Calling save manager to see if the last saved player location is the 
 	#starting level, if not, load the current level that the player is in
 	print(SaveManager.level, SaveManager.player)
+	cur_player.set_light()
 		#if save.level != "error": #and save.check_point_level() != null and save.check_point_loc() != null:
-	
-	if SaveManager.level() != SpawnPoint.original_spawn_key: #and SaveManager.level() != null:
-		next(SaveManager.level(), SaveManager.player())
-		cur_player.position = SaveManager.player()
-		print(8)
-	elif SaveManager.player() != null:
-		print("in first level")
-		cur_player.position = SaveManager.player()
-		print(9)
-		
-	if SaveManager.check_point_loc() != null:
-		SpawnPoint.global_vector = SaveManager.check_point_loc()
-		SpawnPoint.check_point_level = SaveManager.check_point_level()
-		print(0)
-		
+	if not force_preloaded_level:
+		if SaveManager.level() != SpawnPoint.original_spawn_key: #and SaveManager.level() != null:
+			next(SaveManager.level(), SaveManager.player())
+			cur_player.position = SaveManager.player()
+			print(8)
+		elif SaveManager.player() != null:
+			print("in first level")
+			cur_player.position = SaveManager.player()
+			print(9)
+			
+		if SaveManager.check_point_loc() != null:
+			SpawnPoint.global_vector = SaveManager.check_point_loc()
+			SpawnPoint.check_point_level = SaveManager.check_point_level()
+			print(0)
 		
 	#var instance = load(PAUSE_PATH).instantiate()
 	#print("test", instance.position)
@@ -74,11 +85,16 @@ func _ready() -> void:
 	#add_child(instance)
 	#$PauseMenu.global_position = get_viewport().get_camera_2d().global_position
 	
+	print("Player pos (map coords): %v" % Level.to_map_coords(cur_player.position))
 	print("camera: ", get_viewport().get_camera_2d().global_position)
 
 # Sets current level
 func set_cur_level(level: Level) -> void:
 	cur_level = level
+
+	LevelManager.sfx_bus = DEF_SFX_BUS if not level.echo else ECHO_SFX_BUS
+	LevelManager.dark_level = level.dark
+	
 	emit_signal("level_set", cur_level)
 	
 # Gets current level
@@ -117,7 +133,8 @@ func next(next_level_key: String, next_level_pos_add: Vector2, force_change: boo
 		#await get_tree().physics_frame
 		add_child(next_level)																	# Add next level
 		cur_player.set_position(cur_player.position + Level.to_pixel_coords(next_level_pos_add))# Change player position
-		cur_level.call_deferred("add_child", cur_player)										# Add back player
+		cur_level.call_deferred("add_child", cur_player)	
+		cur_player.set_light()									# Add back player
 		print("Switching level complete, player is at ", cur_player.position)
 		#print("Intended spawn point ", next_level_pos_add)
 		

@@ -8,6 +8,8 @@
 
 [node name="Level03" instance=ExtResource("1_ajhbu")]
 size = Vector2(20, 22)
+dark = true
+echo = true
 
 [node name="Goal" parent="Goals" index="0" instance=ExtResource("2_1lvvy")]
 scale = Vector2(0.25, 0.25)

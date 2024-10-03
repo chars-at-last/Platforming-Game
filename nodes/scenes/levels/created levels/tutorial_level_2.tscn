@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="5_r2r8m"]
 
 [node name="TutorialLevel2" instance=ExtResource("1_hxu22")]
+dark = true
+echo = true
 
 [node name="Goal01" parent="Goals" index="0" instance=ExtResource("2_3svi3")]
 scale = Vector2(0.5, 0.5)

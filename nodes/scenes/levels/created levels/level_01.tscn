@@ -11,6 +11,8 @@
 
 [node name="Level01" instance=ExtResource("1_7va63")]
 default_spawn = Vector2(-5, 0)
+dark = true
+echo = true
 
 [node name="Goal01" parent="Goals" index="0" instance=ExtResource("4_gntsh")]
 scale = Vector2(0.5, 0.5)
