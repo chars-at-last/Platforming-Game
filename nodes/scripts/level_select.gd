@@ -52,7 +52,7 @@ func _on_tutorial_level_2_pressed() -> void:
 
 
 
-func _on_tutorial_level_3_pressed() -> void:
+func _on_level_1_pressed() -> void:
 	var keys: Array[String]
 	var collection: Array[String]
 	keys.append("1x3")
@@ -65,7 +65,7 @@ func _on_tutorial_level_3_pressed() -> void:
 
 
 
-func _on_level_1_pressed() -> void:
+func _on_level_2_pressed() -> void:
 	var keys: Array[String]
 	var collection: Array[String]
 	keys.append("1x4")
@@ -77,7 +77,7 @@ func _on_level_1_pressed() -> void:
 	hide()
 
 
-func _on_level_2_pressed() -> void:
+func _on_level_3_pressed() -> void:
 	var keys: Array[String]
 	var collection: Array[String]
 	keys.append("1x5")
@@ -89,7 +89,7 @@ func _on_level_2_pressed() -> void:
 	hide()
 
 
-func _on_level_3_pressed() -> void:
+func _on_tutorial_level_3_pressed() -> void:
 	var keys: Array[String]
 	var collection: Array[String]
 	keys.append("1x6")

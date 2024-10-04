@@ -6,20 +6,20 @@
 [ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="3_frloc"]
 [ext_resource type="Script" path="res://nodes/scripts/obstacles/tile.gd" id="4_3ylpt"]
 
-[node name="TutorialLevel2" instance=ExtResource("1_g6ejj")]
+[node name="tutorial_level_3" instance=ExtResource("1_g6ejj")]
 size = Vector2(20, 22)
 
 [node name="Goal01" parent="Goals" index="0" instance=ExtResource("2_f0d4c")]
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAAKAPz/AAAAAAAAAAAKAP3/AAAAAAAAAAAKAP7/AAAAAAAAAAAKAPv/AAAAAAAAAAA=")
-next_level_key = "1x4"
+next_level_key = "2x1"
 next_level_position_add = Vector2(-20, 5)
 
 [node name="Goal02" parent="Goals" index="1" instance=ExtResource("2_f0d4c")]
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAD1/wkAAAAAAAAAAAD1/woAAAAAAAAAAAD1/wsAAAAAAAAAAAD1/wwAAAAAAAAAAAD1/w0AAAAAAAAAAAA=")
-next_level_key = "1x2"
-next_level_position_add = Vector2(20, -10)
+next_level_key = "1x5"
+next_level_position_add = Vector2(20, 0)
 
 [node name="Backgroumd" type="TileMapLayer" parent="." index="1"]
 z_index = -3

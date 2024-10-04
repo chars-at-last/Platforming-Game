@@ -58,15 +58,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 8
 text = "Tutorial level 2"
 
-[node name="tutorial_level_3" type="Button" parent="GridContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 8
-text = "Tutorial level 3"
-
 [node name="level1" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
-text = "Level1"
+text = "Level1
+"
 
 [node name="level2" type="Button" parent="GridContainer"]
 layout_mode = 2
@@ -78,24 +74,26 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 8
 text = "Level3"
 
+[node name="tutorial_level_3" type="Button" parent="GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Tutorial level 3"
+
 [node name="back" type="Button" parent="GridContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
 text = "Go Back"
 
-[connection signal="pressed" from="GridContainer/tutorial_level_1" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="GridContainer/tutorial_level_1" to="." method="_on_tutorial_level_1_pressed"]
 [connection signal="pressed" from="GridContainer/tutorial_level_1" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="GridContainer/tutorial_level_2" to="." method="_on_tutorial_level_2_pressed"]
 [connection signal="pressed" from="GridContainer/tutorial_level_2" to="." method="_on_control_pressed"]
-[connection signal="pressed" from="GridContainer/tutorial_level_3" to="." method="_on_tutorial_level_3_pressed"]
-[connection signal="pressed" from="GridContainer/tutorial_level_3" to="." method="_on_control_pressed"]
 [connection signal="pressed" from="GridContainer/level1" to="." method="_on_level_1_pressed"]
-[connection signal="pressed" from="GridContainer/level1" to="." method="_on_save_quit_pressed"]
-[connection signal="pressed" from="GridContainer/level2" to="." method="_on_save_quit_pressed"]
+[connection signal="pressed" from="GridContainer/level1" to="." method="_on_control_pressed"]
 [connection signal="pressed" from="GridContainer/level2" to="." method="_on_level_2_pressed"]
 [connection signal="pressed" from="GridContainer/level2" to="." method="_on_save_quit_pressed"]
 [connection signal="pressed" from="GridContainer/level3" to="." method="_on_level_3_pressed"]
 [connection signal="pressed" from="GridContainer/level3" to="." method="_on_save_quit_pressed"]
-[connection signal="pressed" from="GridContainer/level3" to="." method="_on_level_3_pressed"]
+[connection signal="pressed" from="GridContainer/tutorial_level_3" to="." method="_on_tutorial_level_3_pressed"]
+[connection signal="pressed" from="GridContainer/tutorial_level_3" to="." method="_on_save_quit_pressed"]
 [connection signal="pressed" from="GridContainer/back" to="." method="_on_back_pressed"]
