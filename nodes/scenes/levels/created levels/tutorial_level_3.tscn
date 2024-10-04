@@ -34,3 +34,5 @@ tile_map_data = PackedByteArray("AAAJAPr/AQABAAIAAAAJAPn/AQABAAAAAAAIAPr/AQABAAI
 
 [node name="Tile" parent="." index="3" instance=ExtResource("3_frloc")]
 tile_map_data = PackedByteArray("AAD9/wQAAAAAAAAAAQA=")
+
+[connection signal="body_entered" from="Tile/Area2D" to="Tile/Area2D" method="_on_body_entered"]
