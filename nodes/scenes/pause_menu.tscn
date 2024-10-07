@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://3x5mk8srema3"]
 
 [ext_resource type="Script" path="res://nodes/scripts/pause_menu.gd" id="1_klwgo"]
-[ext_resource type="PackedScene" uid="uid://cb4gvfdyshg1e" path="res://nodes/scenes/level_select.tscn" id="2_ronxo"]
+[ext_resource type="PackedScene" uid="uid://cb4gvfdyshg1e" path="res://nodes/scenes/level_select_REMOTE_4413.tscn" id="2_ronxo"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
