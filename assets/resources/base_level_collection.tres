@@ -13,5 +13,7 @@ collection = {
 "1x4": "level_02",
 "1x5": "level_03",
 "1x6": "tutorial_level_3",
-"2x1": "level_2x1"
+"2x1": "level_2x1",
+"2x2": "level_2x2",
+"2x3": "level_2x3"
 }

@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3 uid="uid://dsarf8g262rwd"]
+
+[ext_resource type="PackedScene" uid="uid://cdgoq2id47lpe" path="res://nodes/scenes/interactive.tscn" id="1_ty48n"]
+[ext_resource type="Texture2D" uid="uid://dowbxt31l1pfn" path="res://assets/art/comp195_additional_sprites.png" id="2_rbnnr"]
+[ext_resource type="Script" path="res://nodes/scripts/interactives/turtle.gd" id="2_s3o1s"]
+
+[sub_resource type="Animation" id="Animation_dk2ba"]
+resource_name = "walk"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.533333, 1, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 4, 3]
+}
+
+[sub_resource type="Animation" id="Animation_bibwp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v5imx"]
+_data = {
+"RESET": SubResource("Animation_bibwp"),
+"walk": SubResource("Animation_dk2ba")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rst2d"]
+radius = 9.0
+height = 54.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ufpww"]
+size = Vector2(54, 19)
+
+[node name="Turtle" instance=ExtResource("1_ty48n")]
+scale = Vector2(0.5, 0.5)
+collision_mask = 2
+script = ExtResource("2_s3o1s")
+facing_dir = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_rbnnr")
+hframes = 3
+vframes = 2
+frame = 4
+region_enabled = true
+region_rect = Rect2(0, 0, 192, 128)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_v5imx")
+}
+autoplay = "walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+position = Vector2(-2, 8)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_rst2d")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="3"]
+position = Vector2(-2, 21.5)
+shape = SubResource("RectangleShape2D_ufpww")

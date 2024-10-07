@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=4 uid="uid://cshq7iye6f3s7"]
+
+[ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_p33g1"]
+[ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_p6jsx"]
+[ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="2_yxy0r"]
+[ext_resource type="PackedScene" uid="uid://b2ku6teggg8ok" path="res://nodes/scenes/Obstacles/death_block.tscn" id="4_7fp52"]
+[ext_resource type="Texture2D" uid="uid://bsw8tk4y1l888" path="res://assets/art/backgrounds/2x2b.png" id="5_0ji8c"]
+
+[node name="Level2x2" instance=ExtResource("1_p33g1")]
+
+[node name="Goal" parent="Goals" index="0" instance=ExtResource("2_p6jsx")]
+position = Vector2(-16, 0)
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAALAAEAAAAAAAAAAAALAAAAAAAAAAAAAAALAP//AAAAAAAAAAALAP7/AAAAAAAAAAALAP3/AAAAAAAAAAALAPz/AAAAAAAAAAALAPv/AAAAAAAAAAALAPr/AAAAAAAAAAA=")
+next_level_key = "2x1"
+next_level_position_add = Vector2(-20.5, 0)
+
+[node name="Tile" parent="." index="1" instance=ExtResource("2_yxy0r")]
+tile_map_data = PackedByteArray("AAAJAAUAAQAGAAIAAAAJAAQAAQAGAAIAAAAJAAMAAQAGAAIAAAAJAAIAAQAGAAEAAAAIAAIAAQAFAAEAAAAHAAMAAQAGAAEAAAAIAAMAAQAFAAQAAAAIAAQAAQAGAAIAAAAIAAUAAQAFAAQAAwAHAAUAAQAGAAMAAAAHAAQAAQAGAAIAAAAGAAMAAQAGAAEAAAAFAAMAAQAGAAEAAAAEAAMAAQAGAAEAAAADAAMAAQAGAAEAAAADAAQAAQAFAAQAAwAEAAQAAQAGAAIAAAAFAAQAAQAGAAIAAAAGAAQAAQAGAAIAAAAGAAUAAQAGAAMAAAAFAAUAAQAGAAMAAAAEAAUAAQAGAAMAAAADAAUAAQAFAAMAAAACAAMAAQAGAAEAAAABAAMAAQAGAAEAAAACAAQAAQAGAAMAAAAAAAMAAQAGAAEAAAD//wMAAQAFAAEAAAAKAAUAAQAGAAIAAAAKAAQAAQAGAAIAAAAKAAMAAQAGAAIAAAAKAAIAAQAGAAEAAAALAAIAAQAHAAEAAAALAAMAAQAHAAIAAAALAAQAAQAHAAIAAAALAAUAAQAHAAIAAAALAAYAAQAHAAMAAAAKAAYAAQAGAAMAAAAJAAYAAQAGAAMAAAAIAAYAAQAFAAMAAAABAAQAAQAGAAMAAAAAAAQAAQAGAAMAAAD//wQAAQAFAAMAAAA=")
+
+[node name="DeathBlock" parent="." index="2" instance=ExtResource("4_7fp52")]
+tile_map_data = PackedByteArray("AAD6/wYAAAAEAAAAAAACAAYAAAAEAAAAAAABAAYAAAAEAAAAAAAAAAYAAAAEAAAAAAD//wYAAAAEAAAAAAD+/wYAAAAEAAAAAAD9/wYAAAAEAAAAAAD8/wYAAAAEAAAAAAD7/wYAAAAEAAAAAAD5/wYAAAAEAAAAAAD4/wYAAAAEAAAAAAD3/wYAAAAEAAAAAAD2/wYAAAAEAAAAAAD1/wUAAAAEAAAAAAD1/wQAAAAEAAAAAAD1/wMAAAAEAAAAAAD1/wIAAAAEAAAAAAD1/wEAAAAEAAAAAAD1/wAAAAAEAAAAAAD1////AAAEAAAAAAD1//7/AAAEAAAAAAD1//3/AAAEAAAAAAD1//z/AAAEAAAAAAD1//v/AAAEAAAAAAD1//r/AAAEAAAAAAA=")
+
+[node name="TextureRect" type="TextureRect" parent="." index="3"]
+z_index = -256
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("5_0ji8c")

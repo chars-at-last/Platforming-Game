@@ -23,6 +23,7 @@ static var dark_level: bool = false
 @export var force_preloaded_level: bool = false		## If set, force preloaded level instead of default or saved level (ONLY USE FOR TESTING)
 
 @export var default_level_key: String = "1x1"
+@export var preloaded_level_key: String
 @export var cur_level_key: String
 # TODO: Change this default_level later
 #@export var default_level: PackedScene = preload("res://nodes/scenes/levels/created levels/level_01.tscn")
@@ -48,6 +49,7 @@ func _ready() -> void:
 		
 	if force_preloaded_level or SaveManager.level() == SaveManager.level_key:
 		add_child((preloaded_level if preloaded_level != null else default_level).instantiate())
+		cur_level_key = preloaded_level_key
 	else:
 		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[SaveManager.level()] + ".tscn").instantiate())
 	
