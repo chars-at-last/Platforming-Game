@@ -7,6 +7,7 @@ const SOLIDS_LAYER: int = 512
 # Variable(s)
 @export_range(0, 1, .05) var linear_damping: float = .1
 
+@export var pickable: bool = true
 @export var pushable: bool = true
 @export var solid: bool = true
 

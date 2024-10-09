@@ -25,3 +25,6 @@ func _physics_process(delta: float) -> void:
 		facing_dir = get_wall_normal().x
 		ground_vel.x = abs(ground_vel.x) * facing_dir
 		sprite.flip_h = facing_dir < 0
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	print('1')

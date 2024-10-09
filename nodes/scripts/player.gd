@@ -229,7 +229,7 @@ func physics_interactive(_delta: float) -> void:
 func physics_grabbing(_delta: float) -> void:
 	if not _holding and Input.is_action_pressed("pick_up"):
 		var pickup: Interactive = null
-		for body in interactive_area.get_overlapping_bodies():
+		for body in interactive_area.get_overlapping_bodies().filter(func(x: Interactive) -> bool: return x.pickable):
 			if body is Interactive:
 				# Assign if pickup is null or distance to player is lesser
 				if not pickup or body.position.distance_squared_to(position) < pickup.position.distance_squared_to(position):
@@ -241,7 +241,7 @@ func physics_grabbing(_delta: float) -> void:
 			pickup.reparent(interactive_marker, false)
 			pickup.position = Vector2.ZERO
 			
-	if _holding and Input.is_action_just_released("pick_up"):
+	if _holding != null and Input.is_action_just_released("pick_up"):
 		_holding.reparent(GameManager.current_level_manager.cur_level)
 		
 		var throw_vector: Vector2
