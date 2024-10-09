@@ -44,14 +44,17 @@ func _ready() -> void:
 	
 	GameManager.current_level_manager = self
 	# TODO: Allow for any level to be the default
-	if cur_level_key.is_empty():
-		cur_level_key = default_level_key
-		
-	if force_preloaded_level or SaveManager.level() == SaveManager.level_key:
-		add_child((preloaded_level if preloaded_level != null else default_level).instantiate())
-		cur_level_key = preloaded_level_key
-	else:
-		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[SaveManager.level()] + ".tscn").instantiate())
+	
+	level_select()
+	# Old code
+	#if cur_level_key.is_empty():
+		#cur_level_key = default_level_key
+	
+	#if force_preloaded_level or SaveManager.level() == SaveManager.level_key:
+		#add_child((preloaded_level if preloaded_level != null else default_level).instantiate())
+		#cur_level_key = preloaded_level_key
+	#else:
+		#add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[SaveManager.level()] + ".tscn").instantiate())
 	
 	if force_preloaded_level or not cur_checkpoint:
 		#print('!')
@@ -114,6 +117,21 @@ func setup_levels(level_keys: Array[String], level_collection: Array[String]) ->
 		levels_path.append(self.level_collection[level_collection[i]].levels_path)
 		
 	level_loader.load_levels(true_level_names, levels_path, level_keys)
+
+
+# Select a level to be loaded
+func level_select() -> void:
+	print("preloading ", preloaded_level_key)
+	if cur_level_key.is_empty():
+		cur_level_key = default_level_key
+	if not preloaded_level_key.is_empty() and not level_collection.has(preloaded_level_key) or SaveManager.level() == SaveManager.level_key:
+		print("loading")
+		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[preloaded_level_key] + ".tscn").instantiate())
+		cur_level_key = preloaded_level_key
+	else:
+		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[SaveManager.level()] + ".tscn").instantiate())
+	
+
 
 #func level_loaded(instance1):
 	#add_child(instance1)

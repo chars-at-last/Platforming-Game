@@ -1,13 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cf02ai7i3ygsy"]
+[gd_scene load_steps=3 format=3 uid="uid://cf02ai7i3ygsy"]
 
 [ext_resource type="Script" path="res://nodes/scripts/level_manager.gd" id="1_k6me5"]
 [ext_resource type="PackedScene" uid="uid://xgdcwda6n32s" path="res://nodes/scenes/level_loader.tscn" id="2_nlybe"]
-[ext_resource type="PackedScene" uid="uid://c8itlcobpgdes" path="res://nodes/scenes/levels/created levels/level_2x1.tscn" id="2_ukp8c"]
 
 [node name="LevelManager" type="Node2D"]
 script = ExtResource("1_k6me5")
-force_preloaded_level = true
-preloaded_level_key = "2x1"
-preloaded_level = ExtResource("2_ukp8c")
+preloaded_level_key = "1x3"
 
 [node name="LevelLoader" parent="." instance=ExtResource("2_nlybe")]
