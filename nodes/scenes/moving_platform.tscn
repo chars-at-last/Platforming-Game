@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://n1ras3a5iqr8"]
+
+[ext_resource type="Script" path="res://moving_platform.gd" id="1_ht57o"]
+[ext_resource type="Texture2D" uid="uid://xgsjr2kjuw0g" path="res://assets/art/tilemap_placeholder.png" id="2_iosyk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6q4mv"]
+size = Vector2(96, 32)
+
+[sub_resource type="Animation" id="Animation_3jc84"]
+resource_name = "Movement"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-1.56, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_nbmrs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hnyq5"]
+_data = {
+"Movement": SubResource("Animation_3jc84"),
+"RESET": SubResource("Animation_nbmrs")
+}
+
+[node name="Path2D" type="Path2D"]
+script = ExtResource("1_ht57o")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotates = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
+remote_path = NodePath("../../AnimatableBody2D")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
+texture = ExtResource("2_iosyk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+shape = SubResource("RectangleShape2D_6q4mv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hnyq5")
+}
