@@ -57,5 +57,3 @@ loop = false
 [node name="Path2D2" parent="." index="5" instance=ExtResource("6_2hm00")]
 position = Vector2(-260, 314)
 curve = SubResource("Curve2D_u7y7e")
-
-[connection signal="body_entered" from="Tile/Area2D" to="Tile/Area2D" method="_on_body_entered"]

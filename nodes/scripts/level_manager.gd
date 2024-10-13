@@ -62,6 +62,7 @@ func _ready() -> void:
 			cur_player = load(PLAYER_PATH).instantiate()
 		cur_level.add_child(cur_player)
 		cur_player.position = Level.to_pixel_coords(cur_level.default_spawn)
+		print(cur_level.default_spawn)
 		#print('player coords: ', Level.to_pixel_coords(cur_level.default_spawn))
 		handle_player_camera()
 	#Calling save manager to see if the last saved player location is the 
@@ -122,6 +123,7 @@ func setup_levels(level_keys: Array[String], level_collection: Array[String]) ->
 # Select a level to be loaded
 func level_select() -> void:
 	print("preloading ", preloaded_level_key)
+	force_preloaded_level = true
 	if cur_level_key.is_empty():
 		cur_level_key = default_level_key
 	if not preloaded_level_key.is_empty() and not level_collection.has(preloaded_level_key) or SaveManager.level() == SaveManager.level_key:
