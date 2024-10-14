@@ -1165,7 +1165,7 @@ anim_player = NodePath("../AnimationPlayer")
 
 [node name="TileArea" type="Area2D" parent="." groups=["Can_Die"]]
 collision_layer = 0
-collision_mask = 220
+collision_mask = 1244
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileArea"]
 shape = SubResource("CapsuleShape2D_xlpux")

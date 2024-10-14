@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://dktbsil7r81xf"]
+[gd_scene load_steps=12 format=4 uid="uid://dktbsil7r81xf"]
 
 [ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_qlmj5"]
 [ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_7wgyq"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b2ku6teggg8ok" path="res://nodes/scenes/Obstacles/death_block.tscn" id="7_0kcnq"]
 [ext_resource type="PackedScene" uid="uid://n1ras3a5iqr8" path="res://nodes/scenes/moving_platform.tscn" id="7_0w3wo"]
 [ext_resource type="PackedScene" uid="uid://bax0hg5n0t3qk" path="res://nodes/scenes/Obstacles/check_point.tscn" id="8_m6hgp"]
+[ext_resource type="PackedScene" uid="uid://cv87u7w8w308u" path="res://nodes/scenes/coin.tscn" id="9_3q2y6"]
 
 [sub_resource type="Curve2D" id="Curve2D_k0nw5"]
 _data = {
@@ -23,7 +24,7 @@ point_count = 5
 
 [node name="level_3x1" instance=ExtResource("1_qlmj5")]
 size = Vector2(50, 22)
-default_spawn = Vector2(-8, 15)
+default_spawn = Vector2(-8, -5)
 dark = true
 echo = true
 
@@ -59,3 +60,8 @@ tile_map_data = PackedByteArray("AAD3/w4AAQAEAAIAAAD3/w0AAQAEAAEAAAACAAIAAQAEAAI
 [node name="Path2D2" parent="." index="6" instance=ExtResource("7_0w3wo")]
 position = Vector2(433, 350)
 curve = SubResource("Curve2D_kyg5e")
+speed = 1.0
+
+[node name="TileMapLayer" parent="." index="7" instance=ExtResource("9_3q2y6")]
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAD+/wIAAAAAAAAAAAA=")

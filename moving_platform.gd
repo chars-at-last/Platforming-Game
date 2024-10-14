@@ -8,7 +8,9 @@ extends Path2D
 @onready var path = $PathFollow2D
 @onready var animation = $AnimationPlayer
 
-# Called when the node enters the scene tree for the first time.
+# If the platform is not moving in a closed path (i.e. the platform is moving up and down
+# or left to right), have the AnimationPlayer play the looping animation so the platform will
+# return to the starting point before moving on its path again. 
 func _ready() -> void:
 	if not loop:
 		print("something")
@@ -19,6 +21,7 @@ func _ready() -> void:
 		set_process(false)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# If the platform is moving in a closed path (i.e. moving in a circular path),
+# simply have the platform move at the standard speed set for it
 func _process(delta: float) -> void:
 	path.progress += speed

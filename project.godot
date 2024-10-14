@@ -117,6 +117,7 @@ pause={
 2d_physics/layer_8="Death"
 2d_physics/layer_9="Interactive"
 2d_physics/layer_10="Solid"
+2d_physics/layer_11="Collectables"
 
 [physics]
 
