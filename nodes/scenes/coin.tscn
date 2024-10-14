@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cv87u7w8w308u"]
+[gd_scene load_steps=7 format=3 uid="uid://cv87u7w8w308u"]
 
 [ext_resource type="Texture2D" uid="uid://cagtrfxllwyvr" path="res://assets/art/coin-64x64.png" id="1_2w51x"]
 [ext_resource type="Script" path="res://coin.gd" id="1_iv46u"]
+[ext_resource type="Texture2D" uid="uid://didoos30blvtf" path="res://assets/resources/Pixel2DCastle1/anim_light2.png" id="2_h2uoo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ka7od"]
 texture = ExtResource("1_2w51x")
@@ -36,11 +37,16 @@ texture = ExtResource("1_2w51x")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gqbbb"]
+texture = ExtResource("2_h2uoo")
+texture_region_size = Vector2i(64, 64)
+
 [sub_resource type="TileSet" id="TileSet_m7a1x"]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1024
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_ka7od")
+sources/1 = SubResource("TileSetAtlasSource_gqbbb")
 
 [node name="TileMapLayer" type="TileMapLayer"]
 tile_set = SubResource("TileSet_m7a1x")
