@@ -47,7 +47,8 @@ func _physics_process(_delta: float) -> void:
 # Controls the gun charging
 func physics_gun_control(_delta: float) -> void:
 	if _can_fire:
-		if Input.is_action_just_pressed("charge_gun"):
+		if Input.is_action_just_pressed("charge_gun") or (not _charging and Input.is_action_pressed("charge_gun")):
+		#if Input.is_action_just_pressed("charge_gun"):
 			_charging = true
 			gun_charge_instance = SoundManager.instance_poly("gun", "charging", LevelManager.sfx_bus)
 			gun_charge_instance.trigger()
@@ -63,6 +64,7 @@ func physics_gun_control(_delta: float) -> void:
 			
 		if _charging and Input.is_action_just_released("charge_gun"):
 			_charging = false
+			base_node.set_just_jumped(false)
 			gun_charge_instance.release()
 			SoundManager.play("gun", "blast", LevelManager.sfx_bus)
 			fire_gun(1.0 - (timer.time_left / CHARGE_TIME))
@@ -109,3 +111,18 @@ func change_gun_color(color: Color) -> void:
 # Change gun shake
 func change_gun_shake(amount: float) -> void:
 	sprite.material.set_shader_parameter("shake_amount", amount)
+
+# Reset
+func reset(disable: bool = false) -> void:
+	change_gun_shake(0)
+	change_gun_color(charged_color)
+	_charging = false
+	
+	if self.gun_color_tween:
+		gun_color_tween.kill()
+		
+	if gun_charge_instance:
+		gun_charge_instance.release()
+	timer.stop()
+	
+	self.process_mode = Node.PROCESS_MODE_DISABLED if disable else Node.PROCESS_MODE_INHERIT

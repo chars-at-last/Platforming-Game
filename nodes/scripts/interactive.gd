@@ -24,6 +24,10 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 
+# Handles being picked up
+func handle_pickup() -> void:
+	pass
+
 # Disable
 func disable() -> void:
 	process_mode = Node.PROCESS_MODE_DISABLED
@@ -40,7 +44,11 @@ func make_solid() -> void:
 	if solid:
 		self.collision_layer |= SOLIDS_LAYER
 	
+# Throw internal
+func _throw_inner(force: float, direction: Vector2, mitigated: bool = false) -> void:
+	self.velocity += force * direction
+	
 # Throw
 func throw(force: float, direction: Vector2, mitigated: bool = false, make_solid_check: Callable = Callable()) -> void:
 	enable(make_solid_check)
-	self.velocity += force * direction
+	_throw_inner(force, direction, mitigated)

@@ -177,6 +177,7 @@ func handle_player_camera() -> void:
 func on_death(body) -> void:
 	body.visible = false
 	body._can_control = false
+	body.gun.reset(true)
 	
 	await get_tree().create_timer(1).timeout
 	reset_player(body)

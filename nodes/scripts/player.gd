@@ -143,7 +143,8 @@ func physics_gravity(delta: float) -> void:
 			if _just_jumped:
 				if unbridled_velocity.y > 0:
 					_just_jumped = false
-				elif Input.is_action_just_released("jump"):
+				elif Input.is_action_just_released("jump") or not Input.is_action_pressed("jump"):
+				#elif Input.is_action_just_released("jump"):
 					_just_jumped = false
 					unbridled_velocity.y *= SHORT_JUMP_MULT
 			
@@ -183,12 +184,20 @@ func jumped() -> void:
 	_just_jumped = true
 	SoundManager.play("player", "jump", LevelManager.sfx_bus)
 
+# Jump
+func jump(vely: float, refill_gun: bool = false) -> void:
+	unbridled_velocity.y = vely
+	if refill_gun:
+		gun.change_can_fire(refill_gun)
+	jumped()
+
 # Handle jump
 func physics_jump(_delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		unbridled_velocity.y = JUMP_VELOCITY
+		#unbridled_velocity.y = JUMP_VELOCITY
 		unbridled_velocity.x += jump_vel_boost * direction
-		jumped()
+		jump(JUMP_VELOCITY)
+		#jumped()
 
 # Walls
 func physics_wall(_delta: float) -> void:
@@ -237,6 +246,7 @@ func physics_grabbing(_delta: float) -> void:
 					
 		if pickup:
 			_holding = pickup
+			pickup.handle_pickup()
 			pickup.disable()
 			pickup.reparent(interactive_marker, false)
 			pickup.position = Vector2.ZERO
@@ -299,6 +309,11 @@ func reset() -> void:
 	for child in interactive_marker.get_children():
 		interactive_marker.remove_child(child)
 		child.queue_free()
+		
+	gun.reset()
+
+func set_just_jumped(jj: bool) -> void:
+	self._just_jumped = jj
 
 # Signal method(s) #
 
