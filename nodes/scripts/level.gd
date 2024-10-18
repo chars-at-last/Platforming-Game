@@ -12,6 +12,7 @@ const DEFAULT_SPAWN: Vector2 = Vector2(0, 0)
 # Variable(s)
 @export var size: Vector2 = BASE_LEVEL_SIZE
 @export var default_spawn: Vector2 = DEFAULT_SPAWN
+@export var camera_zoom: Vector2 = Vector2.ONE
 @export var dark: bool = false
 @export var echo: bool = false
 

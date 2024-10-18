@@ -129,6 +129,8 @@ func face() -> void:
 		gun.flip(not temp_flip_h)
 		interactive_marker.position.x = abs(interactive_marker.position.x) * -temp
 		_h_looking_direction = HLOOKING_DIRS.LEFT if temp > 0 else HLOOKING_DIRS.RIGHT
+		if _holding != null:
+			_holding.position = Vector2.ZERO + _holding.offset * _h_looking_direction
 
 # Gravity and other stuff
 func physics_gravity(delta: float) -> void:
@@ -249,7 +251,7 @@ func physics_grabbing(_delta: float) -> void:
 			pickup.handle_pickup()
 			pickup.disable()
 			pickup.reparent(interactive_marker, false)
-			pickup.position = Vector2.ZERO
+			pickup.position = Vector2.ZERO + pickup.offset * _h_looking_direction
 			
 	if _holding != null and Input.is_action_just_released("pick_up"):
 		_holding.reparent(GameManager.current_level_manager.cur_level)

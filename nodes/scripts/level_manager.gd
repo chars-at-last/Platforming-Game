@@ -45,7 +45,7 @@ func _ready() -> void:
 	GameManager.current_level_manager = self
 	# TODO: Allow for any level to be the default
 	
-	level_select()
+	var temp: bool = level_select()
 	# Old code
 	#if cur_level_key.is_empty():
 		#cur_level_key = default_level_key
@@ -84,6 +84,9 @@ func _ready() -> void:
 			SpawnPoint.global_vector = SaveManager.check_point_loc()
 			SpawnPoint.check_point_level = SaveManager.check_point_level()
 			print(0)
+			
+	if temp:
+		SpawnPoint.global_vector = Level.to_map_coords(cur_player.position)
 		
 	#var instance = load(PAUSE_PATH).instantiate()
 	#print("test", instance.position)
@@ -121,7 +124,7 @@ func setup_levels(level_keys: Array[String], level_collection: Array[String]) ->
 
 
 # Select a level to be loaded
-func level_select() -> void:
+func level_select() -> bool:
 	print("preloading ", preloaded_level_key)
 	force_preloaded_level = true
 	if cur_level_key.is_empty():
@@ -130,9 +133,12 @@ func level_select() -> void:
 		print("loading")
 		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[preloaded_level_key] + ".tscn").instantiate())
 		cur_level_key = preloaded_level_key
+		SpawnPoint.check_point_level = preloaded_level_key
+		#SpawnPoint.global_vector = cur_player.global_position
+		return true
 	else:
 		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[SaveManager.level()] + ".tscn").instantiate())
-	
+		return false
 
 
 #func level_loaded(instance1):
@@ -174,6 +180,7 @@ func handle_player_camera() -> void:
 	var level_size = cur_level.size * Level.BASE_TILE_SIZE
 	cur_player.camera.set_limit(SIDE_RIGHT, level_size.x)
 	cur_player.camera.set_limit(SIDE_BOTTOM, level_size.y)
+	cur_player.camera.zoom = cur_level.camera_zoom
 	#pass
 	
 func on_death(body) -> void:

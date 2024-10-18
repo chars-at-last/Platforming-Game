@@ -2,10 +2,13 @@ class_name Interactive extends CharacterBody2D
 
 
 # Constant
+const PLAYER_LAYER: int = 1
 const SOLIDS_LAYER: int = 512
 
 # Variable(s)
 @export_range(0, 1, .05) var linear_damping: float = .1
+
+@export var offset: Vector2 = Vector2.ZERO
 
 @export var pickable: bool = true
 @export var pushable: bool = true
