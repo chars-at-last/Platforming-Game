@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://chyptlpn2oi0c"]
+[gd_scene load_steps=10 format=4 uid="uid://chyptlpn2oi0c"]
 
 [ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_n05ll"]
 [ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_2wgvq"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://vyj36j0hv8jy" path="res://nodes/scenes/Obstacles/spikes.tscn" id="4_6ddd2"]
 [ext_resource type="PackedScene" uid="uid://dsarf8g262rwd" path="res://nodes/scenes/interactives/turtle.tscn" id="5_k53vc"]
 [ext_resource type="PackedScene" uid="uid://b2ku6teggg8ok" path="res://nodes/scenes/Obstacles/death_block.tscn" id="6_k1a1i"]
+[ext_resource type="PackedScene" uid="uid://bvbjytke3hmq6" path="res://nodes/scenes/section_2_background.tscn" id="7_6hw3o"]
 
 [sub_resource type="Gradient" id="Gradient_6nboh"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0.00784314)
@@ -78,3 +79,17 @@ grow_vertical = 2
 
 [node name="DeathBlock" parent="." index="7" instance=ExtResource("6_k1a1i")]
 tile_map_data = PackedByteArray("AAAgAAwAAAAAAAAAAAAfAAwAAAAAAAAAAAAeAAwAAAAAAAAAAAAdAAwAAAAAAAAAAAAcAAwAAAAAAAAAAAAbAAwAAAAAAAAAAAAaAAwAAAAAAAAAAAAZAAwAAAAAAAAAAAAYAAwAAAAAAAAAAAAXAAwAAAAAAAAAAAAWAAwAAAAAAAAAAAAVAAwAAAAAAAAAAAAUAAwAAAAAAAAAAAATAAwAAAAAAAAAAAASAAwAAAAAAAAAAAARAAwAAAAAAAAAAAAQAAwAAAAAAAAAAAAPAAwAAAAAAAAAAAAOAAwAAAAAAAAAAAANAAwAAAAAAAAAAAAMAAwAAAAAAAAAAAALAAwAAAAAAAAAAAAKAAwAAAAAAAAAAAAJAAwAAAAAAAAAAAAIAAwAAAAAAAAAAAAHAAwAAAAAAAAAAAAGAAwAAAAAAAAAAAAFAAwAAAAAAAAAAAAEAAwAAAAAAAAAAAADAAwAAAAAAAAAAAACAAwAAAAAAAAAAAABAAwAAAAAAAAAAAAAAAwAAAAAAAAAAAD//wwAAAAAAAAAAAD+/wwAAAAAAAAAAAD9/wwAAAAAAAAAAAD8/wwAAAAAAAAAAAD7/wwAAAAAAAAAAAD6/wwAAAAAAAAAAAD5/wwAAAAAAAAAAAD4/wwAAAAAAAAAAAD3/wwAAAAAAAAAAAD2/wwAAAAAAAAAAAD1/wwAAAAAAAAAAAA=")
+
+[node name="Section2Background" parent="." index="8" instance=ExtResource("7_6hw3o")]
+
+[node name="ColorRect" parent="Section2Background" index="0"]
+offset_top = -477.0
+offset_right = 1051.0
+offset_bottom = 749.0
+
+[node name="Sprite2D" parent="Section2Background" index="2"]
+position = Vector2(459, 408)
+scale = Vector2(1.5, 1.5)
+region_rect = Rect2(0, 0, 1280, 360)
+
+[editable path="Section2Background"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://jrs6aqsdt2a6"]
+[gd_scene load_steps=7 format=4 uid="uid://jrs6aqsdt2a6"]
 
 [ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_7scnb"]
 [ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_ja4oe"]
 [ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="2_ymb7k"]
 [ext_resource type="PackedScene" uid="uid://vyj36j0hv8jy" path="res://nodes/scenes/Obstacles/spikes.tscn" id="3_kgpg4"]
 [ext_resource type="PackedScene" uid="uid://dsarf8g262rwd" path="res://nodes/scenes/interactives/turtle.tscn" id="4_s720c"]
+[ext_resource type="PackedScene" uid="uid://bvbjytke3hmq6" path="res://nodes/scenes/section_2_background.tscn" id="6_m1p06"]
 
 [node name="Level2x3" instance=ExtResource("1_7scnb")]
 position = Vector2(320, 540)
@@ -36,4 +37,5 @@ tile_map_data = PackedByteArray("AAAKAAIAAQAGAAIAAQAKAAMAAQAGAAIAAQAKAAQAAQAGAAI
 
 [node name="Turtle" parent="." index="4" instance=ExtResource("4_s720c")]
 position = Vector2(-129, 76)
-scale = Vector2(0.6, 0.6)
+
+[node name="Section2Background" parent="." index="5" instance=ExtResource("6_m1p06")]

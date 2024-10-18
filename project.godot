@@ -41,6 +41,10 @@ window/size/viewport_height=360
 window/size/mode=2
 window/stretch/mode="viewport"
 
+[editor]
+
+movie_writer/movie_file="/home/christopher/Important_Things/Homework/COMP 195/videos/recording.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/resonate/plugin.cfg")

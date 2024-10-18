@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvbjytke3hmq6"]
+
+[ext_resource type="Texture2D" uid="uid://c3uk5jp57nuy" path="res://assets/art/backgrounds/2xX_clouds.png" id="1_mwm64"]
+[ext_resource type="Texture2D" uid="uid://cnhdrq52w0m0s" path="res://assets/art/backgrounds/2xX_castles.png" id="2_8edv6"]
+
+[node name="Section2Background" type="Control"]
+z_index = -256
+layout_mode = 3
+anchors_preset = 0
+offset_left = -35.0
+offset_top = -280.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -317.0
+offset_top = -317.0
+offset_right = 1847.0
+offset_bottom = 461.0
+color = Color(0.0392157, 0.454902, 0.647059, 1)
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.5, 0.5)
+scroll_offset = Vector2(25, 83)
+repeat_size = Vector2(640, 0)
+autoscroll = Vector2(-10, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+texture_repeat = 2
+texture = ExtResource("1_mwm64")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(674, 229)
+texture = ExtResource("2_8edv6")
+region_enabled = true
+region_rect = Rect2(0, 0, 2560, 360)
+region_filter_clip_enabled = true

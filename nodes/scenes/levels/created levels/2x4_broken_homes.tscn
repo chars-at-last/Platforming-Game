@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://d4bv5hu4fq1x2"]
+[gd_scene load_steps=7 format=4 uid="uid://d4bv5hu4fq1x2"]
 
 [ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_snxs2"]
 [ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="2_7kega"]
 [ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_nywfp"]
 [ext_resource type="PackedScene" uid="uid://vyj36j0hv8jy" path="res://nodes/scenes/Obstacles/spikes.tscn" id="3_pe03w"]
 [ext_resource type="PackedScene" uid="uid://dsarf8g262rwd" path="res://nodes/scenes/interactives/turtle.tscn" id="5_6ol1w"]
+[ext_resource type="PackedScene" uid="uid://bvbjytke3hmq6" path="res://nodes/scenes/section_2_background.tscn" id="6_heyde"]
 
 [node name="BrokenHomes" instance=ExtResource("1_snxs2")]
 position = Vector2(320, 540)
@@ -80,3 +81,16 @@ modulate = Color(0.259294, 0.259294, 0.259294, 1)
 z_index = -256
 tile_map_data = PackedByteArray("AAD///j/AQAIAAAAAAD///f/AQAIAAAAAAD///b/AQAKAAEAAAD+//j/AQAJAAMAAAD+//f/AQAIAAAAAAD+//b/AQAIAAQAAQD9//j/AQAIAAAAAAD9//f/AQAIAAAAAAD9//b/AQAJAAIAAAD8//j/AQAIAAAAAAD8//f/AQAIAAAAAAD8//b/AQAIAAAAAAD+//X/AQAKAAEAAAD9//X/AQAIAAAAAAD9//T/AQAIAAAAAAD8//X/AQAIAAAAAAD8//T/AQAIAAAAAAD7//b/AQAJAAIAAAD7//X/AQAIAAAAAAD7//T/AQAIAAAAAAD6//b/AQAIAAAAAAD6//X/AQAIAAAAAAD6//T/AQAIAAAAAAD5//b/AQAIAAAAAAD5//X/AQAIAAAAAAD5//T/AQAJAAIAAAD6//P/AQAIAAAAAAD5//P/AQAIAAAAAAD4//T/AQAIAAAAAAD4//P/AQAIAAAAAAD7//f/AQAJAAMAAAD6//f/AQAIAAAAAAD4//X/AQAJAAMAAAD3//X/AQAIAAMAAAD3//T/AQAIAAAAAAD3//P/AQAIAAEAAAATAPD/AQAIAAAAAAASAPH/AQAIAAAAAAASAPL/AQAIAAAAAAATAPL/AQAIAAAAAAATAPP/AQAIAAAAAAASAPP/AQAIAAAAAAASAPT/AQAIAAAAAAASAPX/AQAIAAAAAAASAPb/AQAIAAAAAAASAPf/AQAIAAAAAAARAPf/AQAIAAAAAAASAPj/AQAIAAAAAAATAPj/AQAIAAAAAAATAPn/AQAIAAAAAAATAPf/AQAIAAAAAAATAPb/AQAIAAAAAAATAPX/AQAIAAAAAAATAPT/AQAIAAAAAAAUAPP/AQAIAAAAAAAUAPL/AQAIAAAAAAAUAPH/AQAIAAAAAAAVAPH/AQAIAAAAAAATAPH/AQAIAAAAAAARAPH/AQAIAAAAAAARAPL/AQAIAAAAAAAQAPL/AQAIAAAAAAAPAPL/AQAIAAAAAAARAPP/AQAIAAAAAAARAPT/AQAIAAAAAAAUAPT/AQAIAAAAAAAVAPT/AQAIAAAAAAAWAPT/AQAIAAAAAAAWAPP/AQAIAAAAAAAXAPP/AQAIAAAAAAAXAPT/AQAIAAAAAAAVAPX/AQAIAAAAAAAUAPX/AQAIAAAAAAARAPb/AQAIAAAAAAARAPj/AQAIAAAAAAAQAPj/AQAIAAAAAAAPAPj/AQAIAAAAAAAPAPf/AQAIAAAAAAAPAPb/AQAIAAAAAAAOAPX/AQAIAAAAAAAPAPX/AQAIAAAAAAAPAPT/AQAIAAAAAAAQAPX/AQAIAAAAAAARAPX/AQAIAAAAAAATAPr/AQAIAAAAAAASAPr/AQAIAAAAAAARAPr/AQAIAAAAAAARAPv/AQAIAAAAAAASAPv/AQAIAAAAAAATAPv/AQAIAAAAAAASAPz/AQAIAAAAAAAAAPn/AQAIAAAAAAAAAPj/AQAIAAAAAAD8//n/AQAIAAAAAAD7//n/AQAIAAAAAAD7//j/AQAIAAAAAAD9//P/AQAIAAAAAAD8//P/AQAIAAAAAAD5//f/AQAIAAAAAAD5//j/AQAIAAAAAAD6//L/AQAIAAAAAAA=")
 collision_enabled = false
+
+[node name="Section2Background" parent="." index="8" instance=ExtResource("6_heyde")]
+z_index = -512
+
+[node name="ColorRect" parent="Section2Background" index="0"]
+offset_right = 1075.0
+
+[node name="Sprite2D" parent="Section2Background" index="2"]
+position = Vector2(331, 209)
+scale = Vector2(1.25, 1.25)
+region_rect = Rect2(0, 0, 1706, 360)
+
+[editable path="Section2Background"]
