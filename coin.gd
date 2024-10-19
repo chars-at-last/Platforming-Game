@@ -1,11 +1,6 @@
 class_name Coin extends Tile
 
 
-# Called when the node enters the scene tree for the first time.
-#func _ready() -> void:
-	#pass # Replace with function body.
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 	#pass
@@ -16,10 +11,23 @@ const RESPAWN_OFFSET: Vector2 = Vector2(.5, 0)
 # Variables
 @export var total_coins: int
 
+var door: Door = Door.new()
+var animation = door.animation
+
 var distances = []
 var cells = []
 
 var can_collide = true
+
+
+
+
+
+#func _ready() -> void:
+	#var door: Door = Door.new()
+	#connect("collected", Callable(door, "_on_coins_collected"))
+
+
 
 func handle_collision(collider: Node) -> void:
 	if can_collide:
@@ -62,6 +70,9 @@ func handle_collision(collider: Node) -> void:
 			print(total_coins)
 			can_collide = false
 			$Timer.start()
+			if total_coins == 0:
+				print("something here")
+				DoorOpened.can_open = true
 
 
 func _on_timer_timeout() -> void:

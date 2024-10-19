@@ -13,7 +13,7 @@ extends Path2D
 # return to the starting point before moving on its path again. 
 func _ready() -> void:
 	if not loop:
-		print("something")
+		#print("something")
 		if animation.is_playing():
 			await animation.animation_finished
 		animation.play("Movement")
