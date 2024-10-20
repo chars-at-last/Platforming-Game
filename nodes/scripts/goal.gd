@@ -27,6 +27,10 @@ func handle_collision(collider: Node) -> void:
 	if goal_active and collider is Player:
 		print("Level Completed!", next_level_position_add)
 		emit_signal("complete_level", next_level_key, next_level_position_add)
+		
+		#clear the dictionary in DoorOpened so the next level's door will work as
+		#intended
+		DoorOpened.door_ids.clear()
 
 func _on_timer_timeout() -> void:
 	goal_active = true

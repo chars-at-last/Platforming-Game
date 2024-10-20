@@ -10,6 +10,7 @@ const RESPAWN_OFFSET: Vector2 = Vector2(.5, 0)
 
 # Variables
 @export var total_coins: int
+@export var id: int
 
 var door: Door = Door.new()
 var animation = door.animation
@@ -23,7 +24,8 @@ var can_collide = true
 
 
 
-#func _ready() -> void:
+func _ready() -> void:
+	DoorOpened.door_ids[id] = false
 	#var door: Door = Door.new()
 	#connect("collected", Callable(door, "_on_coins_collected"))
 
@@ -67,12 +69,14 @@ func handle_collision(collider: Node) -> void:
 
 			distances = []
 			cells = []
-			print(total_coins)
+			#print(total_coins)
 			can_collide = false
 			$Timer.start()
 			if total_coins == 0:
-				print("something here")
-				DoorOpened.can_open = true
+				print(id)
+				print("id ", DoorOpened.door_ids.size())
+				DoorOpened.door_ids[id] = true
+				print(DoorOpened.door_ids)
 
 
 func _on_timer_timeout() -> void:
