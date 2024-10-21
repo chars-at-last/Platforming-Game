@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://xgsjr2kjuw0g" path="res://assets/art/tilemap_placeholder.png" id="2_un7i3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6q4mv"]
-size = Vector2(96, 32)
+size = Vector2(93.9999, 30)
 
 [sub_resource type="Animation" id="Animation_3jc84"]
 resource_name = "Movement"
@@ -64,6 +64,7 @@ scale = Vector2(1, 0.96875)
 texture = ExtResource("2_un7i3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+position = Vector2(-0.000171006, 1.00003)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_6q4mv")
 
