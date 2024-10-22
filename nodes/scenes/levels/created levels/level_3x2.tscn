@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://btlnk0nr81hww"]
+[gd_scene load_steps=15 format=4 uid="uid://btlnk0nr81hww"]
 
 [ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_qlmj5"]
 [ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_7wgyq"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bax0hg5n0t3qk" path="res://nodes/scenes/Obstacles/check_point.tscn" id="8_m6hgp"]
 [ext_resource type="PackedScene" uid="uid://cv87u7w8w308u" path="res://nodes/scenes/coin.tscn" id="9_3q2y6"]
 [ext_resource type="PackedScene" uid="uid://jbg30mry1f3o" path="res://nodes/scenes/Obstacles/door.tscn" id="10_i6808"]
+[ext_resource type="PackedScene" uid="uid://vyj36j0hv8jy" path="res://nodes/scenes/Obstacles/spikes.tscn" id="11_2duo3"]
 
 [sub_resource type="Curve2D" id="Curve2D_vdn2b"]
 _data = {
@@ -84,3 +85,7 @@ id = 2
 position = Vector2(48, 109)
 curve = SubResource("Curve2D_xkboo")
 loop = false
+
+[node name="Spikes" parent="." index="10" instance=ExtResource("11_2duo3")]
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAAdAP//AQADAAAAAGA=")

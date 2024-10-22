@@ -21,5 +21,6 @@ collection = {
 "3x1": "level_3x1",
 "3x2": "level_3x2",
 "3x3": "level_3x3",
+"3x4": "level_3x4",
 "level_2x4": "2x4_broken_homes"
 }
