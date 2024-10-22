@@ -33,6 +33,7 @@ SpawnPoint="*res://nodes/singletons/spawn_point.gd"
 SoundManager="*res://addons/resonate/sound_manager/sound_manager.gd"
 MusicManager="*res://addons/resonate/music_manager/music_manager.gd"
 SaveManager="*res://nodes/scripts/save_manager.gd"
+DoorOpened="*res://nodes/singletons/door_opened.gd"
 
 [display]
 
