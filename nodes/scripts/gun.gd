@@ -101,8 +101,10 @@ func flip(is_flipped: bool) -> void:
 
 # Change if gun can be fired
 func change_can_fire(can_fire: bool) -> void:
+	var temp: bool = _can_fire
 	_can_fire = can_fire
-	change_gun_color(charged_color if can_fire else empty_color)
+	if temp != _can_fire:
+		change_gun_color(charged_color if can_fire else empty_color)
 
 # Change gun color
 func change_gun_color(color: Color) -> void:

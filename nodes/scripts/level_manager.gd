@@ -187,6 +187,7 @@ func on_death(body) -> void:
 	body.visible = false
 	body._can_control = false
 	body.gun.reset(true)
+	body.call_deferred("set_process_mode", Node.PROCESS_MODE_DISABLED)
 	
 	await get_tree().create_timer(1).timeout
 	reset_player(body)

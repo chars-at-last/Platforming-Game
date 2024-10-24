@@ -16,18 +16,20 @@ enum States {
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var player: AnimationPlayer = $AnimationPlayer
 @onready var area: Area2D = $Area2D
+@onready var left_ray: ShapeCast2D = $ShapeCast2DLeft
+@onready var right_ray: ShapeCast2D = $ShapeCast2DRight
 
 @export var facing_dir: float = 1
 var ground_vel: Vector2
 var _state: States = States.WALKING
+var _collision_rays_set: bool = false
 
 # Signal(s)
 signal death(body)
 
 # Ready
 func _ready() -> void:
-	sprite.flip_h = facing_dir < 0
-	ground_vel.x = TURTLE_SPEED * facing_dir
+	change_facing_dir(facing_dir, TURTLE_SPEED)
 	
 	if GameManager.current_level_manager:
 		connect("death", Callable(GameManager.current_level_manager, "on_death"))
@@ -42,9 +44,22 @@ func _physics_process(delta: float) -> void:
 			velocity.x = 0
 			
 		if is_on_wall():
-			facing_dir = get_wall_normal().x
-			ground_vel.x = abs(ground_vel.x) * facing_dir
-			sprite.flip_h = facing_dir < 0
+			change_facing_dir(get_wall_normal().x)
+		elif _state == States.WALKING:
+			if _collision_rays_set:
+				if not left_ray.is_colliding():
+					change_facing_dir(1)
+				elif not right_ray.is_colliding():
+					change_facing_dir(-1)
+			else:
+				if left_ray.is_colliding() or right_ray.is_colliding():
+					_collision_rays_set = true
+
+# Handles change in facing dir
+func change_facing_dir(direction: float, speed: float = ground_vel.x) -> void:
+	facing_dir = direction
+	ground_vel.x = abs(speed) * facing_dir
+	sprite.flip_h = facing_dir < 0
 
 # Handles being picked up
 func handle_pickup() -> void:

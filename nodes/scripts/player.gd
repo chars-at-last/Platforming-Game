@@ -313,6 +313,7 @@ func reset() -> void:
 		child.queue_free()
 		
 	gun.reset()
+	call_deferred("set_process_mode", Node.PROCESS_MODE_INHERIT)
 
 func set_just_jumped(jj: bool) -> void:
 	self._just_jumped = jj

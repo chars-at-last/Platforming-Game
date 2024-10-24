@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dsarf8g262rwd"]
+[gd_scene load_steps=11 format=3 uid="uid://dsarf8g262rwd"]
 
 [ext_resource type="PackedScene" uid="uid://cdgoq2id47lpe" path="res://nodes/scenes/interactive.tscn" id="1_ty48n"]
 [ext_resource type="Texture2D" uid="uid://dowbxt31l1pfn" path="res://assets/art/comp195_additional_sprites.png" id="2_rbnnr"]
@@ -53,6 +53,8 @@ size = Vector2(60, 19)
 radius = 21.0
 height = 66.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_nhs3n"]
+
 [node name="Turtle" instance=ExtResource("1_ty48n")]
 scale = Vector2(0.6, 0.6)
 collision_mask = 7
@@ -92,6 +94,20 @@ collision_layer = 0
 position = Vector2(-2, 14)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_je6ia")
+
+[node name="ShapeCast2DRight" type="ShapeCast2D" parent="." index="5"]
+position = Vector2(25, 26.6667)
+shape = SubResource("CircleShape2D_nhs3n")
+target_position = Vector2(0, 20)
+max_results = 1
+collision_mask = 6
+
+[node name="ShapeCast2DLeft" type="ShapeCast2D" parent="." index="6"]
+position = Vector2(-28.3333, 28.3333)
+shape = SubResource("CircleShape2D_nhs3n")
+target_position = Vector2(0, 20)
+max_results = 1
+collision_mask = 6
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
