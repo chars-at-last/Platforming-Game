@@ -127,12 +127,17 @@ func setup_levels(level_keys: Array[String], level_collection: Array[String]) ->
 func level_select() -> bool:
 	print("preloading ", preloaded_level_key)
 	force_preloaded_level = true
-	if cur_level_key.is_empty():
-		cur_level_key = default_level_key
-	if not preloaded_level_key.is_empty() and not level_collection.has(preloaded_level_key) or SaveManager.level() == SaveManager.level_key:
-		print("loading")
-		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[preloaded_level_key] + ".tscn").instantiate())
+	#if cur_level_key.is_empty():
+		#cur_level_key = default_level_key
+	if not preloaded_level_key.is_empty():
 		cur_level_key = preloaded_level_key
+		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[preloaded_level_key] + ".tscn").instantiate())
+		SpawnPoint.check_point_level = preloaded_level_key
+		#SpawnPoint.global_vector = cur_player.global_position
+		return true
+	elif SaveManager.level() != SaveManager.level_key:
+		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[SaveManager.level()] + ".tscn").instantiate())
+		cur_level_key = SaveManager.level()
 		SpawnPoint.check_point_level = preloaded_level_key
 		#SpawnPoint.global_vector = cur_player.global_position
 		return true
