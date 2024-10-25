@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://n1ras3a5iqr8"]
 
 [ext_resource type="Script" path="res://moving_platform.gd" id="1_ht57o"]
-[ext_resource type="Texture2D" uid="uid://dqc2qt55koycc" path="res://assets/art/floating_platform.png" id="2_6b6f0"]
+[ext_resource type="TileSet" uid="uid://bsuhy77c6mhv3" path="res://assets/resources/comp195_tileset.tres" id="3_alfsb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6q4mv"]
-size = Vector2(96, 32)
+size = Vector2(98, 34)
 
 [sub_resource type="Animation" id="Animation_3jc84"]
 resource_name = "Movement"
@@ -57,12 +57,14 @@ remote_path = NodePath("../../AnimatableBody2D")
 collision_layer = 2
 collision_mask = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
-scale = Vector2(0.12, 0.12)
-texture = ExtResource("2_6b6f0")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
 shape = SubResource("RectangleShape2D_6q4mv")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="AnimatableBody2D"]
+position = Vector2(48, 16)
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray(0, 0, 253, 255, 255, 255, 1, 0, 8, 0, 7, 0, 0, 0, 254, 255, 255, 255, 1, 0, 9, 0, 7, 0, 0, 0, 255, 255, 255, 255, 1, 0, 10, 0, 7, 0, 0, 0)
+tile_set = ExtResource("3_alfsb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
