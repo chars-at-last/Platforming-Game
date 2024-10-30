@@ -8,7 +8,7 @@ class_name Coin extends Tile
 # Constant(s)
 const RESPAWN_OFFSET: Vector2 = Vector2(.5, 0)
 
-# Variables
+# Variables and signal
 @export var total_coins: int
 @export var id: int
 
@@ -20,12 +20,19 @@ var cells = []
 
 var can_collide = true
 
+#signal coins_now(num, id)
+
 
 
 
 
 func _ready() -> void:
 	DoorOpened.door_ids[id] = false
+	DoorOpened.coins_needed_for_door[id] = total_coins
+	#var source = tile_set.get_source(0)
+	modulate = Color(id - 1, 1, 0)
+	#door._update_num(1, 1)
+	#connect("coins_now", Callable(door, "_update_num"))
 	#var door: Door = Door.new()
 	#connect("collected", Callable(door, "_on_coins_collected"))
 
@@ -47,9 +54,6 @@ func handle_collision(collider: Node) -> void:
 				distances.append(cell_world_position.distance_to(Level.to_pixel_coords(local_to_map(collider.position))))
 			var index = distances.find(distances.min(), 0)
 			
-			print("all cells ", cells)
-			print("selected index: ", index)
-			print(distances)
 			set_cell(cells[index], -1)
 			#print("and their perspective distances to player", distances)
 			
@@ -71,6 +75,8 @@ func handle_collision(collider: Node) -> void:
 			cells = []
 			#print(total_coins)
 			can_collide = false
+			DoorOpened.coins_needed_for_door[id] = total_coins
+			#emit_signal("coins_now", total_coins, id)
 			$Timer.start()
 			if total_coins == 0:
 				print(id)

@@ -11,9 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://vyj36j0hv8jy" path="res://nodes/scenes/Obstacles/spikes.tscn" id="10_7r6pa"]
 [ext_resource type="PackedScene" uid="uid://jbg30mry1f3o" path="res://nodes/scenes/Obstacles/door.tscn" id="10_lnxwe"]
 
-[sub_resource type="Curve2D" id="Curve2D_k0nw5"]
+[sub_resource type="Curve2D" id="Curve2D_0kotv"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, -1500)
+"points": PackedVector2Array(0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, -550)
 }
 point_count = 2
 
@@ -53,7 +53,7 @@ tile_map_data = PackedByteArray("AAAJAPr/AQAJAAMAAAAIAPr/AQAJAAIAAAAHAPr/AQAJAAI
 
 [node name="Path2D" parent="." index="3" instance=ExtResource("6_0a6ia")]
 position = Vector2(557, 445)
-curve = SubResource("Curve2D_k0nw5")
+curve = SubResource("Curve2D_0kotv")
 loop = false
 speed_scale = 0.5
 
