@@ -58,8 +58,8 @@ tile_map_data = PackedByteArray("AAD5/w4AAQAEAAIAAAD5/w0AAQAEAAEAAAA=")
 
 [node name="Coins" parent="." index="4" instance=ExtResource("8_so20o")]
 scale = Vector2(0.5, 0.5)
-tile_map_data = PackedByteArray("AAACAAYAAAAAAAAAAAANAAYAAAAAAAAAAAAWAAAAAAAAAAAAAAAHAP7/AAAAAAAAAAA=")
-total_coins = 4
+tile_map_data = PackedByteArray("AAACAAYAAAAAAAAAAAANAAYAAAAAAAAAAAAWAAAAAAAAAAAAAAAHAP7/AAAAAAAAAAAiAA4AAAAAAAAAAAA=")
+total_coins = 5
 id = 1
 
 [node name="Door" parent="." index="5" instance=ExtResource("9_jdnhe")]
