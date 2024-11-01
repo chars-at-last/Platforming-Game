@@ -40,7 +40,7 @@ echo = true
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAAeAP3/AAAAAAAAAAAeAPz/AAAAAAAAAAAeAPv/AAAAAAAAAAAeAP7/AAAAAAAAAAA=")
 next_level_key = "3x3"
-next_level_position_add = Vector2(-39, 17)
+next_level_position_add = Vector2(-39, 7)
 
 [node name="Background" type="TileMapLayer" parent="." index="1"]
 z_index = -3
