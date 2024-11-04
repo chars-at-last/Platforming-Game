@@ -5,7 +5,8 @@ const player_location: Vector2 = Vector2(-8, 4) * Level.BASE_TILE_SIZE
 #const check_point_lev = "1x1"
 #constcheck
 
-var path = "user://player_saves.json"
+var save_name: String = "player_saves.json"
+var path = "user://" + save_name
 
 
 # Called when the node enters the scene tree for the first time.
@@ -24,6 +25,15 @@ func _init() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 	#pass
+	
+# Removes save data
+func delete_save() -> bool:
+	var dir = DirAccess.open("user://")
+	if dir.file_exists(save_name):
+		dir.remove(save_name)
+		return true
+
+	return false
 	
 #Save the level key and the player location
 func save(level, player_loc, check_point_level, check_point_loc):

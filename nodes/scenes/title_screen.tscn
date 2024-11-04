@@ -1,0 +1,170 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7puw01k4womg"]
+
+[ext_resource type="Script" path="res://nodes/scripts/title_screen.gd" id="1_j8ja8"]
+[ext_resource type="PackedScene" uid="uid://cf02ai7i3ygsy" path="res://nodes/scenes/level_manager.tscn" id="2_fo2od"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j8ja8")
+level_manager = ExtResource("2_fo2od")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRectTop" type="ColorRect" parent="."]
+z_index = 128
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 0)
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+current_tab = 0
+tabs_visible = false
+
+[node name="Title" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Title"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 11.0
+offset_right = 628.0
+offset_bottom = 86.0
+theme_override_font_sizes/italics_font_size = 25
+bbcode_enabled = true
+text = "[i]Project Momentum Platformer[/i]"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Title"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+offset_left = 18.0
+offset_top = 69.0
+offset_right = 218.0
+offset_bottom = 329.0
+theme_override_constants/separation = 20
+
+[node name="Button" type="Button" parent="TabContainer/Title/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0.866667, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.403922, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 25
+text = "Begin"
+
+[node name="Button2" type="Button" parent="TabContainer/Title/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0.866667, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.403922, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 25
+text = "Delete Save"
+
+[node name="Button3" type="Button" parent="TabContainer/Title/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0.866667, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.403922, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 25
+text = "Credits"
+
+[node name="Button4" type="Button" parent="TabContainer/Title/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0.866667, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.403922, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 25
+text = "Quit"
+
+[node name="Credits" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Credits"]
+offset_left = 13.0
+offset_top = 11.0
+offset_right = 628.0
+offset_bottom = 337.0
+theme_override_font_sizes/italics_font_size = 25
+bbcode_enabled = true
+text = "[i]Credits[/i]
+
+
+[ul]Made by Christopher Yalch and Xiaoshilin (Daniel) Ming
+Made using Godot 4.3 and Resonate
+Made for COMP 195[/ul]
+
+
+
+
+
+
+[url=https://godotengine.org/license/]Godot License[/url]"
+
+[node name="Button" type="Button" parent="TabContainer/Credits"]
+custom_minimum_size = Vector2(100, 50)
+offset_left = 533.0
+offset_top = 6.0
+offset_right = 633.0
+offset_bottom = 56.0
+theme_override_colors/font_hover_color = Color(0, 0.866667, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.403922, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 25
+text = "Back"
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+title = "!!! WARNING !!!"
+initial_position = 1
+size = Vector2i(394, 100)
+ok_button_text = "Yes"
+dialog_text = "Are you sure you wish to delete your saved data?"
+cancel_button_text = "No"
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+title = "W2-855K ERROR REPORT"
+initial_position = 1
+size = Vector2i(368, 106)
+ok_button_text = "Acceptance"
+dialog_text = "\"Fatal error: Critical damage suffered.
+         Your saved data has been wiped.\""
+
+[node name="AcceptDialog2" type="AcceptDialog" parent="."]
+auto_translate_mode = 1
+title = "W2-855K ERROR REPORT"
+initial_position = 1
+size = Vector2i(446, 106)
+ok_button_text = "Confirmed"
+dialog_text = "\"Fatal error: No save data found.
+                       Please visit a restorer to resolve this issue.\""
+
+[connection signal="pressed" from="TabContainer/Title/VBoxContainer/Button" to="." method="_on_button_pressed_title"]
+[connection signal="pressed" from="TabContainer/Title/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="TabContainer/Title/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="TabContainer/Title/VBoxContainer/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="meta_clicked" from="TabContainer/Credits/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
+[connection signal="pressed" from="TabContainer/Credits/Button" to="." method="_on_button_pressed"]
+[connection signal="canceled" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_canceled"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]
