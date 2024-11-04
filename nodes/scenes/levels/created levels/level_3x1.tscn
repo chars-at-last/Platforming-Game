@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://dodhix6c3qvbb"]
+[gd_scene load_steps=11 format=4 uid="uid://dodhix6c3qvbb"]
 
 [ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_qlmj5"]
 [ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_7wgyq"]
 [ext_resource type="TileSet" uid="uid://bsuhy77c6mhv3" path="res://assets/resources/comp195_tileset.tres" id="3_77xsr"]
 [ext_resource type="Script" path="res://nodes/scripts/obstacles/tile.gd" id="4_nmjtu"]
 [ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="5_ra4xv"]
-[ext_resource type="PackedScene" uid="uid://b2ku6teggg8ok" path="res://nodes/scenes/Obstacles/death_block.tscn" id="7_0kcnq"]
 [ext_resource type="PackedScene" uid="uid://bax0hg5n0t3qk" path="res://nodes/scenes/Obstacles/check_point.tscn" id="8_m6hgp"]
 [ext_resource type="PackedScene" uid="uid://cv87u7w8w308u" path="res://nodes/scenes/coin.tscn" id="9_3q2y6"]
 [ext_resource type="PackedScene" uid="uid://jbg30mry1f3o" path="res://nodes/scenes/Obstacles/door.tscn" id="10_i6808"]
@@ -43,30 +42,27 @@ script = ExtResource("4_nmjtu")
 z_index = 1
 tile_map_data = PackedByteArray("AAAIAPr/AQAJAAMAAAAHAPr/AQAJAAMAAAAGAPr/AQAJAAMAAAAFAPr/AQAJAAMAAAAEAPr/AQAJAAMAAAADAPr/AQAJAAMAAAACAPr/AQAJAAMAAAABAPr/AQAJAAMAAAAAAPr/AQAJAAMAAAD///r/AQAJAAMAAAD+//r/AQAJAAMAAAD9//r/AQAJAAMAAAD8//r/AQAJAAMAAAD7//r/AQAJAAMAAAD6//r/AQAJAAMAAAD5//r/AQAJAAMAAAD4//r/AQAJAAMAAAD3//r/AQAJAAMAAAD2//r/AQAJAAMAAAD1//v/AQAKAAIAAAD1//z/AQAKAAIAAAD1//3/AQAKAAIAAAD1//7/AQAKAAIAAAD1////AQAKAAIAAAD1/wAAAQAKAAIAAAD1/wEAAQAKAAIAAAD1/wIAAQAKAAIAAAAJAPr/AQAJAAMAAAD1/wMAAQAKAAIAAAD1/wQAAQAKAAIAAAD1/wUAAQAJAAIAAAD2/wUAAQAJAAEAAAD3/wUAAQAJAAEAAAD4/wUAAQAJAAEAAAD5/wUAAQAJAAEAAAD6/wUAAQAJAAEAAAD7/wUAAQAJAAEAAAD8/wUAAQAJAAEAAAD9/wUAAQAJAAEAAAD+/wUAAQAJAAEAAAD//wUAAQAJAAEAAAAAAAUAAQAJAAEAAAABAAUAAQAJAAEAAAACAAUAAQAJAAEAAAADAAUAAQAJAAEAAAAEAAUAAQAJAAEAAAAFAAUAAQAJAAEAAAAGAAUAAQAJAAEAAAAHAAUAAQAJAAEAAAAIAAUAAQAJAAEAAAAJAAUAAQAJAAEAAAAJAPv/AQAIAAIAAAAJAPz/AQAIAAIAAAAJAP3/AQAIAAIAAAAJAP7/AQAIAAIAAAAJAP//AQAIAAIAAAAJAAAAAQAIAAIAAAAJAAEAAQAIAAIAAAD2/wAAAQAJAAEAAAD3/wAAAQAJAAEAAAD4/wAAAQAJAAEAAAD2/wEAAQAJAAMAAAD3/wEAAQAJAAMAAAD4/wEAAQAJAAMAAAD5/wAAAQAKAAEAAAD5/wEAAQAKAAMAAAADAP7/AQAIAAEAAAAEAP7/AQAJAAEAAAAFAP7/AQAJAAEAAAAGAP7/AQAJAAEAAAAHAP7/AQAJAAEAAAAIAP7/AQAJAAEAAAAEAP//AQAJAAIAAAAFAP//AQAJAAIAAAAGAP//AQAJAAIAAAAHAP//AQAKAAIAAAADAP//AQAIAAIAAAAEAAAAAQAJAAIAAAAFAAAAAQAJAAIAAAAGAAAAAQAJAAIAAAAHAAAAAQAKAAIAAAADAAAAAQAIAAIAAAAEAAEAAQAJAAMAAAAFAAEAAQAJAAMAAAAGAAEAAQAJAAMAAAAHAAEAAQAKAAMAAAADAAEAAQAIAAMAAAAKAAUAAQAJAAEAAAD1//r/AQAKAAIAAAA=")
 
-[node name="DeathBlock" parent="." index="3" instance=ExtResource("7_0kcnq")]
-tile_map_data = PackedByteArray()
-
-[node name="Checkpoint" parent="." index="4" instance=ExtResource("8_m6hgp")]
+[node name="Checkpoint" parent="." index="3" instance=ExtResource("8_m6hgp")]
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAD6/wQAAQAEAAIAAAD6/wMAAQAEAAEAAAA=")
 
-[node name="Coins" parent="." index="5" instance=ExtResource("9_3q2y6")]
+[node name="Coins" parent="." index="4" instance=ExtResource("9_3q2y6")]
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAD+/wQAAAAAAAAAAAA=")
 total_coins = 1
 id = 1
 
-[node name="Door" parent="." index="6" instance=ExtResource("10_i6808")]
+[node name="Door" parent="." index="5" instance=ExtResource("10_i6808")]
 position = Vector2(273, 111)
 curve = SubResource("Curve2D_jcer6")
 id = 1
 
-[node name="Door2" parent="." index="7" instance=ExtResource("10_i6808")]
+[node name="Door2" parent="." index="6" instance=ExtResource("10_i6808")]
 position = Vector2(82, 110)
 curve = SubResource("Curve2D_4ws11")
 id = 2
 
-[node name="Coins2" parent="." index="8" instance=ExtResource("9_3q2y6")]
+[node name="Coins2" parent="." index="7" instance=ExtResource("9_3q2y6")]
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAAFAP3/AAAAAAAAAAD4////AAAAAAAAAAA=")
 total_coins = 2
