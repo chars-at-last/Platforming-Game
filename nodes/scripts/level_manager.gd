@@ -116,7 +116,8 @@ func get_cur_level() -> Level:
 func setup_levels(level_keys: Array[String], level_collection: Array[String]) -> void:
 	var true_level_names: Array[String]
 	var levels_path: Array[String]
-	for i in range(0, level_keys.size()):		
+	for i in range(0, level_keys.size()):	
+		print("hello sd", level_keys[i])
 		true_level_names.append(self.level_collection[level_collection[i]].collection[level_keys[i]])
 		levels_path.append(self.level_collection[level_collection[i]].levels_path)
 		
