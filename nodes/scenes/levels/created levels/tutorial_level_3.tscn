@@ -8,6 +8,7 @@
 
 [node name="tutorial_level_3" instance=ExtResource("1_g6ejj")]
 size = Vector2(20, 22)
+default_spawn = Vector2(5, 10)
 
 [node name="Goal01" parent="Goals" index="0" instance=ExtResource("2_f0d4c")]
 position = Vector2(0, -1)

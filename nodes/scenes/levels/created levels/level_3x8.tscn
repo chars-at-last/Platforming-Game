@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://b2jdw5rvmos2s"]
+[gd_scene load_steps=10 format=4 uid="uid://b2jdw5rvmos2s"]
 
 [ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_61rq5"]
 [ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_d0okj"]
@@ -6,6 +6,14 @@
 [ext_resource type="Script" path="res://nodes/scripts/obstacles/tile.gd" id="4_y6sdv"]
 [ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="5_4ksd0"]
 [ext_resource type="PackedScene" uid="uid://bax0hg5n0t3qk" path="res://nodes/scenes/Obstacles/check_point.tscn" id="6_ll71p"]
+[ext_resource type="PackedScene" uid="uid://n1ras3a5iqr8" path="res://nodes/scenes/moving_platform.tscn" id="7_2h0wb"]
+[ext_resource type="PackedScene" uid="uid://756hrprkswld" path="res://nodes/scenes/Obstacles/moving_hazards.tscn" id="8_jrxkb"]
+
+[sub_resource type="Curve2D" id="Curve2D_pwrpg"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 514, 2)
+}
+point_count = 2
 
 [node name="level_3x8" instance=ExtResource("1_61rq5")]
 default_spawn = Vector2(-5, 5)
@@ -14,7 +22,9 @@ echo = true
 
 [node name="Goal01" parent="Goals" index="0" instance=ExtResource("2_d0okj")]
 scale = Vector2(0.5, 0.5)
-next_level_position_add = Vector2(-18, 0)
+tile_map_data = PackedByteArray("AAD///n/AAAAAAAAAAAAAPn/AAAAAAAAAAABAPn/AAAAAAAAAAA=")
+next_level_key = "3x9"
+next_level_position_add = Vector2(-9, 10)
 
 [node name="Goal02" parent="Goals" index="1" instance=ExtResource("2_d0okj")]
 scale = Vector2(0.5, 0.5)
@@ -34,3 +44,13 @@ tile_map_data = PackedByteArray("AAAIAPr/AQAJAAMAAAAHAPr/AQAJAAMAAAAGAPr/AQAJAAM
 [node name="Checkpoint" parent="." index="3" instance=ExtResource("6_ll71p")]
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAAAAAQAAQAEAAIAAAAAAAMAAQAEAAEAAAA=")
+
+[node name="Path2D" parent="." index="4" instance=ExtResource("7_2h0wb")]
+position = Vector2(14, 5)
+
+[node name="Path2D2" parent="." index="5" instance=ExtResource("8_jrxkb")]
+position = Vector2(-98, -90)
+scale = Vector2(0.5, 0.5)
+curve = SubResource("Curve2D_pwrpg")
+loop = false
+speed = 3.0

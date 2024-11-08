@@ -67,7 +67,6 @@ tile_map_data = PackedByteArray("AAD+/xEAAAAEAAAAAAD+/xIAAAAEAAAAAAD//xIAAAAEAAA
 [node name="Path2D2" parent="." index="5" instance=ExtResource("6_0a6ia")]
 position = Vector2(433, 350)
 curve = SubResource("Curve2D_kyg5e")
-speed = 1.5
 
 [node name="Coins" parent="." index="6" instance=ExtResource("9_tgv6t")]
 scale = Vector2(0.5, 0.5)
