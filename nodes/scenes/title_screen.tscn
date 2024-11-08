@@ -59,8 +59,10 @@ theme_override_constants/separation = 20
 [node name="Button" type="Button" parent="TabContainer/Title/VBoxContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../Button2")
 theme_override_colors/font_hover_color = Color(0, 0.866667, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0.403922, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0.866667, 0, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 25
@@ -69,8 +71,11 @@ text = "Begin"
 [node name="Button2" type="Button" parent="TabContainer/Title/VBoxContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
+focus_neighbor_top = NodePath("../Button")
+focus_neighbor_bottom = NodePath("../Button3")
 theme_override_colors/font_hover_color = Color(0, 0.866667, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0.403922, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0.866667, 0, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 25
@@ -79,8 +84,11 @@ text = "Delete Save"
 [node name="Button3" type="Button" parent="TabContainer/Title/VBoxContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
+focus_neighbor_top = NodePath("../Button2")
+focus_neighbor_bottom = NodePath("../Button4")
 theme_override_colors/font_hover_color = Color(0, 0.866667, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0.403922, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0.866667, 0, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 25
@@ -89,8 +97,10 @@ text = "Credits"
 [node name="Button4" type="Button" parent="TabContainer/Title/VBoxContainer"]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
+focus_neighbor_top = NodePath("../Button3")
 theme_override_colors/font_hover_color = Color(0, 0.866667, 0, 1)
 theme_override_colors/font_pressed_color = Color(0, 0.403922, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0.866667, 0, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 25
@@ -102,6 +112,7 @@ layout_mode = 2
 metadata/_tab_index = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Credits"]
+layout_mode = 0
 offset_left = 13.0
 offset_top = 11.0
 offset_right = 628.0
@@ -124,6 +135,7 @@ Made for COMP 195[/ul]
 
 [node name="Button" type="Button" parent="TabContainer/Credits"]
 custom_minimum_size = Vector2(100, 50)
+layout_mode = 0
 offset_left = 533.0
 offset_top = 6.0
 offset_right = 633.0

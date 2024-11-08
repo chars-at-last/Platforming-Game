@@ -86,7 +86,9 @@ func _ready() -> void:
 			print(0)
 			
 	if temp:
-		SpawnPoint.global_vector = Level.to_map_coords(cur_player.position)
+		SpawnPoint.global_vector = Level.to_map_coords(cur_player.position) * Level.BASE_TILE_SIZE
+		#print(SpawnPoint.global_vector)
+		#SpawnPoint.global_vector = cur_player.global_position
 		
 	#var instance = load(PAUSE_PATH).instantiate()
 	#print("test", instance.position)

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c17bsgysyn5qt"]
+
+[ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_0kpfx"]
+
+[node name="2x11_bat_outta_hell" instance=ExtResource("1_0kpfx")]
+size = Vector2(30, 22)
+camera_zoom = Vector2(0.75, 0.75)

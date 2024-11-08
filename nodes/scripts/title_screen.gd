@@ -1,6 +1,7 @@
 class_name TitleScreen extends Control
 
 # Variables
+@onready var default_button: Button = $TabContainer/Title/VBoxContainer/Button
 @onready var tab_con: TabContainer = $TabContainer
 @onready var color_rect_top: ColorRect = $ColorRectTop
 @onready var confirm_dialog: ConfirmationDialog = $ConfirmationDialog
@@ -13,6 +14,10 @@ class_name TitleScreen extends Control
 
 # Signals
 signal transition_complete
+
+# Ready
+func _ready() -> void:
+	default_button.grab_focus()
 
 # Transition
 func transition() -> void:
