@@ -178,6 +178,9 @@ func next(next_level_key: String, next_level_pos_add: Vector2, force_change: boo
 		cur_level_key = next_level_key															# Update key
 		SpawnPoint.spawn_key = cur_level_key
 		print(';;', cur_level_key)
+	else:
+		print("switching level failed")
+		#print("switching level failed, preloaded levels: ", level_loader.get_loaded_level())
 		
 	
 # Handles the player's camera
@@ -223,6 +226,8 @@ func reset_player(body) -> void:
 		cur_player.position = Level.to_pixel_coords(cur_level.default_spawn)
 	else:
 		print("Last checkpoint in previous level, switching level")
+		#preloaded_level_key = SpawnPoint.check_point_level
+		#level_select()
 		next(SpawnPoint.check_point_level, Vector2.ZERO)#SpawnPoint.global_vector)
 		cur_player.position = SpawnPoint.global_vector
 		print("Spawning player ", SpawnPoint.global_vector)
