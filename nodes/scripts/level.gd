@@ -33,6 +33,7 @@ func _ready() -> void:
 			collection.append(goal.level_collection_key)
 			
 		GameManager.current_level_manager.setup_levels(keys, collection)
+		print("all level keys: ", keys)
 
 # Convert from "map" coordinates
 static func to_pixel_coords(coords: Vector2) -> Vector2:

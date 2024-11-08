@@ -1,26 +1,14 @@
-[gd_scene load_steps=9 format=4 uid="uid://ddwmvp6l31b6e"]
+[gd_scene load_steps=6 format=4 uid="uid://ddwmvp6l31b6e"]
 
 [ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_g6ejj"]
 [ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_f0d4c"]
 [ext_resource type="TileSet" uid="uid://bsuhy77c6mhv3" path="res://assets/resources/comp195_tileset.tres" id="3_dcn67"]
 [ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="3_frloc"]
 [ext_resource type="Script" path="res://nodes/scripts/obstacles/tile.gd" id="4_3ylpt"]
-[ext_resource type="PackedScene" uid="uid://n1ras3a5iqr8" path="res://nodes/scenes/moving_platform.tscn" id="6_2hm00"]
-
-[sub_resource type="Curve2D" id="Curve2D_vedxf"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 300, 0)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_u7y7e"]
-_data = {
-"points": PackedVector2Array(-9.55656, -2.60633, 9.55656, 2.60633, 1, 2, 1.15837, 43.1493, -1.15837, -43.1493, 99, -44, 35.9095, 5.21267, -35.9095, -5.21267, 41, -106, 6.37104, -17.6652, -6.37104, 17.6652, -19, -57, 0, 0, 0, 0, 1, 0)
-}
-point_count = 5
 
 [node name="tutorial_level_3" instance=ExtResource("1_g6ejj")]
 size = Vector2(20, 22)
+default_spawn = Vector2(5, 10)
 
 [node name="Goal01" parent="Goals" index="0" instance=ExtResource("2_f0d4c")]
 position = Vector2(0, -1)
@@ -48,12 +36,3 @@ tile_map_data = PackedByteArray("AAAJAPr/AQABAAEAAAAJAPn/AQABAAAAAAAIAPr/AQABAAE
 
 [node name="Tile" parent="." index="3" instance=ExtResource("3_frloc")]
 tile_map_data = PackedByteArray("AAD9/wQAAAAAAAAAAQA=")
-
-[node name="Path2D" parent="." index="4" instance=ExtResource("6_2hm00")]
-position = Vector2(-109, 297)
-curve = SubResource("Curve2D_vedxf")
-loop = false
-
-[node name="Path2D2" parent="." index="5" instance=ExtResource("6_2hm00")]
-position = Vector2(-260, 314)
-curve = SubResource("Curve2D_u7y7e")
