@@ -42,7 +42,9 @@ next_level_position_add = Vector2(9, -10)
 [node name="Goal2" parent="Goals" index="1" instance=ExtResource("3_hrkhg")]
 position = Vector2(16, 0)
 scale = Vector2(0.5, 0.5)
-next_level_position_add = Vector2(-20.5, 0)
+tile_map_data = PackedByteArray("AAALAAIAAAAAAAAAAAALAAEAAAAAAAAAAAALAAAAAAAAAAAAAAALAP//AAAAAAAAAAALAP7/AAAAAAAAAAALAP3/AAAAAAAAAAALAPz/AAAAAAAAAAALAPv/AAAAAAAAAAALAPr/AAAAAAAAAAALAPn/AAAAAAAAAAALAPf/AAAAAAAAAAALAPj/AAAAAAAAAAA=")
+next_level_key = "3x10"
+next_level_position_add = Vector2(-20, 0)
 
 [node name="Ground" parent="." index="2" instance=ExtResource("2_igk5d")]
 z_index = 4
@@ -61,7 +63,7 @@ z_index = -570
 offset_left = -332.0
 offset_top = -137.0
 offset_right = 373.0
-offset_bottom = 101.0
+offset_bottom = 255.0
 texture = ExtResource("5_ncgmn")
 
 [node name="Background4" type="TextureRect" parent="." index="5"]
