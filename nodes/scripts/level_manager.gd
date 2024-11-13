@@ -138,14 +138,15 @@ func level_select() -> bool:
 		SpawnPoint.check_point_level = preloaded_level_key
 		#SpawnPoint.global_vector = cur_player.global_position
 		return true
-	elif SaveManager.level() != SaveManager.level_key:
+	elif SaveManager.level() != SaveManager.level_key and SaveManager.level() != null:
+		print("What is this ", SaveManager.level())
 		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[SaveManager.level()] + ".tscn").instantiate())
 		cur_level_key = SaveManager.level()
 		SpawnPoint.check_point_level = preloaded_level_key
 		#SpawnPoint.global_vector = cur_player.global_position
 		return true
 	else:
-		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[SaveManager.level()] + ".tscn").instantiate())
+		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[default_level_key] + ".tscn").instantiate())
 		return false
 
 

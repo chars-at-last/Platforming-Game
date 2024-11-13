@@ -14,7 +14,7 @@ func _init() -> void:
 	var read = FileAccess.open(path, FileAccess.READ)
 	print("hello")
 	if read == null:
-		save(level_key, player_location, null, null)
+		save(level_key, player_location, null, null, true)
 		print('save created')
 	else:
 		print('save exists')
@@ -36,12 +36,13 @@ func delete_save() -> bool:
 	return false
 	
 #Save the level key and the player location
-func save(level, player_loc, check_point_level, check_point_loc):
+func save(level, player_loc, check_point_level, check_point_loc, new_game):
 	var save_data = {
 		"level": level,
 		"player_location": player_loc,
 		"check_point_level": check_point_level,
-		"check_point_loc": check_point_loc
+		"check_point_loc": check_point_loc,
+		"new_game": new_game
 	}
 	var save_file = FileAccess.open(path, FileAccess.WRITE)
 	save_file.store_line(JSON.stringify(save_data))

@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=4 uid="uid://ckhp3a6ck548m"]
+
+[ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_kdq05"]
+[ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_fj1jr"]
+[ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="3_mdvyy"]
+[ext_resource type="Texture2D" uid="uid://dbb824vqc5aj4" path="res://assets/art/backgrounds/background_1_dusk.png" id="4_7bo2y"]
+[ext_resource type="Texture2D" uid="uid://cvd3q016htpbb" path="res://assets/art/backgrounds/background_5_dusk.png" id="5_mon2w"]
+[ext_resource type="Texture2D" uid="uid://bddajxn5rtl6d" path="res://assets/art/backgrounds/background_3_dusk.png" id="6_k4s0v"]
+[ext_resource type="PackedScene" uid="uid://n1ras3a5iqr8" path="res://nodes/scenes/moving_platform.tscn" id="7_imuxc"]
+[ext_resource type="PackedScene" uid="uid://b2ku6teggg8ok" path="res://nodes/scenes/Obstacles/death_block.tscn" id="8_phj3t"]
+
+[sub_resource type="Curve2D" id="Curve2D_nekv4"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -3, 0, 0, 0, 0, 0, 800)
+}
+point_count = 2
+
+[node name="Level_3x11" instance=ExtResource("1_kdq05")]
+default_spawn = Vector2(-6, 2)
+
+[node name="Goal" parent="Goals" index="0" instance=ExtResource("2_fj1jr")]
+position = Vector2(-224, 0)
+scale = Vector2(0.5, 0.5)
+next_level_key = "3x10"
+next_level_position_add = Vector2(20, 0)
+
+[node name="Goal2" parent="Goals" index="1" instance=ExtResource("2_fj1jr")]
+position = Vector2(16, 0)
+scale = Vector2(0.5, 0.5)
+next_level_position_add = Vector2(-20.5, 0)
+
+[node name="Ground" parent="." index="1" instance=ExtResource("3_mdvyy")]
+z_index = 4
+tile_map_data = PackedByteArray("AAD0/wcAAQAJAAIAAAD0/wYAAQAJAAIAAAD0/wUAAQAJAAIAAAD7/wUAAQAJAAIAAAD7/wYAAQAJAAIAAAD7/wcAAQAJAAIAAAADAAUAAQAJAAIAAAACAAUAAQAJAAIAAAABAAYAAQAJAAIAAAAAAAYAAQAJAAIAAAD//wYAAQAJAAIAAAD+/wYAAQAJAAIAAAD9/wYAAQAJAAIAAAD8/wUAAQAJAAIAAAD9/wUAAQAJAAIAAAD+/wUAAQAJAAIAAAD//wUAAQAJAAIAAAAAAAUAAQAJAAIAAAABAAUAAQAJAAIAAAAEAAUAAQAKAAIAAAAEAAYAAQAKAAIAAAADAAYAAQAJAAIAAAACAAcAAQAJAAIAAAABAAcAAQAJAAIAAAAAAAcAAQAJAAIAAAD//wcAAQAJAAIAAAD+/wcAAQAJAAIAAAD9/wcAAQAJAAIAAAD8/wYAAQAJAAIAAAD8/wcAAQAJAAIAAAADAAcAAQAJAAIAAAAEAAcAAQAKAAIAAAACAAYAAQAJAAIAAAD4/wUAAQAJAAIAAAD4/wYAAQAJAAIAAAD4/wcAAQAJAAIAAAD6/wUAAQAJAAIAAAD5/wUAAQAJAAIAAAD5/wYAAQAJAAIAAAD5/wcAAQAJAAIAAAD6/wcAAQAJAAIAAAD6/wYAAQAJAAIAAAD3/wcAAQAJAAIAAAD2/wcAAQAJAAIAAAD1/wcAAQAJAAIAAAD3/wUAAQAJAAIAAAD2/wUAAQAJAAIAAAD1/wUAAQAJAAIAAAD1/wYAAQAJAAIAAAD2/wYAAQAJAAIAAAD3/wYAAQAJAAIAAAAEAPv/AQAKAAMAAAAEAPr/AQAKAAIAAAAEAPn/AQAKAAIAAAAEAPj/AQAKAAIAAAAEAPf/AQAKAAIAAAD0//v/AQAJAAIAAAD0//r/AQAJAAIAAAD0//n/AQAJAAIAAAD0//j/AQAJAAIAAAD0//f/AQAJAAIAAAD1//v/AQAJAAIAAAD1//r/AQAJAAIAAAD1//n/AQAJAAIAAAD1//j/AQAJAAIAAAD1//f/AQAJAAIAAAD2//f/AQAJAAIAAAD3//f/AQAJAAIAAAD4//f/AQAJAAIAAAD5//f/AQAJAAIAAAD6//f/AQAJAAIAAAD7//f/AQAJAAIAAAD8//f/AQAJAAIAAAD9//f/AQAJAAIAAAD+//f/AQAJAAIAAAD///f/AQAJAAIAAAAAAPf/AQAJAAIAAAABAPf/AQAJAAIAAAACAPf/AQAJAAIAAAADAPf/AQAJAAIAAAADAPj/AQAJAAIAAAADAPn/AQAJAAIAAAADAPr/AQAJAAIAAAADAPv/AQAJAAIAAAACAPv/AQAJAAIAAAACAPr/AQAJAAIAAAABAPr/AQAJAAIAAAABAPn/AQAJAAIAAAABAPj/AQAJAAIAAAACAPj/AQAJAAIAAAACAPn/AQAJAAIAAAAAAPj/AQAJAAIAAAAAAPn/AQAJAAIAAAAAAPr/AQAJAAIAAAAAAPv/AQAJAAIAAAABAPv/AQAJAAIAAAD///v/AQAJAAIAAAD///r/AQAJAAIAAAD///n/AQAJAAIAAAD///j/AQAJAAIAAAD9//j/AQAJAAIAAAD8//j/AQAJAAIAAAD7//j/AQAJAAIAAAD6//j/AQAJAAIAAAD5//j/AQAJAAIAAAD4//j/AQAJAAIAAAD3//j/AQAJAAIAAAD2//j/AQAJAAIAAAD+//j/AQAJAAIAAAD+//n/AQAJAAIAAAD+//r/AQAJAAIAAAD+//v/AQAJAAIAAAD9//v/AQAJAAIAAAD9//r/AQAJAAIAAAD9//n/AQAJAAIAAAD8//n/AQAJAAIAAAD7//n/AQAJAAIAAAD6//n/AQAJAAIAAAD5//n/AQAJAAIAAAD4//n/AQAJAAIAAAD3//n/AQAJAAIAAAD2//n/AQAJAAIAAAD2//r/AQAJAAIAAAD2//v/AQAJAAIAAAD8//v/AQAJAAIAAAD8//r/AQAJAAIAAAD3//r/AQAJAAIAAAD3//v/AQAJAAIAAAD7//v/AQAJAAIAAAD7//r/AQAJAAIAAAD4//r/AQAJAAIAAAD4//v/AQAJAAIAAAD6//v/AQAJAAIAAAD6//r/AQAJAAIAAAD5//r/AQAJAAIAAAD5//v/AQAJAAIAAAALAPf/AQAIAAIAAAALAPj/AQAIAAIAAAALAPn/AQAIAAIAAAALAPr/AQAIAAIAAAALAPv/AQAIAAIAAAALAPz/AQAIAAIAAAALAP3/AQAIAAIAAAALAP7/AQAIAAIAAAALAP//AQAIAAIAAAALAAAAAQAIAAIAAAALAAEAAQAIAAIAAAALAAIAAQAIAAIAAAALAAMAAQAIAAIAAAALAAQAAQAIAAIAAAALAAUAAQAIAAIAAAALAAYAAQAIAAIAAAALAAcAAQAIAAIAAAA=")
+
+[node name="Background2" type="TextureRect" parent="." index="2"]
+z_index = -570
+offset_left = -328.0
+offset_top = -265.0
+offset_right = 373.0
+offset_bottom = 95.0
+texture = ExtResource("4_7bo2y")
+
+[node name="Background3" type="TextureRect" parent="." index="3"]
+z_index = -570
+offset_left = -332.0
+offset_top = -137.0
+offset_right = 373.0
+offset_bottom = 259.0
+texture = ExtResource("5_mon2w")
+
+[node name="Background4" type="TextureRect" parent="." index="4"]
+z_index = -570
+offset_left = -333.0
+offset_top = -210.0
+offset_right = 372.0
+offset_bottom = -86.0
+texture = ExtResource("6_k4s0v")
+
+[node name="Path2D" parent="." index="5" instance=ExtResource("7_imuxc")]
+position = Vector2(254, -200)
+curve = SubResource("Curve2D_nekv4")
+speed = 1.0
+
+[node name="DeathBlock" parent="." index="6" instance=ExtResource("8_phj3t")]
+tile_map_data = PackedByteArray()
+
+[node name="Push" type="Node2D" parent="." index="7"]
+
+[node name="Path2D" parent="Push" index="0" instance=ExtResource("7_imuxc")]
+position = Vector2(-490, -76)
+rotation = -1.5708
+curve = SubResource("Curve2D_nekv4")
+loop = false
+
+[node name="Path2D2" parent="Push" index="1" instance=ExtResource("7_imuxc")]
+position = Vector2(-490, 25)
+rotation = -1.5708
+curve = SubResource("Curve2D_nekv4")
+loop = false
+
+[node name="Path2D3" parent="Push" index="2" instance=ExtResource("7_imuxc")]
+position = Vector2(-490, 120)
+rotation = -1.5708
+curve = SubResource("Curve2D_nekv4")
+loop = false
