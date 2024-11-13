@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://ckhp3a6ck548m"]
+[gd_scene load_steps=9 format=4 uid="uid://ckhp3a6ck548m"]
 
 [ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_kdq05"]
 [ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_fj1jr"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://cvd3q016htpbb" path="res://assets/art/backgrounds/background_5_dusk.png" id="5_mon2w"]
 [ext_resource type="Texture2D" uid="uid://bddajxn5rtl6d" path="res://assets/art/backgrounds/background_3_dusk.png" id="6_k4s0v"]
 [ext_resource type="PackedScene" uid="uid://n1ras3a5iqr8" path="res://nodes/scenes/moving_platform.tscn" id="7_imuxc"]
-[ext_resource type="PackedScene" uid="uid://b2ku6teggg8ok" path="res://nodes/scenes/Obstacles/death_block.tscn" id="8_phj3t"]
 
 [sub_resource type="Curve2D" id="Curve2D_nekv4"]
 _data = {
@@ -27,7 +26,9 @@ next_level_position_add = Vector2(20, 0)
 [node name="Goal2" parent="Goals" index="1" instance=ExtResource("2_fj1jr")]
 position = Vector2(16, 0)
 scale = Vector2(0.5, 0.5)
-next_level_position_add = Vector2(-20.5, 0)
+tile_map_data = PackedByteArray("AAAFAAgAAAAAAAAAAAAGAAgAAAAAAAAAAAAHAAgAAAAAAAAAAAAIAAgAAAAAAAAAAAAJAAgAAAAAAAAAAAAKAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAA=")
+next_level_key = "3xend"
+next_level_position_add = Vector2(0, -20)
 
 [node name="Ground" parent="." index="1" instance=ExtResource("3_mdvyy")]
 z_index = 4
@@ -44,28 +45,25 @@ texture = ExtResource("4_7bo2y")
 [node name="Background3" type="TextureRect" parent="." index="3"]
 z_index = -570
 offset_left = -332.0
-offset_top = -137.0
+offset_top = -257.0
 offset_right = 373.0
 offset_bottom = 259.0
 texture = ExtResource("5_mon2w")
 
 [node name="Background4" type="TextureRect" parent="." index="4"]
 z_index = -570
-offset_left = -333.0
-offset_top = -210.0
-offset_right = 372.0
-offset_bottom = -86.0
+offset_left = -330.0
+offset_top = -370.0
+offset_right = 375.0
+offset_bottom = -246.0
 texture = ExtResource("6_k4s0v")
 
 [node name="Path2D" parent="." index="5" instance=ExtResource("7_imuxc")]
-position = Vector2(254, -200)
+position = Vector2(256, -214)
 curve = SubResource("Curve2D_nekv4")
 speed = 1.0
 
-[node name="DeathBlock" parent="." index="6" instance=ExtResource("8_phj3t")]
-tile_map_data = PackedByteArray()
-
-[node name="Push" type="Node2D" parent="." index="7"]
+[node name="Push" type="Node2D" parent="." index="6"]
 
 [node name="Path2D" parent="Push" index="0" instance=ExtResource("7_imuxc")]
 position = Vector2(-490, -76)

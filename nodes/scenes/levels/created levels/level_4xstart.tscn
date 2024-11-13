@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=4 uid="uid://bwp6sooue5kdv"]
+
+[ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_c88bn"]
+[ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_ys7k7"]
+[ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="3_13hab"]
+[ext_resource type="Texture2D" uid="uid://cvd3q016htpbb" path="res://assets/art/backgrounds/background_5_dusk.png" id="4_wogx8"]
+[ext_resource type="Texture2D" uid="uid://2gi04rer45a0" path="res://assets/art/backgrounds/trees.png" id="5_5q3ss"]
+[ext_resource type="PackedScene" uid="uid://bax0hg5n0t3qk" path="res://nodes/scenes/Obstacles/check_point.tscn" id="6_0bbi8"]
+
+[node name="Level_4xstart" instance=ExtResource("1_c88bn")]
+default_spawn = Vector2(-6, 2)
+
+[node name="Goal" parent="Goals" index="0" instance=ExtResource("2_ys7k7")]
+position = Vector2(-224, 0)
+scale = Vector2(0.5, 0.5)
+next_level_key = "3x10"
+next_level_position_add = Vector2(20, 0)
+
+[node name="Goal2" parent="Goals" index="1" instance=ExtResource("2_ys7k7")]
+position = Vector2(16, 0)
+scale = Vector2(0.5, 0.5)
+next_level_position_add = Vector2(-20.5, 0)
+
+[node name="Ground" parent="." index="1" instance=ExtResource("3_13hab")]
+z_index = 4
+tile_map_data = PackedByteArray("AAD3//j/AQAKAAIAAAD3//n/AQAKAAIAAAD3//r/AQAKAAIAAAD3//v/AQAKAAIAAAD3//z/AQAKAAIAAAD3//3/AQAKAAIAAAD3//7/AQAKAAIAAAD3////AQAKAAIAAAD3/wAAAQAKAAIAAAD3/wEAAQAKAAIAAAD3/wIAAQAKAAIAAAD4/wQAAQABAAAAAAD5/wQAAQABAAAAAAD6/wQAAQABAAAAAAD8/wQAAQABAAAAAAD7/wQAAQABAAAAAAD9/wQAAQABAAAAAAD+/wQAAQABAAAAAAD//wQAAQABAAAAAAAAAAQAAQABAAAAAAABAAQAAQABAAAAAAACAAQAAQABAAAAAAADAAQAAQABAAAAAAAEAAQAAQABAAAAAAAFAAQAAQABAAAAAAAGAAQAAQABAAAAAAAHAAQAAQABAAAAAAAIAAQAAQABAAAAAAD3/wQAAQABAAEAAAAJAAQAAQABAAAAAAAKAAQAAQABAAAAAAALAAQAAQABAAAAAAD3/wMAAQAKAAIAAAD2/wMAAQAJAAIAAAD2/wIAAQAJAAIAAAD2/wEAAQAJAAIAAAD2/wAAAQAJAAIAAAD2////AQAJAAIAAAD2//7/AQAJAAIAAAD2//3/AQAJAAIAAAD2//z/AQAJAAIAAAD2//v/AQAJAAIAAAD2//r/AQAJAAIAAAD2//n/AQAJAAIAAAD2//j/AQAJAAIAAAD1//j/AQAJAAIAAAD1//n/AQAJAAIAAAD1//r/AQAJAAIAAAD1//v/AQAJAAIAAAD1//z/AQAJAAIAAAD1//3/AQAJAAIAAAD1//7/AQAJAAIAAAD1////AQAJAAIAAAD1/wAAAQAJAAIAAAD1/wEAAQAJAAIAAAD1/wIAAQAJAAIAAAD1/wMAAQAJAAIAAAD2/wQAAQABAAEAAAD1/wQAAQABAAEAAAD1/wUAAQABAAEAAAD2/wUAAQABAAEAAAD3/wUAAQABAAEAAAD4/wUAAQABAAEAAAD5/wUAAQABAAEAAAD6/wUAAQABAAEAAAD7/wUAAQABAAEAAAD8/wUAAQABAAEAAAD9/wUAAQABAAEAAAD+/wUAAQABAAEAAAD//wUAAQABAAEAAAAAAAUAAQABAAEAAAABAAUAAQABAAEAAAACAAUAAQABAAEAAAADAAUAAQABAAEAAAAEAAUAAQABAAEAAAAFAAUAAQABAAEAAAAGAAUAAQABAAEAAAAHAAUAAQABAAEAAAAIAAUAAQABAAEAAAAJAAUAAQABAAEAAAAKAAUAAQABAAEAAAALAAUAAQABAAEAAAALAAYAAQABAAEAAAAKAAYAAQABAAEAAAAJAAYAAQABAAEAAAAIAAYAAQABAAEAAAAHAAYAAQABAAEAAAAGAAYAAQABAAEAAAAFAAYAAQABAAEAAAAEAAYAAQABAAEAAAADAAYAAQABAAEAAAACAAYAAQABAAEAAAABAAYAAQABAAEAAAAAAAYAAQABAAEAAAD//wYAAQABAAEAAAD+/wYAAQABAAEAAAD9/wYAAQABAAEAAAD8/wYAAQABAAEAAAD7/wYAAQABAAEAAAD6/wYAAQABAAEAAAD5/wYAAQABAAEAAAD4/wYAAQABAAEAAAD3/wYAAQABAAEAAAD2/wYAAQABAAEAAAD1/wYAAQABAAEAAAA=")
+
+[node name="Background3" type="TextureRect" parent="." index="2"]
+visibility_layer = 2
+z_index = -570
+offset_left = -332.0
+offset_top = -267.0
+offset_right = 373.0
+offset_bottom = 259.0
+texture = ExtResource("4_wogx8")
+
+[node name="Background4" type="TextureRect" parent="." index="3"]
+visibility_layer = 256
+z_index = -570
+offset_left = -326.0
+offset_top = -260.0
+offset_right = 379.0
+offset_bottom = 134.0
+texture = ExtResource("5_5q3ss")
+
+[node name="Checkpoint" parent="." index="4" instance=ExtResource("6_0bbi8")]
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAD6/wMAAQAEAAIAAAD6/wIAAQAEAAEAAAA=")
