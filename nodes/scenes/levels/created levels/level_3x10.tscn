@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=4 uid="uid://dlxejfsymiwqa"]
+
+[ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_w4toy"]
+[ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_iqj14"]
+[ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="3_v8p7s"]
+[ext_resource type="Texture2D" uid="uid://dbb824vqc5aj4" path="res://assets/art/backgrounds/background_1_dusk.png" id="4_xy177"]
+[ext_resource type="Texture2D" uid="uid://cvd3q016htpbb" path="res://assets/art/backgrounds/background_5_dusk.png" id="5_ykhte"]
+[ext_resource type="Texture2D" uid="uid://bddajxn5rtl6d" path="res://assets/art/backgrounds/background_3_dusk.png" id="6_4ciig"]
+[ext_resource type="PackedScene" uid="uid://n1ras3a5iqr8" path="res://nodes/scenes/moving_platform.tscn" id="7_t7y7d"]
+[ext_resource type="PackedScene" uid="uid://b2ku6teggg8ok" path="res://nodes/scenes/Obstacles/death_block.tscn" id="8_lr08o"]
+
+[sub_resource type="Curve2D" id="Curve2D_nekv4"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -3, 0, 0, 0, 0, 0, 800)
+}
+point_count = 2
+
+[node name="Level_3x10" instance=ExtResource("1_w4toy")]
+default_spawn = Vector2(-6, 2)
+
+[node name="Goal" parent="Goals" index="0" instance=ExtResource("2_iqj14")]
+position = Vector2(-224, 0)
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAD7/wIAAAAAAAAAAAD7/wEAAAAAAAAAAAD7/wAAAAAAAAAAAAD7////AAAAAAAAAAD7//7/AAAAAAAAAAD7//3/AAAAAAAAAAD7//z/AAAAAAAAAAD7//v/AAAAAAAAAAD7//r/AAAAAAAAAAD7/wMAAAAAAAAAAAD7/wQAAAAAAAAAAAD7/wUAAAAAAAAAAAA=")
+next_level_key = "3x9"
+next_level_position_add = Vector2(20, 0)
+
+[node name="Goal2" parent="Goals" index="1" instance=ExtResource("2_iqj14")]
+position = Vector2(16, 0)
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAAHAAgAAAAAAAAAAAAGAAgAAAAAAAAAAAAIAAgAAAAAAAAAAAA=")
+next_level_key = "3x11"
+next_level_position_add = Vector2(0, -20)
+
+[node name="Ground" parent="." index="1" instance=ExtResource("3_v8p7s")]
+z_index = 4
+tile_map_data = PackedByteArray("AAD0/wcAAQAJAAIAAAD0/wYAAQAJAAIAAAD0/wUAAQAJAAIAAAD7/wMAAQAJAAEAAAD7/wQAAQAJAAIAAAD7/wUAAQAJAAIAAAD7/wYAAQAJAAIAAAD7/wcAAQAJAAIAAAD8/wMAAQAJAAEAAAD9/wMAAQAJAAEAAAD+/wMAAQAJAAEAAAD//wMAAQAJAAEAAAAAAAMAAQAJAAEAAAABAAMAAQAJAAEAAAACAAMAAQAJAAEAAAADAAMAAQAJAAEAAAAEAAMAAQAKAAEAAAD8/wQAAQAJAAIAAAD9/wQAAQAJAAIAAAD+/wQAAQAJAAIAAAD//wQAAQAJAAIAAAAAAAQAAQAJAAIAAAABAAQAAQAJAAIAAAACAAQAAQAJAAIAAAADAAQAAQAJAAIAAAAEAAQAAQAKAAIAAAADAAUAAQAJAAIAAAACAAUAAQAJAAIAAAABAAYAAQAJAAIAAAAAAAYAAQAJAAIAAAD//wYAAQAJAAIAAAD+/wYAAQAJAAIAAAD9/wYAAQAJAAIAAAD8/wUAAQAJAAIAAAD9/wUAAQAJAAIAAAD+/wUAAQAJAAIAAAD//wUAAQAJAAIAAAAAAAUAAQAJAAIAAAABAAUAAQAJAAIAAAAEAAUAAQAKAAIAAAAEAAYAAQAKAAIAAAADAAYAAQAJAAIAAAACAAcAAQAJAAIAAAABAAcAAQAJAAIAAAAAAAcAAQAJAAIAAAD//wcAAQAJAAIAAAD+/wcAAQAJAAIAAAD9/wcAAQAJAAIAAAD8/wYAAQAJAAIAAAD8/wcAAQAJAAIAAAADAAcAAQAJAAIAAAAEAAcAAQAKAAIAAAACAAYAAQAJAAIAAAD4/wMAAQAJAAEAAAD5/wMAAQAJAAEAAAD6/wMAAQAJAAEAAAD4/wQAAQAJAAIAAAD4/wUAAQAJAAIAAAD4/wYAAQAJAAIAAAD4/wcAAQAJAAIAAAD5/wQAAQAJAAIAAAD6/wQAAQAJAAIAAAD6/wUAAQAJAAIAAAD5/wUAAQAJAAIAAAD5/wYAAQAJAAIAAAD5/wcAAQAJAAIAAAD6/wcAAQAJAAIAAAD6/wYAAQAJAAIAAAD1/wMAAQAJAAEAAAD2/wMAAQAJAAEAAAD3/wMAAQAJAAEAAAD3/wcAAQAJAAIAAAD2/wcAAQAJAAIAAAD1/wcAAQAJAAIAAAD1/wQAAQAJAAIAAAD2/wQAAQAJAAIAAAD3/wQAAQAJAAIAAAD3/wUAAQAJAAIAAAD2/wUAAQAJAAIAAAD1/wUAAQAJAAIAAAD1/wYAAQAJAAIAAAD2/wYAAQAJAAIAAAD3/wYAAQAJAAIAAAD0/wQAAQAJAAIAAAALAAkAAQAIAAIAAAALAAgAAQAIAAIAAAALAAcAAQAIAAIAAAALAAYAAQAIAAIAAAALAAUAAQAIAAIAAAALAAQAAQAIAAIAAAALAAMAAQAIAAIAAAALAAIAAQAIAAIAAAALAAEAAQAIAAIAAAALAAAAAQAIAAIAAAALAP//AQAIAAIAAAALAP7/AQAIAAIAAAALAP3/AQAIAAIAAAALAPz/AQAIAAIAAAALAPv/AQAIAAIAAAALAPr/AQAIAAIAAAALAPn/AQAIAAIAAAALAPj/AQAIAAIAAAALAPf/AQAIAAIAAAA=")
+
+[node name="Background2" type="TextureRect" parent="." index="2"]
+z_index = -570
+offset_left = -328.0
+offset_top = -265.0
+offset_right = 373.0
+offset_bottom = 95.0
+texture = ExtResource("4_xy177")
+
+[node name="Background3" type="TextureRect" parent="." index="3"]
+z_index = -570
+offset_left = -332.0
+offset_top = -137.0
+offset_right = 373.0
+offset_bottom = 259.0
+texture = ExtResource("5_ykhte")
+
+[node name="Background4" type="TextureRect" parent="." index="4"]
+z_index = -570
+offset_left = -333.0
+offset_top = -210.0
+offset_right = 372.0
+offset_bottom = -86.0
+texture = ExtResource("6_4ciig")
+
+[node name="Path2D" parent="." index="5" instance=ExtResource("7_t7y7d")]
+position = Vector2(257, -353)
+curve = SubResource("Curve2D_nekv4")
+speed = 1.0
+
+[node name="DeathBlock" parent="." index="6" instance=ExtResource("8_lr08o")]
+tile_map_data = PackedByteArray("AAAEAAgAAAAEAAAAAAAEAAkAAAAEAAAAAAAFAAkAAAAEAAAAAAAGAAkAAAAEAAAAAAAJAAkAAAAEAAAAAAAKAAkAAAAEAAAAAAALAAkAAAAEAAAAAAA=")

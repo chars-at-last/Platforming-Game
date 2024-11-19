@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://b03acn6rfrr2k"]
+[gd_scene load_steps=11 format=4 uid="uid://b03acn6rfrr2k"]
 
 [ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_7ugjd"]
 [ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="2_igk5d"]
@@ -6,6 +6,25 @@
 [ext_resource type="Texture2D" uid="uid://dbb824vqc5aj4" path="res://assets/art/backgrounds/background_1_dusk.png" id="4_fqwyf"]
 [ext_resource type="Texture2D" uid="uid://cvd3q016htpbb" path="res://assets/art/backgrounds/background_5_dusk.png" id="5_ncgmn"]
 [ext_resource type="Texture2D" uid="uid://bddajxn5rtl6d" path="res://assets/art/backgrounds/background_3_dusk.png" id="6_6j73u"]
+[ext_resource type="PackedScene" uid="uid://756hrprkswld" path="res://nodes/scenes/Obstacles/moving_hazards.tscn" id="7_8yxf0"]
+
+[sub_resource type="Curve2D" id="Curve2D_j4l7r"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, -488)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_wkugm"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2, -4, 0, 0, 0, 0, -1000, -4)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_ghjls"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2, 2, 0, 0, 0, 0, -1000, 2)
+}
+point_count = 2
 
 [node name="Level_3x9" instance=ExtResource("1_7ugjd")]
 default_spawn = Vector2(-6, 2)
@@ -23,7 +42,9 @@ next_level_position_add = Vector2(9, -10)
 [node name="Goal2" parent="Goals" index="1" instance=ExtResource("3_hrkhg")]
 position = Vector2(16, 0)
 scale = Vector2(0.5, 0.5)
-next_level_position_add = Vector2(-20.5, 0)
+tile_map_data = PackedByteArray("AAALAAIAAAAAAAAAAAALAAEAAAAAAAAAAAALAAAAAAAAAAAAAAALAP//AAAAAAAAAAALAP7/AAAAAAAAAAALAP3/AAAAAAAAAAALAPz/AAAAAAAAAAALAPv/AAAAAAAAAAALAPr/AAAAAAAAAAALAPn/AAAAAAAAAAALAPf/AAAAAAAAAAALAPj/AAAAAAAAAAA=")
+next_level_key = "3x10"
+next_level_position_add = Vector2(-20, 0)
 
 [node name="Ground" parent="." index="2" instance=ExtResource("2_igk5d")]
 z_index = 4
@@ -42,7 +63,7 @@ z_index = -570
 offset_left = -332.0
 offset_top = -137.0
 offset_right = 373.0
-offset_bottom = 101.0
+offset_bottom = 255.0
 texture = ExtResource("5_ncgmn")
 
 [node name="Background4" type="TextureRect" parent="." index="5"]
@@ -52,3 +73,21 @@ offset_top = -210.0
 offset_right = 372.0
 offset_bottom = -86.0
 texture = ExtResource("6_6j73u")
+
+[node name="Path2D" parent="." index="6" instance=ExtResource("7_8yxf0")]
+position = Vector2(297, 72)
+scale = Vector2(0.5, 0.5)
+curve = SubResource("Curve2D_j4l7r")
+loop = false
+
+[node name="Path2D2" parent="." index="7" instance=ExtResource("7_8yxf0")]
+position = Vector2(248, -98)
+scale = Vector2(0.5, 0.5)
+curve = SubResource("Curve2D_wkugm")
+loop = false
+
+[node name="Path2D3" parent="." index="8" instance=ExtResource("7_8yxf0")]
+position = Vector2(249, 72)
+scale = Vector2(0.5, 0.5)
+curve = SubResource("Curve2D_ghjls")
+loop = false

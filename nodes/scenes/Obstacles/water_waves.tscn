@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://cm0l73s8nkjax"]
+
+[ext_resource type="Texture2D" uid="uid://uait7e1mn88k" path="res://assets/art/Water_Tile_resized.png" id="1_jnrux"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s5nxv"]
+texture = ExtResource("1_jnrux")
+texture_region_size = Vector2i(32, 32)
+0:0/animation_columns = 32
+0:0/animation_speed = 24.0
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/animation_frame_6/duration = 1.0
+0:0/animation_frame_7/duration = 1.0
+0:0/animation_frame_8/duration = 1.0
+0:0/animation_frame_9/duration = 1.0
+0:0/animation_frame_10/duration = 1.0
+0:0/animation_frame_11/duration = 1.0
+0:0/animation_frame_12/duration = 1.0
+0:0/animation_frame_13/duration = 1.0
+0:0/animation_frame_14/duration = 1.0
+0:0/animation_frame_15/duration = 1.0
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ppavn"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_s5nxv")
+
+[node name="TileMapLayer" type="TileMapLayer"]
+tile_set = SubResource("TileSet_ppavn")
