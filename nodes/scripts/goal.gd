@@ -1,14 +1,15 @@
 class_name Goal extends Tile
 
 # Signal(s)
-signal complete_level(next_level_key: String, next_level_pos_add: Vector2)
+signal complete_level(next_level_key: String, next_level_pos_add: Vector2, next_level_pos_vel: Vector2)
 
 # Variable(s)
 @export var next_level_key: String									## Key of next level
 @export var level_collection_key: String = "base_collection"		## Key of next level collection
 #@export var current_level_key: String		## Key of current level
 
-@export var next_level_position_add: Vector2						## How to add to player position in transition to next level
+@export var next_level_position_add: Vector2						## How much to add to player position in transition to next level
+@export var next_level_position_vel: Vector2 = Vector2.ZERO			## How much to add to player velocity when transitioning
 
 var goal_active: bool = false
 
@@ -26,7 +27,7 @@ func _ready() -> void:
 func handle_collision(collider: Node) -> void:
 	if goal_active and collider is Player:
 		print("Level Completed!", next_level_position_add)
-		emit_signal("complete_level", next_level_key, next_level_position_add)
+		emit_signal("complete_level", next_level_key, next_level_position_add, next_level_position_vel)
 		
 		#clear the dictionary in DoorOpened so the next level's door will work as
 		#intended

@@ -154,7 +154,7 @@ func level_select() -> bool:
 	#next_level = instance1.get_path()
 
 #func _on_goal_tile_complete_level() -> void:
-func next(next_level_key: String, next_level_pos_add: Vector2, force_change: bool = false) -> void:
+func next(next_level_key: String, next_level_pos_add: Vector2, next_level_pos_vel: Vector2 = Vector2.ZERO, force_change: bool = false) -> void:
 	print("Switching level ", next_level_key)
 	await get_tree().physics_frame
 	if level_loader.loaded_levels.has(next_level_key):
@@ -170,6 +170,10 @@ func next(next_level_key: String, next_level_pos_add: Vector2, force_change: boo
 		add_child(next_level)																	# Add next level
 		#awaitd get_tree().physics_frame
 		cur_player.set_position(cur_player.position + Level.to_pixel_coords(next_level_pos_add))# Change player position
+		cur_player.velocity += next_level_pos_vel
+		cur_player.unbridled_velocity += next_level_pos_vel
+		
+		
 		cur_level.call_deferred("add_child", cur_player)	
 		cur_player.set_light()									# Add back player
 		print("Switching level complete, player is at ", cur_player.position)
@@ -209,7 +213,7 @@ func reset_player(body) -> void:
 	if SpawnPoint.check_point_level == cur_level_key:
 		print("Spawning in current level", cur_level_key)
 		#print(SpawnPoint.global_vector)
-		next(cur_level_key, Vector2.ZERO, true)
+		next(cur_level_key, Vector2.ZERO, Vector2.ZERO, true)
 		body.position = SpawnPoint.global_vector
 	elif !SpawnPoint.check_point_on and SaveManager.check_point_level() == null:
 		print("No checkpoint, restarting game")
@@ -240,9 +244,9 @@ func reset_player(body) -> void:
 
 # Signal method(s) #
 
-func _on_goal_tile_complete_level(next_level_key: String, next_level_pos_add: Vector2) -> void:
+func _on_goal_tile_complete_level(next_level_key: String, next_level_pos_add: Vector2, next_level_pos_vel: Vector2) -> void:
 	if cur_level_key != next_level_key:
-		next(next_level_key, next_level_pos_add)
+		next(next_level_key, next_level_pos_add, next_level_pos_vel)
 		
 func _on_checkpoint_reached() -> void:
 	SpawnPoint.check_point_level = cur_level_key
