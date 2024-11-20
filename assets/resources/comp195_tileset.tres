@@ -1,11 +1,9 @@
-[gd_resource type="TileSet" load_steps=17 format=3 uid="uid://bsuhy77c6mhv3"]
+[gd_resource type="TileSet" load_steps=15 format=3 uid="uid://bsuhy77c6mhv3"]
 
 [ext_resource type="Texture2D" uid="uid://dr3xpnwogtwk2" path="res://assets/art/comp195_tileset.png" id="1_045vx"]
 [ext_resource type="PackedScene" uid="uid://bxkind4xikk3o" path="res://nodes/scenes/gun_recharge_orb.tscn" id="1_q5wx7"]
 [ext_resource type="PackedScene" uid="uid://dsarf8g262rwd" path="res://nodes/scenes/interactives/turtle.tscn" id="2_svvbr"]
 [ext_resource type="Texture2D" uid="uid://vl0syh03y3f" path="res://assets/resources/Pixel2DCastle1/walls.png" id="4_a1qad"]
-[ext_resource type="Texture2D" uid="uid://uait7e1mn88k" path="res://assets/art/Water_Tile_resized.png" id="4_hjedv"]
-[ext_resource type="Texture2D" uid="uid://ci1fibossddox" path="res://assets/art/tileset_resized.png" id="5_h37b8"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_rn60h"]
 scenes/1/scene = ExtResource("1_q5wx7")
@@ -947,9 +945,36 @@ texture_region_size = Vector2i(64, 64)
 8:0/0 = 0
 8:0/0/physics_layer_3/polygon_0/points = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
 9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+11:8/0 = 0
+11:7/0 = 0
+11:6/0 = 0
+11:5/0 = 0
+11:4/0 = 0
+11:3/0 = 0
+11:2/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+13:2/0 = 0
+13:3/0 = 0
+13:4/0 = 0
+13:5/0 = 0
+13:6/0 = 0
+13:7/0 = 0
+13:8/0 = 0
+12:8/0 = 0
+12:7/0 = 0
+12:6/0 = 0
+12:5/0 = 0
+12:4/0 = 0
+12:3/0 = 0
+12:2/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s3rx8"]
-texture = ExtResource("4_hjedv")
 texture_region_size = Vector2i(64, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -1230,7 +1255,6 @@ texture_region_size = Vector2i(64, 64)
 7:7/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6bb7g"]
-texture = ExtResource("5_h37b8")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 1:0/0 = 0

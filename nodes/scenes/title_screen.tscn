@@ -45,7 +45,7 @@ offset_right = 628.0
 offset_bottom = 86.0
 theme_override_font_sizes/italics_font_size = 25
 bbcode_enabled = true
-text = "[i]Project Momentum Platformer[/i]"
+text = "[i]Castle of the Elder Tree[/i]"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Title"]
 custom_minimum_size = Vector2(200, 200)
