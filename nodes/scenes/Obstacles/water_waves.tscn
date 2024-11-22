@@ -5,8 +5,9 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s5nxv"]
 texture = ExtResource("1_jnrux")
 texture_region_size = Vector2i(32, 32)
-0:0/animation_columns = 32
+0:0/animation_columns = 15
 0:0/animation_speed = 24.0
+0:0/animation_mode = 1
 0:0/animation_frame_0/duration = 1.0
 0:0/animation_frame_1/duration = 1.0
 0:0/animation_frame_2/duration = 1.0
@@ -22,7 +23,6 @@ texture_region_size = Vector2i(32, 32)
 0:0/animation_frame_12/duration = 1.0
 0:0/animation_frame_13/duration = 1.0
 0:0/animation_frame_14/duration = 1.0
-0:0/animation_frame_15/duration = 1.0
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ppavn"]
