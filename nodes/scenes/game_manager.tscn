@@ -80,8 +80,3 @@ tile_map_data = PackedByteArray("AAApAA4AAAAAAAAAAAApAA8AAAAAAAAAAAApABAAAAAAAAA
 next_level_key = "level_01"
 
 [node name="LevelManager" parent="." instance=ExtResource("7_5cnyl")]
-
-[connection signal="death" from="Spikes" to="LevelManager" method="on_death"]
-[connection signal="death" from="SpikesSmall" to="LevelManager" method="on_death"]
-[connection signal="complete_level" from="TileMapLayer" to="LevelManager" method="next"]
-[connection signal="complete_level" from="TileMapLayer" to="LevelManager" method="_on_tile_map_layer_complete_level"]

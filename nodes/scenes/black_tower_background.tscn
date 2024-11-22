@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://dohus5543im5f"]
+
+[ext_resource type="Shader" path="res://nodes/scripts/shaders/color_swap.gdshader" id="1_05umr"]
+[ext_resource type="Texture2D" uid="uid://40hx1ohbospg" path="res://assets/art/death_spirits.png" id="1_d10yq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_galft"]
+shader = ExtResource("1_05umr")
+shader_parameter/from = Color(1, 1, 1, 1)
+shader_parameter/to = Color(0.196078, 0.364706, 0.203922, 1)
+shader_parameter/threshold = 1.0
+shader_parameter/alpha_threshold = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_owow2"]
+shader = ExtResource("1_05umr")
+shader_parameter/from = Color(1, 1, 1, 1)
+shader_parameter/to = Color(0.196078, 0.364706, 0.203922, 1)
+shader_parameter/threshold = 1.0
+shader_parameter/alpha_threshold = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6b3ki"]
+shader = ExtResource("1_05umr")
+shader_parameter/from = Color(1, 1, 1, 1)
+shader_parameter/to = Color(0.764706, 0.0862745, 0.0862745, 1)
+shader_parameter/threshold = 1.0
+shader_parameter/alpha_threshold = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_70lrb"]
+shader = ExtResource("1_05umr")
+shader_parameter/from = Color(1, 1, 1, 1)
+shader_parameter/to = Color(0.760784, 0.0862745, 0.0862745, 1)
+shader_parameter/threshold = 1.0
+shader_parameter/alpha_threshold = 0.2
+
+[node name="BlackTowerBackground" type="Node2D"]
+z_index = -256
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Parallax2D2" type="Parallax2D" parent="Node2D"]
+scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(0, 1080)
+autoscroll = Vector2(0, 50)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Parallax2D2"]
+material = SubResource("ShaderMaterial_galft")
+position = Vector2(94, 144)
+texture = ExtResource("1_d10yq")
+flip_v = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D/Parallax2D2"]
+material = SubResource("ShaderMaterial_owow2")
+position = Vector2(1186, 144)
+texture = ExtResource("1_d10yq")
+flip_h = true
+flip_v = true
+
+[node name="Parallax2D" type="Parallax2D" parent="Node2D"]
+scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(0, 1080)
+autoscroll = Vector2(0, -50)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Parallax2D"]
+material = SubResource("ShaderMaterial_6b3ki")
+position = Vector2(94, 144)
+texture = ExtResource("1_d10yq")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D/Parallax2D"]
+material = SubResource("ShaderMaterial_70lrb")
+position = Vector2(1186, 144)
+texture = ExtResource("1_d10yq")
+flip_h = true
