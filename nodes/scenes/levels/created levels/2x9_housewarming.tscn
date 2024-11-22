@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://vyj36j0hv8jy" path="res://nodes/scenes/Obstacles/spikes.tscn" id="4_xw4rg"]
 
 [node name="2x9_housewarming" instance=ExtResource("1_r1smg")]
+default_spawn = Vector2(4, -4)
 
 [node name="Goal" parent="Goals" index="0" instance=ExtResource("2_38al6")]
 position = Vector2(-16, 0)

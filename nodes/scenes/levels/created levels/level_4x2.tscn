@@ -1,18 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://c3ij3c2xjnqov"]
+[gd_scene load_steps=5 format=4 uid="uid://c3ij3c2xjnqov"]
 
 [ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_mxi3o"]
 [ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_g7ayb"]
 [ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="3_f2lfu"]
 [ext_resource type="PackedScene" uid="uid://b2ku6teggg8ok" path="res://nodes/scenes/Obstacles/death_block.tscn" id="5_k3bhk"]
-[ext_resource type="PackedScene" uid="uid://cv87u7w8w308u" path="res://nodes/scenes/coin.tscn" id="6_c5yxt"]
-[ext_resource type="PackedScene" uid="uid://jbg30mry1f3o" path="res://nodes/scenes/Obstacles/door.tscn" id="7_iy7op"]
-[ext_resource type="PackedScene" uid="uid://cm0l73s8nkjax" path="res://nodes/scenes/Obstacles/water_waves.tscn" id="8_4vkjk"]
-
-[sub_resource type="Curve2D" id="Curve2D_1oyjx"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, -3, -152)
-}
-point_count = 3
 
 [node name="Level_4x2" instance=ExtResource("1_mxi3o")]
 size = Vector2(54, 22)
@@ -29,6 +20,7 @@ next_level_position_add = Vector2(17, 0)
 position = Vector2(16, 0)
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAAsAP3/AAAAAAAAAAAsAPz/AAAAAAAAAAAsAPv/AAAAAAAAAAA=")
+next_level_key = "3x10"
 next_level_position_add = Vector2(-20.5, 0)
 
 [node name="Ground" parent="." index="1" instance=ExtResource("3_f2lfu")]
@@ -40,18 +32,3 @@ tile_map_data = PackedByteArray("AAADAAQACAAWAAIAAAADAAUACAAWAAIAAAADAAYACAAWAAI
 
 [node name="DeathBlock" parent="." index="3" instance=ExtResource("5_k3bhk")]
 tile_map_data = PackedByteArray("AAADABAAAAAEAAAAAAAEABAAAAAEAAAAAAAFABAAAAAEAAAAAAAGABAAAAAEAAAAAAAHABAAAAAEAAAAAAAIABAAAAAEAAAAAAAJABAAAAAEAAAAAAAKABAAAAAEAAAAAAALABAAAAAEAAAAAAAMABAAAAAEAAAAAAANABAAAAAEAAAAAAAOABAAAAAEAAAAAAAPABAAAAAEAAAAAAAQABAAAAAEAAAAAAARABAAAAAEAAAAAAASABAAAAAEAAAAAAATABAAAAAEAAAAAAAUABAAAAAEAAAAAAAVABAAAAAEAAAAAAAWABAAAAAEAAAAAAAXABAAAAAEAAAAAAAYABAAAAAEAAAAAAAZABAAAAAEAAAAAAAaABAAAAAEAAAAAAAbABAAAAAEAAAAAAAcABAAAAAEAAAAAAAdABAAAAAEAAAAAAAeABAAAAAEAAAAAAAfABAAAAAEAAAAAAAgABAAAAAEAAAAAAAhABAAAAAEAAAAAAAiABAAAAAEAAAAAAAjABAAAAAEAAAAAAAkABAAAAAEAAAAAAAlABAAAAAEAAAAAAAmABAAAAAEAAAAAAAnABAAAAAEAAAAAAAoABAAAAAEAAAAAAApABAAAAAEAAAAAAAqABAAAAAEAAAAAAA=")
-
-[node name="Water" parent="." index="4" instance=ExtResource("8_4vkjk")]
-position = Vector2(0, -20)
-tile_map_data = PackedByteArray("AAADABAAAAAAAAAAAAAHABAAAAAAAAAAAAAGABAAAAAAAAAAAAAFABAAAAAAAAAAAAAEABAAAAAAAAAAAAAIABAAAAAAAAAAAAAJABAAAAAAAAAAAAAKABAAAAAAAAAAAAALABAAAAAAAAAAAAAMABAAAAAAAAAAAAANABAAAAAAAAAAAAAOABAAAAAAAAAAAAAPABAAAAAAAAAAAAAQABAAAAAAAAAAAAARABAAAAAAAAAAAAASABAAAAAAAAAAAAATABAAAAAAAAAAAAAUABAAAAAAAAAAAAAVABAAAAAAAAAAAAAWABAAAAAAAAAAAAAXABAAAAAAAAAAAAAYABAAAAAAAAAAAAAZABAAAAAAAAAAAAAaABAAAAAAAAAAAAAbABAAAAAAAAAAAAAcABAAAAAAAAAAAAAdABAAAAAAAAAAAAAeABAAAAAAAAAAAAAfABAAAAAAAAAAAAAgABAAAAAAAAAAAAAhABAAAAAAAAAAAAAiABAAAAAAAAAAAAAjABAAAAAAAAAAAAAkABAAAAAAAAAAAAAlABAAAAAAAAAAAAAmABAAAAAAAAAAAAAnABAAAAAAAAAAAAAoABAAAAAAAAAAAAApABAAAAAAAAAAAAAqABAAAAAAAAAAAAA=")
-
-[node name="Coins" parent="." index="5" instance=ExtResource("6_c5yxt")]
-scale = Vector2(0.5, 0.5)
-tile_map_data = PackedByteArray("AAD5/wsAAAAAAAAAAAA=")
-total_coins = 1
-id = 1
-
-[node name="Door" parent="." index="6" instance=ExtResource("7_iy7op")]
-position = Vector2(1358, -112)
-curve = SubResource("Curve2D_1oyjx")
-id = 1

@@ -113,12 +113,13 @@ func make_solid() -> void:
 # Signal method(s) #
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.velocity.y > 0:
-		update_state(States.SHELL if _state == States.WALKING else States.SPINNING, sign(position.x - body.position.x))
-		
-		if body is not Player:
-			body.velocity.y = TURTLE_BOOST
-		else:
-			body.jump(TURTLE_BOOST, true)
-	elif body.velocity.y <= 0 and _state == States.SPINNING:
-		emit_signal("death", body)
+	if body is Player:
+		if body.velocity.y > 0:
+			update_state(States.SHELL if _state == States.WALKING else States.SPINNING, sign(position.x - body.position.x))
+			
+			if body is not Player:
+				body.velocity.y = TURTLE_BOOST
+			else:
+				body.jump(TURTLE_BOOST, true)
+		elif body.velocity.y <= 0 and _state == States.SPINNING:
+			emit_signal("death", body)

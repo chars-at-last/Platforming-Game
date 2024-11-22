@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=4 uid="uid://qyxcdas581wy"]
+
+[ext_resource type="PackedScene" uid="uid://tlcp7xi0yxyb" path="res://nodes/scenes/levels/level.tscn" id="1_tq3a1"]
+[ext_resource type="PackedScene" uid="uid://d2cg1ygpdb07v" path="res://nodes/scenes/goal.tscn" id="2_b4ykf"]
+[ext_resource type="PackedScene" uid="uid://ch2455e3kwkon" path="res://nodes/scenes/Obstacles/tile.tscn" id="2_ny5w3"]
+[ext_resource type="PackedScene" uid="uid://dsarf8g262rwd" path="res://nodes/scenes/interactives/turtle.tscn" id="3_8vrl2"]
+[ext_resource type="PackedScene" uid="uid://bvbjytke3hmq6" path="res://nodes/scenes/section_2_background.tscn" id="4_wc7wn"]
+
+[sub_resource type="Gradient" id="Gradient_68tos"]
+offsets = PackedFloat32Array(0, 0.358696, 0.862319, 1)
+colors = PackedColorArray(0.0392157, 0.454902, 0.647059, 1, 0.392157, 0, 0.729412, 1, 0.592671, 2.06962e-05, 0.439436, 1, 0.486275, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_t2prg"]
+gradient = SubResource("Gradient_68tos")
+
+[node name="2x15_the_wall" instance=ExtResource("1_tq3a1")]
+
+[node name="Goal" parent="Goals" index="0" instance=ExtResource("2_b4ykf")]
+position = Vector2(-8, 0)
+tile_map_data = PackedByteArray("AAD6/wEAAAAAAAAAAAD6/wAAAAAAAAAAAAD6////AAAAAAAAAAD6//7/AAAAAAAAAAD6//3/AAAAAAAAAAD6//z/AAAAAAAAAAD6//v/AAAAAAAAAAD6//r/AAAAAAAAAAA=")
+next_level_key = "2x14"
+next_level_position_add = Vector2(20.5, 0)
+
+[node name="Goal2" parent="Goals" index="1" instance=ExtResource("2_b4ykf")]
+position = Vector2(8, 0)
+tile_map_data = PackedByteArray("AAAFAAEAAAACAAAAAAAFAAAAAAACAAAAAAA=")
+next_level_key = "2x1"
+next_level_position_add = Vector2(-20.5, 0)
+
+[node name="Section2Background" parent="." index="1" instance=ExtResource("4_wc7wn")]
+z_index = -321
+
+[node name="ColorRect" parent="Section2Background" index="0"]
+visible = false
+
+[node name="Parallax2D" parent="Section2Background" index="1"]
+visible = false
+
+[node name="Sprite2D" parent="Section2Background/Parallax2D" index="0"]
+visible = false
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" parent="Section2Background" index="2"]
+position = Vector2(263, 259)
+scale = Vector2(2, 2)
+
+[node name="TextureRect" type="TextureRect" parent="." index="2"]
+self_modulate = Color(0.912289, 0.912289, 0.912289, 1)
+z_index = -1280
+offset_left = 461.0
+offset_top = -189.0
+offset_right = 717.0
+offset_bottom = 666.0
+rotation = 1.5708
+texture = SubResource("GradientTexture1D_t2prg")
+
+[node name="Tile" parent="." index="3" instance=ExtResource("2_ny5w3")]
+tile_map_data = PackedByteArray("AAAKAAUAAQAHAAIAAAAJAAUAAQAGAAIAAAAIAAUAAQAGAAIAAAAHAAUAAQAGAAIAAAAGAAUAAQAGAAIAAAAFAAUAAQAGAAIAAAAEAAUAAQAGAAIAAAADAAUAAQAGAAIAAAACAAUAAQAGAAIAAAABAAUAAQAGAAIAAAAAAAUAAQAGAAIAAAD//wUAAQAGAAIAAAD+/wUAAQAGAAIAAAD9/wUAAQAGAAIAAAD8/wUAAQAGAAIAAAD7/wUAAQAGAAIAAAD6/wUAAQAGAAIAAAD5/wUAAQAGAAIAAAD4/wUAAQAGAAIAAAD3/wUAAQAGAAIAAAD2/wUAAQAGAAIAAAD1/wUAAQAFAAIAAAAKAAYAAQAHAAMAAAAKAAQAAQAHAAEAAAAJAAYAAQAGAAMAAAAJAAQAAQAGAAEAAAAIAAYAAQAGAAMAAAAIAAQAAQAGAAEAAAAHAAYAAQAGAAMAAAAHAAQAAQAGAAEAAAAGAAYAAQAGAAMAAAAGAAQAAQAGAAEAAAAFAAYAAQAGAAMAAAAFAAQAAQAGAAEAAAAEAAYAAQAGAAMAAAAEAAQAAQAGAAEAAAADAAYAAQAGAAMAAAADAAQAAQAGAAEAAAACAAYAAQAGAAMAAAACAAQAAQAGAAEAAAABAAYAAQAGAAMAAAABAAQAAQAGAAEAAAAAAAYAAQAGAAMAAAAAAAQAAQAGAAEAAAD//wYAAQAGAAMAAAD//wQAAQAGAAEAAAD+/wYAAQAGAAMAAAD+/wQAAQAGAAEAAAD9/wYAAQAGAAMAAAD9/wQAAQAGAAEAAAD8/wYAAQAGAAMAAAD8/wQAAQAGAAEAAAD7/wYAAQAGAAMAAAD7/wQAAQAGAAEAAAD6/wYAAQAGAAMAAAD6/wQAAQAGAAEAAAD5/wYAAQAGAAMAAAD5/wQAAQAGAAEAAAD4/wYAAQAGAAMAAAD4/wQAAQAFAAQAAQD3/wYAAQAGAAMAAAD3/wQAAQAGAAIAAAD2/wYAAQAGAAMAAAD2/wQAAQAGAAIAAAD1/wYAAQAFAAMAAAD1/wQAAQAFAAIAAAAKAAAAAQAKAAMAAAAKAP//AQAKAAIAAAAKAP7/AQAKAAIAAAAKAP3/AQAKAAIAAAAKAPz/AQAKAAIAAAAKAPv/AQAKAAIAAAAKAPr/AQAKAAIAAAAKAPn/AQAKAAEAAAAJAAAAAQAJAAMAAAAJAP//AQAJAAIAAAAJAP7/AQAJAAIAAAAJAP3/AQAJAAIAAAAJAPz/AQAJAAIAAAAJAPv/AQAJAAIAAAAJAPr/AQAJAAIAAAAJAPn/AQAJAAEAAAAIAAAAAQAIAAMAAAAIAP//AQAIAAIAAAAIAP7/AQAIAAIAAAAIAP3/AQAIAAIAAAAIAPz/AQAIAAIAAAAIAPv/AQAIAAIAAAAIAPr/AQAIAAIAAAAIAPn/AQAIAAEAAAAIAPj/AQACAAYAAAAHAPj/AQABAAYAAAAGAPj/AQABAAYAAAAFAPj/AQABAAYAAAAEAPj/AQABAAYAAAADAPj/AQABAAYAAAACAPj/AQABAAYAAAABAPj/AQABAAYAAAAAAPj/AQABAAYAAAD///j/AQABAAYAAAD+//j/AQABAAYAAAD9//j/AQABAAYAAAD8//j/AQABAAYAAAD7//j/AQABAAYAAAD6//j/AQABAAYAAAD5//j/AQABAAYAAAD4//j/AQABAAYAAAD3//j/AQABAAYAAAD2//j/AQAAAAYAAAD4/wMAAQAHAAEAAAD3/wMAAQAGAAEAAAD2/wMAAQAGAAEAAAD1/wMAAQAFAAEAAAA=")
+
+[node name="Turtle" parent="." index="4" instance=ExtResource("3_8vrl2")]
+position = Vector2(-138, 109)
+
+[node name="Turtle2" parent="." index="5" instance=ExtResource("3_8vrl2")]
+position = Vector2(100, 103)
+facing_dir = -1.0
+
+[node name="Tile2" parent="." index="6" instance=ExtResource("2_ny5w3")]
+modulate = Color(0.226707, 0.226707, 0.226707, 1)
+z_index = -310
+tile_map_data = PackedByteArray("AAAKAAQAAQAKAAMAAAAKAAMAAQAKAAIAAAAKAAIAAQAKAAIAAAAKAAEAAQAKAAIAAAAKAAAAAQAKAAEAAAAJAAQAAQAIAAMAAAAJAAMAAQAIAAIAAAAJAAIAAQAIAAIAAAAJAAEAAQAIAAIAAAAJAAAAAQAIAAEAAAA=")
+collision_enabled = false
+
+[node name="Others" parent="." index="7" instance=ExtResource("2_ny5w3")]
+tile_map_data = PackedByteArray("AAAAAAMAAQAEAAcAAAAAAAIAAQAEAAYAAAAAAAEAAQAEAAYAAAAAAAAAAQAEAAYAAAD//wMAAQADAAcAAAD//wIAAQADAAYAAAD//wEAAQADAAYAAAD//wAAAQADAAYAAAAAAP//AQAEAAUAAAAAAP7/AQAEAAQAAAD/////AQADAAUAAAD///7/AQADAAQAAAA=")
+
+[editable path="Section2Background"]

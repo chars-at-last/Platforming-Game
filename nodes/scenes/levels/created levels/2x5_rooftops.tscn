@@ -89,6 +89,9 @@ offset_top = -477.0
 offset_right = 1111.0
 offset_bottom = 749.0
 
+[node name="Parallax2D" parent="Section2Background" index="1"]
+repeat_times = 3
+
 [node name="Sprite2D" parent="Section2Background" index="2"]
 position = Vector2(459, 408)
 scale = Vector2(1.5, 1.5)
