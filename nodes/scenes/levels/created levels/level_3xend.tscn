@@ -21,7 +21,7 @@ position = Vector2(16, 0)
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAAEAAgAAAAAAAAAAAAFAAgAAAAAAAAAAAAGAAgAAAAAAAAAAAAHAAgAAAAAAAAAAAAIAAgAAAAAAAAAAAAJAAgAAAAAAAAAAAAKAAgAAAAAAAAAAAA=")
 next_level_key = "4xstart"
-next_level_position_add = Vector2(-17, -20)
+next_level_position_add = Vector2(-15, -15)
 
 [node name="Ground" parent="." index="1" instance=ExtResource("3_8risw")]
 z_index = 4

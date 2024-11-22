@@ -129,6 +129,10 @@ func setup_levels(level_keys: Array[String], level_collection: Array[String]) ->
 # Select a level to be loaded
 func level_select() -> bool:
 	print("preloading ", preloaded_level_key)
+	#preload("res://assets/art/Water_Tile_resized.png")
+	preload("res://nodes/scenes/Obstacles/water_waves.tscn")
+	preload("res://nodes/scenes/Obstacles/door.tscn")
+	preload("res://nodes/scenes/coin.tscn")
 	force_preloaded_level = true
 	#if cur_level_key.is_empty():
 		#cur_level_key = default_level_key

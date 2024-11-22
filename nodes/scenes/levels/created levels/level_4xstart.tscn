@@ -13,7 +13,7 @@ default_spawn = Vector2(-6, 2)
 [node name="Goal" parent="Goals" index="0" instance=ExtResource("2_ys7k7")]
 position = Vector2(-224, 0)
 scale = Vector2(0.5, 0.5)
-next_level_key = "3x10"
+next_level_key = "3xend"
 next_level_position_add = Vector2(20, 0)
 
 [node name="Goal2" parent="Goals" index="1" instance=ExtResource("2_ys7k7")]
@@ -21,7 +21,7 @@ position = Vector2(16, 0)
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAADAAcAAAAAAAAAAAADAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAAFAAgAAAAAAAAAAAAGAAgAAAAAAAAAAAAHAAgAAAAAAAAAAAAIAAgAAAAAAAAAAAAJAAgAAAAAAAAAAAAKAAgAAAAAAAAAAAALAAgAAAAAAAAAAAAMAAgAAAAAAAAAAAA=")
 next_level_key = "4x2"
-next_level_position_add = Vector2(-16, -11)
+next_level_position_add = Vector2(-16, -12)
 
 [node name="Ground" parent="." index="1" instance=ExtResource("3_13hab")]
 z_index = 4
