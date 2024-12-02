@@ -44,6 +44,7 @@ collection = {
 "4x2": "level_4x2",
 "4x3": "level_4x3",
 "4x4": "level_4x4",
+"4xend": "level_4xend",
 "4xstart": "level_4xstart",
 "5x1": "5x1_regression",
 "5x2": "5x2_black_and_white",
