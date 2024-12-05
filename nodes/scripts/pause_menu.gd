@@ -30,6 +30,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 #Pausing the game
 func set_paused(value: bool) -> void:
+	var camera = CurrentCameraZoom.camera_zoom_level
+	print("Camera zoom level ", CurrentCameraZoom.camera_zoom_level)
+	$GridContainer.get_parent().scale = Vector2(1 / camera.x, 1 / camera.y)
 	self.global_position = get_parent().get_screen_center_position()
 	is_paused = value
 	get_tree().paused = is_paused
