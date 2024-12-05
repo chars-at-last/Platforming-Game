@@ -11,6 +11,8 @@ extends Control
 var is_paused: bool = false:
 	set = set_paused
 
+
+@onready var help_scene = preload("res://nodes/scenes/help.tscn")
 #var saving = Save_Manager.new()
 #var level_manager = LevelManager.new()
 
@@ -46,7 +48,10 @@ func _on_resume_pressed() -> void:
 
 
 func _on_control_pressed() -> void:
-	pass # Replace with function body.
+	print("Button pressed")
+	var help_screen = help_scene.instantiate()
+	get_tree().root.add_child(help_screen)
+	help_screen.visible = true
 
 
 func _on_save_quit_pressed() -> void:
