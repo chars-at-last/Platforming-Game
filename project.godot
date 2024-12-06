@@ -34,6 +34,7 @@ SoundManager="*res://addons/resonate/sound_manager/sound_manager.gd"
 MusicManager="*res://addons/resonate/music_manager/music_manager.gd"
 SaveManager="*res://nodes/scripts/save_manager.gd"
 DoorOpened="*res://nodes/singletons/door_opened.gd"
+CurrentCameraZoom="*res://nodes/singletons/current_camera_zoom.gd"
 
 [display]
 

@@ -20,6 +20,9 @@ const DEFAULT_SPAWN: Vector2 = Vector2(0, 0)
 
 # Ready
 func _ready() -> void:
+	#Pass the camer zoom level to the singleton
+	CurrentCameraZoom.camera_zoom_level = camera_zoom
+	
 	SpawnPoint.original_spawn = default_spawn
 	if GameManager.current_level_manager:
 		GameManager.current_level_manager.set_cur_level(self)
