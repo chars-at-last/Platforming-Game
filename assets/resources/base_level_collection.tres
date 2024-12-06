@@ -49,6 +49,10 @@ collection = {
 "5x1": "5x1_regression",
 "5x2": "5x2_black_and_white",
 "5x3": "5x3_red_and_yellow",
+"5x4": "5x4_turtle_power",
+"5x5": "5x5_black_tower",
+"5x6": "5x6_terminal_lucidity",
+"5x7": "5x7_causality",
 "5xstart": "5x1_regression",
 "level_2x4": "2x4_broken_homes"
 }
