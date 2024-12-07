@@ -24,8 +24,8 @@ next_level_position_add = Vector2(20.5, 0)
 [node name="Goal2" parent="Goals" index="1" instance=ExtResource("2_b4ykf")]
 position = Vector2(8, 0)
 tile_map_data = PackedByteArray("AAAFAAEAAAACAAAAAAAFAAAAAAACAAAAAAA=")
-next_level_key = "2x1"
-next_level_position_add = Vector2(-20.5, 0)
+next_level_key = "3x1"
+next_level_position_add = Vector2(-20.5, 1)
 
 [node name="Section2Background" parent="." index="1" instance=ExtResource("4_wc7wn")]
 z_index = -321
