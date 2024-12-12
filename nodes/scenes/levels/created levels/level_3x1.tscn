@@ -36,7 +36,7 @@ next_level_position_add = Vector2(-18, 0)
 position = Vector2(-8, 0)
 tile_map_data = PackedByteArray("AAD6/wIAAAACAAAAAAD6/wEAAAACAAAAAAA=")
 next_level_key = "2xend"
-next_level_position_add = Vector2(20.5, 0)
+next_level_position_add = Vector2(20.5, -1)
 
 [node name="Background" type="TileMapLayer" parent="." index="1"]
 z_index = -3
