@@ -5,6 +5,10 @@
 
 [node name="LevelManager" type="Node2D"]
 script = ExtResource("1_k6me5")
-preloaded_level_key = "3x1"
+<<<<<<< HEAD
+preloaded_level_key = "5x5"
+=======
+preloaded_level_key = "4x2"
+>>>>>>> 6c766d3f8af93cc30198e805ced5c74810e8d543
 
 [node name="LevelLoader" parent="." instance=ExtResource("2_nlybe")]
