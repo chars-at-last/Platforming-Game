@@ -55,5 +55,6 @@ func _on_control_pressed() -> void:
 
 
 func _on_save_quit_pressed() -> void:
+	print("Saving this location to the save manager ", GameManager.current_level_manager.cur_player.position)
 	SaveManager.save(GameManager.current_level_manager.cur_level_key, GameManager.current_level_manager.cur_player.position, SpawnPoint.check_point_level, SpawnPoint.global_vector, false)
 	get_tree().quit()

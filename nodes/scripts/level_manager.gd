@@ -19,6 +19,8 @@ static var cur_player: Player = null
 static var sfx_bus: String = DEF_SFX_BUS
 static var dark_level: bool = false
 
+var loading_from_save = false
+
 #var loading_from_save: bool = false		#Is the player loading from a saved game?
 @export var force_preloaded_level: bool = false		## If set, force preloaded level instead of default or saved level (ONLY USE FOR TESTING)
 
@@ -57,7 +59,7 @@ func _ready() -> void:
 		#add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[SaveManager.level()] + ".tscn").instantiate())
 	
 	if force_preloaded_level or not cur_checkpoint:
-		#print('!')
+		print('!')
 		if not cur_player:
 			cur_player = load(PLAYER_PATH).instantiate()
 		cur_level.add_child(cur_player)
@@ -69,24 +71,25 @@ func _ready() -> void:
 	#starting level, if not, load the current level that the player is in
 	print(SaveManager.level, SaveManager.player)
 	cur_player.set_light()
-		#if save.level != "error": #and save.check_point_level() != null and save.check_point_loc() != null:
-	if not force_preloaded_level:
-		if SaveManager.level() != SpawnPoint.original_spawn_key: #and SaveManager.level() != null:
-			next(SaveManager.level(), SaveManager.player())
-			cur_player.position = SaveManager.player()
-			print(8)
-		elif SaveManager.player() != null:
-			print("in first level")
-			cur_player.position = SaveManager.player()
-			print(9)
+		
+	#if not force_preloaded_level:
+		#if SaveManager.level() != SpawnPoint.original_spawn_key: #and SaveManager.level() != null:
+			#next(SaveManager.level(), SaveManager.player())
+			#cur_player.position = SaveManager.player()
+			#print(8)
+		#elif SaveManager.player() != null:
+			#print("in first level")
+			#cur_player.position = SaveManager.player()
+			#print(9)
 			
-		if SaveManager.check_point_loc() != null:
-			SpawnPoint.global_vector = SaveManager.check_point_loc()
-			SpawnPoint.check_point_level = SaveManager.check_point_level()
-			print(0)
+		#if SaveManager.check_point_loc() != null:
+			#SpawnPoint.global_vector = SaveManager.check_point_loc()
+			#SpawnPoint.check_point_level = SaveManager.check_point_level()
+			#print(0)
 			
 	if temp:
 		SpawnPoint.global_vector = Level.to_map_coords(cur_player.position) * Level.BASE_TILE_SIZE
+		
 		#print(SpawnPoint.global_vector)
 		#SpawnPoint.global_vector = cur_player.global_position
 		
@@ -96,6 +99,14 @@ func _ready() -> void:
 	#add_child(instance)
 	#$PauseMenu.global_position = get_viewport().get_camera_2d().global_position
 	
+	if loading_from_save:
+			print("Changing location to the one from the save file")
+			#cur_player.position = Level.to_pixel_coords(Save_Manager.player_location)
+			#SpawnPoint.global_vector = Level.to_map_coords(Save_Manager.player_location)
+			cur_player.position = SaveManager.player()
+			print("This is the location that the player should be spawned at ", SaveManager.player)
+			#cur_player.position.y = cur_player.position.y + 115
+			
 	print("Player pos (map coords): %v" % Level.to_map_coords(cur_player.position))
 	print("camera: ", get_viewport().get_camera_2d().global_position)
 
@@ -142,15 +153,18 @@ func level_select() -> bool:
 		SpawnPoint.check_point_level = preloaded_level_key
 		#SpawnPoint.global_vector = cur_player.global_position
 		return true
-	elif SaveManager.level() != SaveManager.level_key and SaveManager.level() != null:
-		print("What is this ", SaveManager.level())
+	elif SaveManager.level() != SaveManager.level_key and SaveManager.level() != null and SaveManager.level() != "":
 		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[SaveManager.level()] + ".tscn").instantiate())
 		cur_level_key = SaveManager.level()
+		print("Location from save", SaveManager.player())
+		loading_from_save = true;
 		SpawnPoint.check_point_level = preloaded_level_key
 		#SpawnPoint.global_vector = cur_player.global_position
 		return true
 	else:
 		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[default_level_key] + ".tscn").instantiate())
+		if SaveManager.player() != null:
+			loading_from_save = true;
 		return false
 
 
@@ -215,12 +229,12 @@ func on_death(body) -> void:
 func reset_player(body) -> void:
 	print(SpawnPoint.check_point_on)
 	# if the last checkpoint is in a different level, we will change the scene back to the correct level first before spawning the player
-	if SpawnPoint.check_point_level == cur_level_key:
+	if cur_level_key != "" and SpawnPoint.check_point_level == cur_level_key:
 		print("Spawning in current level", cur_level_key)
 		#print(SpawnPoint.global_vector)
 		next(cur_level_key, Vector2.ZERO, Vector2.ZERO, true)
 		body.position = SpawnPoint.global_vector
-	elif !SpawnPoint.check_point_on and SaveManager.check_point_level() == null:
+	elif !SpawnPoint.check_point_on and SaveManager.check_point_level() == "":
 		print("No checkpoint, restarting game")
 		
 		
