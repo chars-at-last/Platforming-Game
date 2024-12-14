@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Platforming Game"
-run/main_scene="res://nodes/scenes/level_manager.tscn"
+run/main_scene="res://nodes/scenes/title_screen.tscn"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"

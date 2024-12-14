@@ -71,6 +71,7 @@ func _ready() -> void:
 	cur_player.set_light()
 		#if save.level != "error": #and save.check_point_level() != null and save.check_point_loc() != null:
 	if not force_preloaded_level:
+		print(1)
 		if SaveManager.level() != SpawnPoint.original_spawn_key: #and SaveManager.level() != null:
 			next(SaveManager.level(), SaveManager.player())
 			cur_player.position = SaveManager.player()
@@ -147,7 +148,7 @@ func level_select() -> bool:
 		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[SaveManager.level()] + ".tscn").instantiate())
 		cur_level_key = SaveManager.level()
 		SpawnPoint.check_point_level = preloaded_level_key
-		#SpawnPoint.global_vector = cur_player.global_position
+		# SpawnPoint.global_vector = cur_player.global_position
 		return true
 	else:
 		add_child(load(level_collection["base_collection"].levels_path + level_collection["base_collection"].collection[default_level_key] + ".tscn").instantiate())
