@@ -1,4 +1,4 @@
-class_name Save_Manager extends Node2D
+extends Node2D
 
 const level_key: String = "1x1"
 const player_location: Vector2 = Vector2(-8, 4) * Level.BASE_TILE_SIZE
